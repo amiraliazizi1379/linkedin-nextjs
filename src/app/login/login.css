@@ -1,0 +1,46 @@
+#footer-signin a:hover {
+  text-decoration: underline;
+}
+#footer-signin a {
+  color: gray;
+}
+
+#show-bt {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  transition: none;
+}
+@media (min-width: 360px) {
+  section {
+    width: 100%;
+    height: 90vh;
+   
+  }
+  footer {
+    opacity: 0;
+  }
+main > a {
+  margin-left: 1.5rem;
+}
+}
+@media (min-width: 767px) {
+  section {
+    width: 50vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    width: 35vw;
+  }
+  footer{
+    opacity: 1;
+  }
+}
+@media (min-width: 1280px) {
+  section {
+    width: 25vw;
+  }
+}
+
