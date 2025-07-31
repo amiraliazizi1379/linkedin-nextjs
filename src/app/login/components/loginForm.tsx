@@ -4,13 +4,24 @@ import InputField from "./inputField";
 import { useUserContext } from "../../../context/useContext";
 import GoogleSignin from "../../../components/googleSignin";
 import FormOptions from "./formOptions";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, loginType } from "@/validation/loginSchema";
 
 export default function LoginForm() {
   const { showPassword } = useUserContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<loginType>({
+    resolver: zodResolver(loginSchema),
+    mode: "all",
+  });
   return (
     <main>
       <form
-        action=""
+        onSubmit={() => handleSubmit}
         className="h-[74vh] w-[25vw] p-6  shadow-xl mx-auto rounded-xl text-center"
       >
         <h1 className="font-bold text-3xl text-left">Sign in</h1>
@@ -29,8 +40,18 @@ export default function LoginForm() {
           <div className="border-t w-full border-gray-300"></div>
         </div>
 
-        <InputField id="email" label="Email or phone" />
         <InputField
+          id="email"
+          register={register}
+          name="email"
+          error={errors.email?.message}
+          label="Email or phone"
+        />
+
+        <InputField
+          name="password"
+          register={register}
+          error={errors.password?.message}
           id="password-inp"
           label="Password"
           type={`${showPassword ? "text" : "password"}`}
