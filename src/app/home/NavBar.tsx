@@ -47,7 +47,7 @@ export default function NavBar() {
       </section>
       <div className="flex gap-2 ml-6 mr-[9.5rem]">
         <a
-          href=""
+          href="/register"
           className=" hover:bg-gray-100 rounded-full py-3 px-6 text-[1rem] text-gray-600 font-bold"
         >
           join now

@@ -1,0 +1,16 @@
+#footer-signin a:hover {
+  text-decoration: underline;
+}
+#footer-signin a {
+  color: gray;
+}
+@media (min-width: 360px) {
+  footer {
+    opacity: 0;
+  }
+}
+@media (min-width: 1024px) {
+  footer {
+    opacity: 1;
+  }
+}

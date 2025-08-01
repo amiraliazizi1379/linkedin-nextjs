@@ -64,7 +64,7 @@
   nav > a {
     transform: translateX(-100px);
   }
-  nav a h1 {
+  nav a p {
     opacity: 0;
   }
   #body section > h1 {
@@ -93,12 +93,12 @@
 @media (max-width: 1023px) {
   #body #login-container {
     width: 40vw;
-    margin: 1rem auto;
+    margin: 0 auto;
   }
 }
 @media (max-width: 767px) {
   nav > a {
-    transform: translateX(-100px);
+   margin-left: 3rem;
   }
   nav {
     justify-content: space-between;
@@ -106,13 +106,8 @@
   nav div {
     margin-right: 2rem;
   }
-  nav > a {
-    margin-left: 0;
-  }
-  #linkedin-logo {
-    opacity: 0;
-    margin-left: 1rem;
-  }
+
+  
   #nav-container {
     order: 2;
     flex-basis: 100%;
@@ -131,13 +126,13 @@
     margin-top: 1.5rem;
   }
 
-  #login-container a h1 {
+  #login-container a p {
     font-size: 16px;
   }
 
   #login-container {
     width: 52vw;
-    margin-left: 1rem;
+  
   }
   #get-the-app {
     border-right: none;

@@ -1,4 +1,4 @@
-import { useUserContext } from "../../../context/useContext";
+import { useUserContext } from "../context/useContext";
 
 interface inputProps {
   label?: string;
@@ -20,7 +20,7 @@ export default function InputField({
   const { showPassword, setShowPassword } = useUserContext();
 
   return (
-    <main className="h-[6rem]">
+    <main>
       <div className="relative">
         <input
           {...register(name)}
@@ -49,7 +49,7 @@ export default function InputField({
           </button>
         )}
       </div>
-      {error && <p className="text-red-600">{error}</p>}
+      {error && <p className="text-red-600 text-[14px] text-left mt-2">{error}</p>}
     </main>
   );
 }
