@@ -27,7 +27,9 @@ export default function InputField({
           id={id}
           type={type}
           placeholder=" "
-          className="peer h-[1.8rem] border border-gray-600 mt-6 rounded-md px-4 pt-11 pb-3 w-full focus:outline-[#0a66c2] "
+          className={`peer h-[1.8rem] border ${
+            error ? "border-red-500" : "border-gray-600"
+          } mt-6 rounded-md px-4 pt-11 pb-3 w-full focus:outline-[#0a66c2] `}
         />
         <label
           htmlFor={id}
@@ -49,7 +51,9 @@ export default function InputField({
           </button>
         )}
       </div>
-      {error && <p className="text-red-600 text-[14px] text-left mt-2">{error}</p>}
+      {error && (
+        <p className="text-red-600 text-[14px] text-left mt-2">{error}</p>
+      )}
     </main>
   );
 }

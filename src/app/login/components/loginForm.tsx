@@ -9,7 +9,7 @@ import { loginSchema, loginType } from "@/validation/loginSchema";
 import Divider from "@/components/divider";
 import SubmitButton from "@/components/submitButton";
 import LoginOptions from "@/components/loginOptions";
-
+import { LoginOnSubmit } from "../action";
 
 export default function LoginForm() {
   const { showPassword } = useUserContext();
@@ -24,12 +24,12 @@ export default function LoginForm() {
   return (
     <main>
       <form
-        onSubmit={() => handleSubmit}
+        onSubmit={handleSubmit(LoginOnSubmit)}
         className="h-[80vh] w-[25vw] p-6  shadow-xl mx-auto rounded-xl text-center"
       >
         <h1 className="font-bold text-3xl text-left">Sign in</h1>
-        <LoginOptions apple= {true}/>
-       
+        <LoginOptions apple={true} />
+
         <Divider />
         <InputField
           id="email"
@@ -48,12 +48,12 @@ export default function LoginForm() {
           type={`${showPassword ? "text" : "password"}`}
         />
         <FormOptions />
-        <SubmitButton name="Sign in" className="py-4 mt-4"/>
+        <SubmitButton name="Sign in" className="py-4 mt-4" />
       </form>
       <h1 className=" flex justify-center items-center mt-8 gap-2 text-gray-700">
         New to LinkedIn?
         <a
-          href=""
+          href="/register"
           className="text-[#0a66c2] hover:underline hover:bg-[#daedff] px-2 py-1 rounded-full font-semibold text-[15px]"
         >
           Join now
