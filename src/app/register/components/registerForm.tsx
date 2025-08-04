@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema, registerType } from "@/validation/registerSchema";
 import { useUserContext } from "@/context/useContext";
-import RegisterOnSubmit from "../action";
+import {RegisterOnSubmit} from "../action";
 
 export default function RegisterForm() {
   const {
