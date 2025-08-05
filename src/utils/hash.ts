@@ -3,10 +3,7 @@ import { NextResponse } from "next/server";
 
 
 export async function hashPassword(password: string) {
-   await bcrypt.hash(password, 10, (error, hashed) => {
-    if (error) NextResponse.json({ error }, { status: 403 });
-    return hashed;
-  });
+   return await bcrypt.hash(password, 10)
 }
 
 export async function is_validPassword( password : string , dbPassword : string ) {

@@ -4,6 +4,7 @@ import { Validator } from "@/utils/joiValidator";
 import { AccessToken, RefreshToken } from "@/utils/jwt";
 import { loginType } from "@/validation/loginSchema";
 
+
 interface DataProps {
   email: string;
   password: string;
@@ -15,15 +16,15 @@ export async function registerUser(data : DataProps) {
   const { email, password } = data;
 
   const doubleEmail = await databaseOperation.findEmail(email);
-  if (doubleEmail) return Response.json({ status: 403 });
+  if(doubleEmail) throw new Error("email is already registered")
 
-  const hashedPassword = hashPassword(password);
+  const hashedPassword = await hashPassword(password);
 
   const refreshToken = RefreshToken(email);
 
   const accessToken = AccessToken(email);
 
-  await databaseOperation.addUser(email, password, refreshToken);
+  await databaseOperation.addUser(email, hashedPassword, refreshToken);
 
   return {accessToken,refreshToken};
 }

@@ -6,15 +6,16 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema, registerType } from "@/validation/registerSchema";
 import { useUserContext } from "@/context/useContext";
-import {RegisterOnSubmit} from "../action";
+import { RegisterOnSubmit } from "../action";
+import { loginSchema, loginType } from "@/validation/loginSchema";
 
 export default function RegisterForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<registerType>({
-    resolver: zodResolver(RegisterSchema),
+  } = useForm<loginType>({
+    resolver: zodResolver(loginSchema),
     mode: "all",
   });
 
