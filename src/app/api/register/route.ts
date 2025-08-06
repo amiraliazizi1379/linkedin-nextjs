@@ -3,22 +3,16 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  if (!request)
-    return Response.json(
-      { message: "email or password is invalid" },
-      { status: 400 }
-    );
-  const body = await request.json();
-  
   try {
+    const body = await request.json();
     const { accessToken, refreshToken } = await registerUser(body);
-    
+
     const cookieStore = await cookies();
     cookieStore.set("refreshToken", refreshToken, {
       httpOnly: true,
       path: "/",
-      //secure : true , cookie send by https for more secure
-      //sameSite : "strict" ,  the browser can send cookie only from our site
+      //secure : true , //cookie send by https for more secure
+      sameSite : "strict" ,  //the browser can send cookie only from our site
       maxAge: 60 * 60 * 24 * 1,
     });
 
