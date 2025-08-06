@@ -10,7 +10,6 @@ export async function RegisterOnSubmit(data: loginType) {
       credentials: "include", //to recieve cookie
     });
     const result = await res.json();
-  
   } catch (err) {
     console.log(err);
   }
