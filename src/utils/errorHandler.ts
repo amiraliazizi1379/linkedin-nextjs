@@ -2,7 +2,7 @@ import { AppError } from "@/utils/AppError";
 import { NextResponse } from "next/server";
 import { logger } from "./logger";
 
-export function ErroHandler(error: any) {
+export function ErroHandler(error: unknown) : NextResponse {
   console.log(error);
   logger.error(error);
   if (error instanceof AppError) {
