@@ -13,17 +13,22 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<loginType>({
     resolver: zodResolver(loginSchema),
     mode: "all",
   });
 
-  const { showPassword } = useUserContext();
+  const { showPassword, setAccesstoken } = useUserContext();
+
+  const OnSubmit = async (data: loginType) => {
+    await RegisterOnSubmit(data, setAccesstoken , setError);
+  };
 
   return (
     <form
-      onSubmit={handleSubmit(RegisterOnSubmit)}
+      onSubmit={handleSubmit(OnSubmit)}
       className=" p-6 shadow-xl mx-auto rounded-xl text-center"
     >
       <InputField

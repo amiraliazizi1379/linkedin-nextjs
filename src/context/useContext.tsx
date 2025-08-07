@@ -5,15 +5,20 @@ import { createContext, useState, ReactNode, useContext } from "react";
 type contextType = {
   showPassword: boolean;
   setShowPassword: (value: boolean) => void;
+  accesstoken: string;
+  setAccesstoken: (value: string) => void;
 };
 
 export const userContext = createContext<contextType | null>(null);
 
-export  default function AppProvider({ children }: { children: ReactNode }) {
+export default function AppProvider({ children }: { children: ReactNode }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [accesstoken, setAccesstoken] = useState("");
 
   return (
-    <userContext.Provider value={{ showPassword, setShowPassword }}>
+    <userContext.Provider
+      value={{ showPassword, setShowPassword, accesstoken, setAccesstoken }}
+    >
       {children}
     </userContext.Provider>
   );
