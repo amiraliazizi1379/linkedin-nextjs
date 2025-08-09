@@ -1,13 +1,12 @@
 import { loginType } from "@/validation/loginSchema";
 //import { registerType } from "@/validation/registerSchema";
 import { UseFormSetError } from "react-hook-form";
-import { includes } from "zod";
 
 export async function RegisterOnSubmit(
   data: loginType,
   setAccesstoken: (token: string) => void,
   setError: UseFormSetError<loginType>
-) {
+): Promise<{ success: boolean }> {
   try {
     const res = await fetch("http://localhost:3000/api/register", {
       method: "POST",
@@ -26,10 +25,13 @@ export async function RegisterOnSubmit(
       }
     }
     if (result.accesstoken) setAccesstoken(result.accesstoken);
+
+    return { success: true };
   } catch (err) {
     setError("root", {
       type: "manual",
       message: "something went wrong while connecting to server",
     });
+    return { success: false };
   }
 }

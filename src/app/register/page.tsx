@@ -3,8 +3,9 @@ import "./register.css";
 import Footer from "@/components/footer";
 import Logo from "@/components/logo";
 import RegisterForm from "./components/registerForm";
+import { ReactElement } from "react";
 
-export default function Register() {
+export default function Register() : ReactElement {
   return (
     <main className="min-h-screen  ">
       <Logo className="text-[#0a66c2] mt-4 translate-x-16 text-3xl w-[10%]" />

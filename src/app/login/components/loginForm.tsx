@@ -10,8 +10,9 @@ import Divider from "@/components/divider";
 import SubmitButton from "@/components/submitButton";
 import LoginOptions from "@/components/loginOptions";
 import { LoginOnSubmit } from "../action";
+import { ReactElement } from "react";
 
-export default function LoginForm() {
+export default function LoginForm() : ReactElement{
   const { showPassword } = useUserContext();
   const {
     register,

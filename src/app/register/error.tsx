@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect } from "react"
+import { ReactElement, useEffect } from "react"
 
-export default function Error({error} : {error: Error}){
+export default function Error({error} : {error: Error}):ReactElement{
     
 
     return (

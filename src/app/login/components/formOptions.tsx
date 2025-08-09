@@ -1,5 +1,6 @@
+import { ReactElement } from "react";
 
-export default function FormOptions(){
+export default function FormOptions() : ReactElement{
 
     return (
         <>

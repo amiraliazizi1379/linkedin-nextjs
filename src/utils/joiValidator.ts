@@ -1,11 +1,6 @@
 import Joi from "joi";
 import { AppError } from "./AppError";
-
-interface DataProps {
-  email: string;
-  password: string;
-  helpers: { message: string };
-}
+import { JoiregisterProps } from "@/types/joitypes";
 
 const passwordSchema = Joi.string()
   .min(8)
@@ -23,7 +18,7 @@ const passwordSchema = Joi.string()
       return helpers.message({ custom: "Password must contain one number" });
   });
 
-export function Validator(data: DataProps) {
+export function Validator(data: JoiregisterProps) : void{
   const schema = Joi.object({
     email: Joi.string().email().required(),
     password: passwordSchema,
@@ -31,3 +26,4 @@ export function Validator(data: DataProps) {
   const { error } = schema.validate(data);
   if (error) throw new AppError(error.message, 400);
 }
+

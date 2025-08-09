@@ -13,10 +13,4 @@ export  function AccessToken(email: string) : string {
   });
 }
 // middleware
-/*export async function VerifyJwt(token : string){
-    jwt.verify(token , process.env.ACCESSTOKEN_SECRET! , (decode , error) => {
-
-      if(error) return NextResponse.json({error} , {status : 401})
-        NextResponse.json({status : 200})
-    } )
-}*/
+/**/

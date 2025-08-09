@@ -8,8 +8,11 @@ import { RegisterSchema, registerType } from "@/validation/registerSchema";
 import { useUserContext } from "@/context/useContext";
 import { RegisterOnSubmit } from "../action";
 import { loginSchema, loginType } from "@/validation/loginSchema";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
-export default function RegisterForm() {
+
+export default function RegisterForm() : ReactElement {
   const {
     register,
     handleSubmit,
@@ -21,11 +24,16 @@ export default function RegisterForm() {
   });
 
   const { showPassword, setAccesstoken } = useUserContext();
-
+   const router = useRouter()
   const OnSubmit = async (data: loginType) => {
-    await RegisterOnSubmit(data, setAccesstoken , setError);
+    const result = await RegisterOnSubmit(data, setAccesstoken , setError);
+     if(result.success){
+      router.push('/newpage')
+  }
   };
 
+   
+  
   return (
     <form
       onSubmit={handleSubmit(OnSubmit)}
@@ -52,5 +60,6 @@ export default function RegisterForm() {
       <Divider />
       <LoginOptions />
     </form>
+    
   );
 }

@@ -3,14 +3,11 @@ import { AppError } from "@/utils/AppError";
 import { hashPassword } from "@/utils/hash";
 import { Validator } from "@/utils/joiValidator";
 import { AccessToken, RefreshToken } from "@/utils/jwt";
-import { loginType } from "@/validation/loginSchema";
+import { JoiregisterProps } from "@/types/joitypes";
 
-interface DataProps {
-  email: string;
-  password: string;
-}
 
-export async function registerUser(data: DataProps) {
+
+export async function registerUser(data: JoiregisterProps) {
   await Validator(data);
 
   const { email, password } = data;
