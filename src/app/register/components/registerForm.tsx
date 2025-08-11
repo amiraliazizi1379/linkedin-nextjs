@@ -1,18 +1,18 @@
+"use client";
 import LoginOptions from "@/components/loginOptions";
 import Divider from "@/components/divider";
 import SubmitButton from "@/components/submitButton";
 import InputField from "@/components/inputField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterSchema, registerType } from "@/validation/registerSchema";
+//import { RegisterSchema, registerType } from "@/validation/registerSchema";
 import { useUserContext } from "@/context/useContext";
 import { RegisterOnSubmit } from "../action";
 import { loginSchema, loginType } from "@/validation/loginSchema";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
 
-
-export default function RegisterForm() : ReactElement {
+export default function RegisterForm(): ReactElement {
   const {
     register,
     handleSubmit,
@@ -24,16 +24,14 @@ export default function RegisterForm() : ReactElement {
   });
 
   const { showPassword, setAccesstoken } = useUserContext();
-   const router = useRouter()
-  const OnSubmit = async (data: loginType) => {
-    const result = await RegisterOnSubmit(data, setAccesstoken , setError);
-     if(result.success){
-      router.push('/newpage')
-  }
+  const router = useRouter();
+  const OnSubmit = async (data: loginType): Promise<void> => {
+    const result = await RegisterOnSubmit(data, setAccesstoken, setError);
+    if (result.success) {
+      router.push("/newpage");
+    }
   };
 
-   
-  
   return (
     <form
       onSubmit={handleSubmit(OnSubmit)}
@@ -60,6 +58,5 @@ export default function RegisterForm() : ReactElement {
       <Divider />
       <LoginOptions />
     </form>
-    
   );
 }

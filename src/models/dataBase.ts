@@ -20,4 +20,10 @@ export class databaseOperation {
       [email, password, refreshtoken]
     );
   };
+
+  static findToken = async (token: string) => {
+    return await pool.query("select * from user_table where refreshtoken = ?", [
+      token,
+    ]);
+  };
 }
