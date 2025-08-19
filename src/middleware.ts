@@ -1,28 +1,48 @@
 import { NextResponse, NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-import { databaseOperation } from "./models/dataBase";
-import { catchAsync } from "./utils/catchAsync";
 
-export const middleware = catchAsync(
-  async (request: NextRequest): Promise<NextResponse> => {
-    const accessToken = request.headers.get("authorization");
-    if (accessToken) {
-      const result = await jwtVerify(
-        accessToken,
-        new TextEncoder().encode(process.env.ACCESSTOKEN_SECRET)
+import { AppError } from "./utils/AppError";
+
+export const middleware = async (
+  request: NextRequest
+): Promise<NextResponse> => {
+  try {
+    const accessToken = request.headers.get("Authorization");
+    const refreshToken = request.cookies.get("refreshToken");
+    const userId = request.cookies.get("userId")?.value;
+    
+    const { pathname } = request.nextUrl;
+
+    if (refreshToken && ["/register", "/login"].includes(pathname))
+      return NextResponse.redirect(new URL(`/profile/${userId}`, request.url));
+
+    if(pathname.startsWith('/api/profile/')){
+    if (!accessToken) {
+      const err = new AppError("no token", 401);
+      return NextResponse.json(
+        { message: err.message },
+        { status: err.statusCode }
       );
-      if (result) return NextResponse.next();
     }
-    const token = request.cookies.get("refreshToken")?.value;
-    if (!token) return NextResponse.redirect(new URL("/login", request.url));
-
-    const findUser = await databaseOperation.findToken(token);
-    if (!findUser) return NextResponse.redirect(new URL("login", request.url));
-
-    const secret = new TextEncoder().encode(process.env.REFRESHTOKEN_SECRET);
-    await jwtVerify(token, secret);
+    const result = await jwtVerify(
+      accessToken,
+      new TextEncoder().encode(process.env.ACCESSTOKEN_SECRET)
+    );
+    if (!result) {
+      const err = new AppError("verify", 401);
+      return NextResponse.json(
+        { message: err.message },
+        { status: err.statusCode }
+      );
+    }
+  }
 
     return NextResponse.next();
+  } catch (err) {
+    return NextResponse.json(err);
   }
-);
-export const config = { matcher: ["/api/getuserdata", "/profile"] };
+};
+
+export const config = {
+  matcher: ["/api/profile/:path*", "/login", "/register"],
+};
