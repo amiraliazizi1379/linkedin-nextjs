@@ -5,9 +5,9 @@ import { Validator } from "@/utils/joiValidator";
 import { AccessToken, RefreshToken } from "@/utils/jwt";
 import { JoiregisterProps } from "@/types/joitypes";
 
-
-
-export async function registerUser(data: JoiregisterProps) {
+export async function registerUser(
+  data: JoiregisterProps
+): Promise<{ accessToken: string; refreshToken: string; insertId: number }> {
   await Validator(data);
 
   const { email, password } = data;
@@ -19,9 +19,13 @@ export async function registerUser(data: JoiregisterProps) {
 
   const refreshToken = RefreshToken(email);
 
-  const accessToken = AccessToken(email);
+  const { insertId } = await databaseOperation.addUser(
+    email,
+    hashedPassword,
+    refreshToken
+  );
+ 
+  const accessToken = AccessToken(email, insertId);
 
-  await databaseOperation.addUser(email, hashedPassword, refreshToken);
-
-  return { accessToken, refreshToken };
+  return { accessToken, refreshToken, insertId };
 }
