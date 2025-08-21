@@ -1,5 +1,6 @@
 import { pool } from "@/libs/db";
-import { RowDataPacket } from "mysql2";
+import { QueryResult, ResultSetHeader, RowDataPacket } from "mysql2";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export class databaseOperation {
   static findEmail = async (email: string) => {
@@ -15,15 +16,37 @@ export class databaseOperation {
     password: string,
     refreshtoken: string
   ) => {
-    return await pool.query(
+    const [result] = await pool.query<ResultSetHeader>(
       "insert into user_table (email , password , refreshtoken) values  ( ? , ? , ?)",
       [email, password, refreshtoken]
     );
+
+    return result;
   };
 
   static findToken = async (token: string) => {
-    return await pool.query("select * from user_table where refreshtoken = ?", [
-      token,
-    ]);
+    const [user] = await pool.query<RowDataPacket[]>(
+      "select * from user_table  where refreshtoken = ?",
+      [token]
+    );
+    console.log(user)
+    return user[0];
+  };
+
+
+  static deleteToken = async (token: string) => {
+    return await pool.query(
+      "update user_table set refreshtoken = null where refreshtoken = ?",
+      [token]
+    );
+  };
+
+  static getUserData = async (email: string) => {
+    const [userDat] = await pool.query<RowDataPacket[]>(
+      "select id from user_table where email = ?",
+      [email]
+    );
+
+    return userDat[0];
   };
 }
