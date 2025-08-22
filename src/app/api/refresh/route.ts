@@ -6,22 +6,38 @@ import { databaseOperation } from "@/models/dataBase";
 import { JwtPayload } from "jsonwebtoken";
 
 interface jwts extends JwtPayload {
-  userInfo: { username: string };
+  userInfo: { username: string; userId: number };
 }
 
-export const refreshTokenHandler = catchAsync(
+export const POST = catchAsync(
   async (request: NextRequest): Promise<NextResponse> => {
     const token = request.cookies.get("refreshToken")?.value;
-    if (!token) return NextResponse.redirect(new URL("/login", request.url));
+    if (!token)
+      return NextResponse.json(
+        { message: "You need to sign in" },
+        { status: 401 }
+      );
 
     const findUser = await databaseOperation.findToken(token);
-    if (!findUser) return NextResponse.redirect(new URL("login", request.url));
+
+    if (!findUser)
+      return NextResponse.json(
+        { message: "You need to sign in" },
+        { status: 401 }
+      );
 
     const secret = new TextEncoder().encode(process.env.REFRESHTOKEN_SECRET);
     const { payload } = await jwtVerify<jwts>(token, secret);
-    if (!payload) return NextResponse.redirect(new URL("/login", request.url));
+    if (!payload)
+      return NextResponse.json(
+        { message: "You need to sign in" },
+        { status: 401 }
+      );
+    const newAccessToken = AccessToken(payload.userInfo.username, findUser.id);
 
-    const newAccessToken = AccessToken(payload.userInfo.username);
-    return NextResponse.json({ newAccessToken });
+    return NextResponse.json({
+      accessToken: newAccessToken,
+      userId: findUser,
+    });
   }
 );
