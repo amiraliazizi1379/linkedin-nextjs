@@ -29,10 +29,8 @@ export class databaseOperation {
       "select * from user_table  where refreshtoken = ?",
       [token]
     );
-    console.log(user)
     return user[0];
   };
-
 
   static deleteToken = async (token: string) => {
     return await pool.query(
