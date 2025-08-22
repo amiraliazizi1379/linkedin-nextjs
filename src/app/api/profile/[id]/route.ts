@@ -13,7 +13,7 @@ export const GET = catchAsync(
     const { id } = await params;
 
     const token = request.headers.get("Authorization");
-    console.log(token)
+    
     if (!token) throw new AppError("access denied", 401);
     const payload = jwt.verify(
       token,

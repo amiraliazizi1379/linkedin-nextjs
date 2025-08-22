@@ -21,7 +21,9 @@ export default function Profile({
   useEffect(() => {
     const result = async () => {
       const res = await GetUserData(accesstoken, id);
+      
       const result = await res.json()
+      console.log(result)
       setData(result);
       if (!res.ok) router.replace("/login");
     };
