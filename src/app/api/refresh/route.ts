@@ -4,6 +4,7 @@ import { AccessToken } from "@/utils/jwt";
 import { jwtVerify } from "jose";
 import { databaseOperation } from "@/models/dataBase";
 import { JwtPayload } from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 interface jwts extends JwtPayload {
   userInfo: { username: string; userId: number };
@@ -20,12 +21,19 @@ export const POST = catchAsync(
 
     const findUser = await databaseOperation.findToken(token);
 
-    if (!findUser)
+    if (!findUser) {
+      const cookieStore = await cookies();
+      cookieStore.set("refreshToken", "", {
+        httpOnly: true,
+        path: "/",
+        sameSite: "strict",
+        maxAge: 0,
+      });
       return NextResponse.json(
         { message: "You need to sign in" },
         { status: 401 }
       );
-
+    }
     const secret = new TextEncoder().encode(process.env.REFRESHTOKEN_SECRET);
     const { payload } = await jwtVerify<jwts>(token, secret);
     if (!payload)
