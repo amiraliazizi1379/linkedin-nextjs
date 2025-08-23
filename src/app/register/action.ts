@@ -1,37 +1,37 @@
 import { loginType } from "@/validation/loginSchema";
-//import { registerType } from "@/validation/registerSchema";
 import { UseFormSetError } from "react-hook-form";
+//import { registerType } from "@/validation/registerSchema";
 
 export async function RegisterOnSubmit(
   data: loginType,
-  setAccesstoken: (token: string) => void,
   setError: UseFormSetError<loginType>
-): Promise<{ success: boolean }> {
+) {
   try {
     const res = await fetch("http://localhost:3000/api/register", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
 
       credentials: "include", //to recieve cookie
     });
     const result = await res.json();
-    if (!result.ok) {
-      if (result.message.includes("email"))
-        setError("email", { type: "server", message: result.message });
-      if (result.message.includes("Password"))
-        setError("password", { type: "server", message: result.message });
+
+    if (!res.ok) {
+      const message = result.message.replaceAll('"', "");
+
+      if (message.startsWith("email"))
+        setError("email", { type: "server", message: message });
+      else if (message.startsWith("Password"))
+        setError("password", { type: "server", message: message });
       else {
-        setError("password", { type: "server", message: result.message });
+        setError("root", { type: "manual", message: message });
       }
     }
-    if (result.accesstoken) setAccesstoken(result.accesstoken);
-
-    return { success: true };
+    return result;
   } catch (err) {
     setError("root", {
       type: "manual",
       message: "something went wrong while connecting to server",
     });
-    return { success: false };
   }
 }
