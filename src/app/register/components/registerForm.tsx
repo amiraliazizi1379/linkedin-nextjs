@@ -23,12 +23,17 @@ export default function RegisterForm(): ReactElement {
     mode: "all",
   });
 
-  const { showPassword, setAccesstoken } = useUserContext();
+  const { showPassword, accesstoken, setAccesstoken } = useUserContext();
+  console.log(accesstoken)
   const router = useRouter();
   const OnSubmit = async (data: loginType): Promise<void> => {
-    const result = await RegisterOnSubmit(data, setAccesstoken, setError);
-    if (result.success) {
-      router.push("/newpage");
+    const result = await RegisterOnSubmit(data, setError);
+
+    if (result.accessToken) {
+      
+      const route = String(result.insertId);
+      router.push(`/profile/${route}`);
+      setAccesstoken(result.accessToken);
     }
   };
 
