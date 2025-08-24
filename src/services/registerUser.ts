@@ -19,12 +19,14 @@ export async function registerUser(
 
   const refreshToken = RefreshToken(email);
 
+  const hasheRefreshToken = await hashPassword(refreshToken);
+
   const { insertId } = await databaseOperation.addUser(
     email,
     hashedPassword,
-    refreshToken
+    hasheRefreshToken
   );
- 
+
   const accessToken = AccessToken(email, insertId);
 
   return { accessToken, refreshToken, insertId };
