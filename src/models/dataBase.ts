@@ -26,16 +26,23 @@ export class databaseOperation {
 
   static findToken = async (token: string) => {
     const [user] = await pool.query<RowDataPacket[]>(
-      "select * from user_table  where refreshtoken = ?",
+      "select * from user_table  where id = ?",
       [token]
     );
     return user[0];
   };
 
-  static deleteToken = async (token: string) => {
+  static deleteToken = async (userId: string) => {
     return await pool.query(
-      "update user_table set refreshtoken = null where refreshtoken = ?",
-      [token]
+      "update user_table set refreshtoken = null where id = ?",
+      [userId]
+    );
+  };
+
+  static updateToken = async (token: string, id: string) => {
+    return await pool.query(
+      "update user_table set refreshtoken = ? where id = ?",
+      [token, id]
     );
   };
 
