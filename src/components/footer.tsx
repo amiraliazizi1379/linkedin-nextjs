@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <footer
       id="footer-signin"
-      className="flex flex-wrap gap-4 items-center justify-center text-[12px] mt-6 mb-4"
+      className="flex-center flex-wrap gap-4  text-[12px] mt-6 mb-4"
     >
-      <Logo className="text-lg" logoComponent="text-xl"/>
+      <Logo className="text-lg" logoComponent="text-xl" />
 
       <span>© 2025</span>
       <a href="https://www.linkedin.com/legal/user-agreement?trk=linkedin-tc_auth-button_user-agreement">
