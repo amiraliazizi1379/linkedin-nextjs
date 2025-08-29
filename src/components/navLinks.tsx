@@ -14,7 +14,7 @@ export default function NavLink({ name, component, clasName }: props) {
       className={`flex flex-col items-center gap-[4px] cursor-pointer transition-none hover:text-[#171717] ${clasName}`}
     >
       <span>{component}</span>
-      <p className="text-[12px] ">{name}</p>
+      <p className="text-[12px]">{name}</p>
     </a>
   );
 }
