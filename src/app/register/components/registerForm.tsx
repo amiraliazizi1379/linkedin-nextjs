@@ -24,13 +24,12 @@ export default function RegisterForm(): ReactElement {
   });
 
   const { showPassword, accesstoken, setAccesstoken } = useUserContext();
-  console.log(accesstoken)
+  console.log(accesstoken);
   const router = useRouter();
   const OnSubmit = async (data: loginType): Promise<void> => {
     const result = await RegisterOnSubmit(data, setError);
 
     if (result.accessToken) {
-      
       const route = String(result.insertId);
       router.push(`/profile/${route}`);
       setAccesstoken(result.accessToken);
@@ -61,7 +60,10 @@ export default function RegisterForm(): ReactElement {
 
       <SubmitButton name="Agree and Join" className="mt-12 py-3 " />
       <Divider />
-      <LoginOptions />
+      <LoginOptions
+        textcolor="text-gray-500"
+        className="flex-center login-button hover:bg-[#F1F1F1]"
+      />
     </form>
   );
 }
