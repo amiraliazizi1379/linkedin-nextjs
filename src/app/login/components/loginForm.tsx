@@ -12,7 +12,7 @@ import LoginOptions from "@/components/loginOptions";
 import { LoginOnSubmit } from "../action";
 import { ReactElement } from "react";
 
-export default function LoginForm() : ReactElement{
+export default function LoginForm(): ReactElement{
   const { showPassword } = useUserContext();
   const {
     register,
@@ -29,7 +29,11 @@ export default function LoginForm() : ReactElement{
         className="h-[80vh] w-[25vw] p-6  shadow-xl mx-auto rounded-xl text-center"
       >
         <h1 className="font-bold text-3xl text-left">Sign in</h1>
-        <LoginOptions apple={true} />
+        <LoginOptions
+          apple={true}
+          className=" flex-center login-button hover:bg-[#F1F1F1]"
+          textcolor="gray-500"
+        />
 
         <Divider />
         <InputField
