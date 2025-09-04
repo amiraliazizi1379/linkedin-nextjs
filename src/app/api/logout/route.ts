@@ -1,23 +1,41 @@
 import { databaseOperation } from "@/models/dataBase";
-import { cookies } from "next/headers";
+import { catchAsync } from "@/utils/catchAsync";
+import { clearCookie } from "@/utils/handlecookie";
+import { NextRequest, NextResponse } from "next/server";
 
-import { NextRequest } from "next/server";
+export const POST = catchAsync(
+  async (request: NextRequest): Promise<NextResponse> => {
+    let response = NextResponse.json(
+      { message: "No content to send" },
+      { status: 400 }
+    );
 
-export async function POST(request: NextRequest): Promise<Response> {
-  const refreshToken = request.cookies.get("refreshToken")?.value;
-  if (!refreshToken)
-    return Response.json({ message: "No content to send" }, { status: 204 });
+    const refreshToken = request.cookies.get("refreshToken")?.value;
 
-  await databaseOperation.deleteToken(refreshToken);
-  const cookieStore = await cookies();
+    if (!refreshToken) {
+      response = clearCookie(response);
+      response = clearCookie(response, "userId", "/");
+      return response;
+    }
 
-  cookieStore.set("refreshToken", "", {
-    httpOnly: true,
-    path: "/",
-    sameSite: "strict",
-    maxAge: 0,
-  });
+    const userId = request.cookies.get("userId")?.value;
+    if (!userId) {
+      response = clearCookie(response);
+      response = clearCookie(response, "userId", "/");
+      return response;
+    }
 
-  cookieStore.set("userId", "", { path: "/", maxAge: 0 });
-  return Response.json({ message: "Logged out" }, { status: 200 });
-}
+    await databaseOperation.deleteToken(userId);
+
+    let newresponse = NextResponse.json(
+      { message: "Logged out" },
+      { status: 200 }
+    );
+
+    newresponse = clearCookie(newresponse);
+
+    newresponse = clearCookie(newresponse, "userId", "/");
+
+    return response;
+  }
+);
