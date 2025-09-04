@@ -1,51 +1,42 @@
-import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
+import { data } from "../data/loginbtData";
 
 type props = {
-  id?: string;
   className?: string;
   apple?: boolean;
-  textcolor: string;
 };
 
-export default function LoginOptions({
-  id,
-  className,
-  apple,
-  textcolor,
-}: props) {
+export default function LoginOptions({ className, apple }: props) {
   return (
     <main className="flex flex-col gap-5 ">
-      <a id={id} href="" className={className}>
-        <span
-          className={`text-[1.3rem] rounded-full  bg-[#ffff] ${
-            textcolor === "text-white" && "px-[0.5rem] py-[0.5rem]"
-          } `}
-        >
-          {" "}
-          <FcGoogle />
-        </span>
-
-        <p className={textcolor}>Continue with Google</p>
-      </a>
-      {apple ? (
-        <a
-          href=""
-          className="text-gray-700 flex-center login-button hover:bg-[#F1F1F1]"
-        >
-          <FaApple className="text-[1.5rem] text-[#171717]" />
-
-          <h3 className="text-gray-500 font-semibold">Sign in with Apple</h3>
-        </a>
-      ) : (
-        <a
-          href=""
-          className=" text-gray-700 flex-center login-button hover:bg-[#F1F1F1]"
-        >
-          <img src="microsoft.png" alt="" className="w-[1.3rem]" />
-          <p>Continue with Microsoft</p>
-        </a>
-      )}
+      {data
+        .filter((itm) =>
+          apple
+            ? itm.name.includes("Apple") || itm.name.includes("Google")
+            : !itm.name.includes("Apple")
+        )
+        .map((item, index) => {
+          return (
+            <a
+              key={index}
+              href=""
+              className={`flex-center login-button ${
+                item.name.endsWith("Google")
+                  ? className
+                  : "text-[#6B6B6B] hover:bg-[#F1F1F1]"
+              }`}
+            >
+              <span
+                className={`${
+                  item.name.endsWith("Google") &&
+                  "text-[1.3rem] rounded-full px-[0.5rem] py-[0.5rem] bg-[#ffff]"
+                }`}
+              >
+                {item.logo}
+              </span>
+              <p>{item.name}</p>
+            </a>
+          );
+        })}
     </main>
   );
 }
