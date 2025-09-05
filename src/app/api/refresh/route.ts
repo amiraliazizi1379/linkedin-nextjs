@@ -18,7 +18,7 @@ export const POST = catchAsync(
       { message: "You need to sign in" },
       { status: 401 }
     );
-    if (!token || !userId) return response;
+    if (!token || !userId) return clearCookie(response);
 
     const findUser = await databaseOperation.findToken(userId);
     if (!findUser) return clearCookie(response);
@@ -39,12 +39,19 @@ export const POST = catchAsync(
 
     const newAccessToken = AccessToken(payload.userInfo.username, findUser.id);
 
-    let newresponse = NextResponse.json({
-      accessToken: newAccessToken,
-      userId: findUser.id,
-    });
+    let newresponse = NextResponse.json(
+      {
+        userId: findUser.id,
+      },
+      { status: 200 }
+    );
 
-    newresponse = setCookie(newresponse, newRefreshToken);
+    newresponse = setCookie(
+      newresponse,
+      newRefreshToken,
+      newAccessToken,
+      findUser.id
+    );
 
     return newresponse;
   }

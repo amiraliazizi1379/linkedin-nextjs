@@ -9,21 +9,13 @@ export const POST = catchAsync(
       { message: "No content to send" },
       { status: 400 }
     );
+    response = clearCookie(response);
 
     const refreshToken = request.cookies.get("refreshToken")?.value;
-
-    if (!refreshToken) {
-      response = clearCookie(response);
-      response = clearCookie(response, "userId", "/");
-      return response;
-    }
+    if (!refreshToken) return response;
 
     const userId = request.cookies.get("userId")?.value;
-    if (!userId) {
-      response = clearCookie(response);
-      response = clearCookie(response, "userId", "/");
-      return response;
-    }
+    if (!userId) return response;
 
     await databaseOperation.deleteToken(userId);
 
@@ -34,8 +26,6 @@ export const POST = catchAsync(
 
     newresponse = clearCookie(newresponse);
 
-    newresponse = clearCookie(newresponse, "userId", "/");
-
-    return response;
+    return newresponse;
   }
 );

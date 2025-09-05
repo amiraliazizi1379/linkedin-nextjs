@@ -7,13 +7,17 @@ export const middleware = async (
   request: NextRequest
 ): Promise<NextResponse> => {
   try {
-    const accessToken = request.headers.get("Authorization");
-    const refreshToken = request.cookies.get("refreshToken");
+    const accessToken = request.cookies.get("accessToken")?.value;
+
     const userId = request.cookies.get("userId")?.value;
 
     const { pathname } = request.nextUrl;
 
-    if (refreshToken && ["/", "/register", "/login"].includes(pathname))
+    if (
+      accessToken &&
+      userId &&
+      ["/", "/register", "/login"].includes(pathname)
+    )
       return NextResponse.redirect(new URL(`/profile/${userId}`, request.url));
 
     if (pathname.startsWith("/api/profile/")) {
@@ -44,5 +48,11 @@ export const middleware = async (
 };
 
 export const config = {
-  matcher: ["/api/profile/:path*", "/login", "/register", "/"],
+  matcher: [
+    "/api/profile/:path*",
+    //"/profile/:path*",
+    "/login",
+    "/register",
+    "/",
+  ],
 };

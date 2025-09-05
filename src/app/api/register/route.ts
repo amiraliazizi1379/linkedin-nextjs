@@ -10,12 +10,9 @@ export const POST = catchAsync(
 
     const body = await request.json();
     const { accessToken, refreshToken, insertId } = await registerUser(body);
-    let response = NextResponse.json(
-      { accessToken, insertId },
-      { status: 200 }
-    );
-    setCookie(response, refreshToken);
-    setCookie(response, String(insertId), "userId", "/");
+    let response = NextResponse.json({ insertId }, { status: 200 });
+    setCookie(response, refreshToken, accessToken, String(insertId));
+
     return response;
   }
 );
