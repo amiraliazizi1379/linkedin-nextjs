@@ -1,17 +1,33 @@
-@import "tailwindcss";
+@import "tailwindcss" important;
+@import "tailwindcss/preflight";
+@tailwind utilities;
 
-a , label , button {
-  @apply transition-all duration-200;
+@layer base {
+  a,
+  label,
+  button {
+    @apply transition-all duration-200;
+  }
+}
+
+@layer components {
+  .login-button {
+    @apply border-[1px] border-[#666666] h-[42px] py-2 rounded-full w-full  gap-2 text-[1rem];
+  }
+  .nav-bt-signin {
+    @apply hover:bg-[#effdfd] rounded-full py-3 px-6 text-[1rem] font-bold;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
 }
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-   
-}
-
-#google-toggle--signin{
-  transition: none;
 }
 
 @theme inline {
@@ -32,7 +48,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-
 }
-
-
