@@ -50,7 +50,7 @@ export const middleware = async (
 export const config = {
   matcher: [
     "/api/profile/:path*",
-    //"/profile/:path*",
+    "/profile/:path*",
     "/login",
     "/register",
     "/",
