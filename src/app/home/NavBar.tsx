@@ -1,61 +1,20 @@
-import { FaLaptop } from "react-icons/fa";
-import {
-  BsFillRocketTakeoffFill,
-  BsFillPuzzleFill,
-  BsCollectionPlayFill,
-} from "react-icons/bs";
-import { MdPeopleAlt } from "react-icons/md";
-import { IoIosBriefcase } from "react-icons/io";
 import Logo from "../../components/logo";
+import Options from "./options";
+import { data } from "./data/data";
 
 export default function NavBar() {
   return (
-    <nav className="flex flex-wrap  mt-4 ">
-      <Logo className="text-[#0a66c2] ml-38"/>
-      <section
-        id="nav-container"
-        className="flex gap-8 text-xl text-[#757575]  items-center ml-auto"
-      >
-        <a href="">
-          <BsFillRocketTakeoffFill />
-          <p>Top Content</p>
-        </a>
-        <a href="">
-          <MdPeopleAlt />
-          <p>People</p>
-        </a>
-        <a href="">
-          <BsCollectionPlayFill />
-          <p>Learning</p>
-        </a>
-        <a href="">
-          <IoIosBriefcase />
-          <p>Jobs</p>
-        </a>
-        <a href="">
-          <BsFillPuzzleFill />
-          <p>Games</p>
-        </a>
-        <a
-          id="get-the-app"
-          className="border-l-1 border-r-1 border-gray-200 px-4"
-          href=""
-        >
-          <FaLaptop />
-          <p>Get the app</p>
-        </a>
-      </section>
-      <div className="flex gap-2 ml-6 mr-[9.5rem]">
-        <a
-          href="/register"
-          className=" hover:bg-gray-100 rounded-full py-3 px-6 text-[1rem] text-gray-600 font-bold"
-        >
+    <nav className=" flex items-center mt-4 max-[1023px]:grid  max-[1023px]:grid-cols-2">
+      <Logo className="text-[#0a66c2] w-[110px] ml-38 max-[640px]:ml-4 max-[1150px]:ml-12" />
+
+      <Options datas={data} styles="min-[1023px]:ml-auto" />
+      <div className="flex w-[225px] gap-2 ml-6 mr-[9.5rem] max-[1150px]:ml-0 max-[1150px]:mr-8 max-[540px]:translate-x-[-2rem] max-[410px]:translate-x-[-4rem] max-[347px]:translate-x-[-6rem] max-[957px]:translate-x-[12rem] max-[862px]:translate-x-[9rem] max-[779px]:translate-x-[6rem] max-[700px]:translate-x-[4rem] max-[640px]:translate-x-[2rem] max-[1023px]:translate-x-[15rem]">
+        <a href="/register" className=" text-gray-600 nav-bt-signin  ">
           join now
         </a>
         <a
-          id="sign-b"
-          className=" hover:bg-[#effdfd] border py-3 rounded-full px-6 text-[1rem] text-[#0a66c2] hover:text-[#39597a] font-bold"
           href="/login"
+          className=" nav-bt-signin border text-[#0a66c2] hover:text-[#39597a] "
         >
           Sign in
         </a>
