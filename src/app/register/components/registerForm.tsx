@@ -23,23 +23,22 @@ export default function RegisterForm(): ReactElement {
     mode: "all",
   });
 
-  const { showPassword, accesstoken, setAccesstoken } = useUserContext();
-  console.log(accesstoken);
+  const {showPassword} = useUserContext();
+
   const router = useRouter();
   const OnSubmit = async (data: loginType): Promise<void> => {
-    const result = await RegisterOnSubmit(data, setError);
+  const result = await RegisterOnSubmit(data, setError);
 
-    if (result.accessToken) {
+    if (result) {
       const route = String(result.insertId);
       router.push(`/profile/${route}`);
-      setAccesstoken(result.accessToken);
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit(OnSubmit)}
-      className=" p-6 shadow-xl mx-auto rounded-xl text-center"
+      className=" p-6 shadow-xl mx-auto rounded-xl pb-8 text-center max-[480px]:w-[95vw] max-[550px]:w-[80vw] max-[640px]:w-[70vw] max-[780px]:w-[60vw] max-[1023px]:w-[50vw] min-[1023px]:w-[28vw]"
     >
       <InputField
         id="email"
@@ -60,10 +59,7 @@ export default function RegisterForm(): ReactElement {
 
       <SubmitButton name="Agree and Join" className="mt-12 py-3 " />
       <Divider />
-      <LoginOptions
-        textcolor="text-gray-500"
-        className="flex-center login-button hover:bg-[#F1F1F1]"
-      />
+      <LoginOptions className="hover:bg-[#F1F1F1] mt-4 bg-[#ffff] text-gray-500" />
     </form>
   );
 }
