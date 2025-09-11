@@ -26,8 +26,9 @@ export async function RegisterOnSubmit(
       else {
         setError("root", { type: "manual", message: message });
       }
+    } else {
+      return result;
     }
-    return result;
   } catch (err) {
     setError("root", {
       type: "manual",
