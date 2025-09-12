@@ -4,7 +4,6 @@ export function setCookie<T>(
   response: NextResponse<T>,
   refreshToken: string,
   accessToken: string,
-  id: string
 ): NextResponse<T> {
   response.cookies.set("refreshToken", refreshToken, {
     httpOnly: true,
@@ -13,12 +12,6 @@ export function setCookie<T>(
     maxAge: 60 * 60 * 24 * 1,
   });
   response.cookies.set("accessToken", accessToken, {
-    httpOnly: true,
-    path: "/",
-    sameSite: "strict",
-    maxAge: 60 * 60 * 24 * 1,
-  });
-  response.cookies.set("userId", id, {
     httpOnly: true,
     path: "/",
     sameSite: "strict",
@@ -40,12 +33,6 @@ export function clearCookie<T>(response: NextResponse<T>): NextResponse<T> {
     path: "/",
     sameSite: "strict",
     maxAge: 60 * 60 * 24 * 1,
-  });
-  response.cookies.set("userId", "", {
-    httpOnly: true,
-    path: "/",
-    sameSite: "strict",
-    maxAge: 0,
   });
   return response;
 }
