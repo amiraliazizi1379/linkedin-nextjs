@@ -11,7 +11,7 @@ export const POST = catchAsync(
     const body = await request.json();
     const { accessToken, refreshToken, insertId } = await registerUser(body);
     let response = NextResponse.json({ insertId }, { status: 200 });
-    setCookie(response, refreshToken, accessToken, String(insertId));
+    setCookie(response, refreshToken, accessToken);
 
     return response;
   }
