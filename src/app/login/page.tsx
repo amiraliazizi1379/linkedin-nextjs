@@ -1,4 +1,3 @@
-import "./login.css";
 import Footer from "../../components/footer";
 import Logo from "../../components/logo";
 import LoginForm from "./components/loginForm";
