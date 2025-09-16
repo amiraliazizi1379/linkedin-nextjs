@@ -5,6 +5,7 @@ import { databaseOperation } from "@/models/dataBase";
 import * as jwt from "jsonwebtoken";
 import { hashPassword, is_validPassword } from "@/utils/hash";
 import { clearCookie, setCookie } from "@/utils/handlecookie";
+import { verifyRefreshToken } from "@/libs/verifyRtoken";
 
 interface jwts extends jwt.JwtPayload {
   userInfo: { username: string; userId: number };
@@ -12,46 +13,43 @@ interface jwts extends jwt.JwtPayload {
 
 export const POST = catchAsync(
   async (request: NextRequest): Promise<NextResponse> => {
-    const token = request.cookies.get("refreshToken")?.value;
-    const userId = request.cookies.get("userId")?.value;
     let response = NextResponse.json(
-      { message: "You need to sign in" },
+      { message: "Unathorized" },
       { status: 401 }
     );
-    if (!token || !userId) return clearCookie(response);
+
+    const token = request.cookies.get("refreshToken")?.value;
+    if (!token) return clearCookie(response);
+
+    const userId = verifyRefreshToken(token);
+    if (!userId) return clearCookie(response);
 
     const findUser = await databaseOperation.findToken(userId);
     if (!findUser) return clearCookie(response);
 
     const is_validToken = await is_validPassword(token, findUser.refreshtoken);
-    if (!is_validToken) return clearCookie(response);
+    if (!is_validToken) {
+      await databaseOperation.deleteToken(userId);
+      return clearCookie(response);
+    }
 
-    const payload = jwt.verify(token, process.env.REFRESHTOKEN_SECRET!) as jwts;
-
-    if (!payload) return clearCookie(response);
-
-    const newRefreshToken = RefreshToken(findUser.email);
+    const newRefreshToken = RefreshToken(findUser.id);
 
     await databaseOperation.updateToken(
       await hashPassword(newRefreshToken),
       findUser.id
     );
 
-    const newAccessToken = AccessToken(payload.userInfo.username, findUser.id);
+    const newAccessToken = AccessToken(findUser.email, findUser.id);
 
     let newresponse = NextResponse.json(
       {
-        userId: findUser.id,
+        message: "new access token successfully made",
       },
       { status: 200 }
     );
 
-    newresponse = setCookie(
-      newresponse,
-      newRefreshToken,
-      newAccessToken,
-      findUser.id
-    );
+    newresponse = setCookie(newresponse, newRefreshToken, newAccessToken);
 
     return newresponse;
   }
