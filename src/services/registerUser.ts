@@ -17,15 +17,12 @@ export async function registerUser(
 
   const hashedPassword = await hashPassword(password);
 
-  const refreshToken = RefreshToken(email);
+  const { insertId } = await databaseOperation.addUser(email, hashedPassword);
+
+  const refreshToken = RefreshToken(insertId);
 
   const hasheRefreshToken = await hashPassword(refreshToken);
-
-  const { insertId } = await databaseOperation.addUser(
-    email,
-    hashedPassword,
-    hasheRefreshToken
-  );
+  await databaseOperation.updateToken(hasheRefreshToken, insertId);
 
   const accessToken = AccessToken(email, insertId);
 
