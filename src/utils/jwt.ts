@@ -1,8 +1,8 @@
 import * as jwt from "jsonwebtoken";
 
-export function RefreshToken(email: string): string {
+export function RefreshToken(id : number): string {
   return jwt.sign(
-    { userInfo: { username: email } },
+    { userInfo: { userId : id } },
     process.env.REFRESHTOKEN_SECRET!,
     {
       expiresIn: "1d",
@@ -15,7 +15,7 @@ export function AccessToken(email: string, id: number): string {
     { userInfo: { username: email, userId: id } },
     process.env.ACCESSTOKEN_SECRET!,
     {
-      expiresIn: "15m",
+      expiresIn: "5m",
     }
   );
 }
