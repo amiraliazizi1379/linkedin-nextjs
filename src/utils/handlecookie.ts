@@ -7,7 +7,7 @@ export function setCookie<T>(
 ): NextResponse<T> {
   response.cookies.set("refreshToken", refreshToken, {
     httpOnly: true,
-    path: "/api",
+    path: "/",
     sameSite: "strict",
     maxAge: 60 * 60 * 24 * 1,
   });
@@ -24,7 +24,7 @@ export function setCookie<T>(
 export function clearCookie<T>(response: NextResponse<T>): NextResponse<T> {
   response.cookies.set("refreshToken", "", {
     httpOnly: true,
-    path: "/api",
+    path: "/",
     sameSite: "strict",
     maxAge: 0,
   });
@@ -32,7 +32,7 @@ export function clearCookie<T>(response: NextResponse<T>): NextResponse<T> {
     httpOnly: true,
     path: "/",
     sameSite: "strict",
-    maxAge: 60 * 60 * 24 * 1,
+    maxAge: 0,
   });
   return response;
 }
