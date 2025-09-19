@@ -1,4 +1,8 @@
-export const catchAsync = <T extends (...args: any[]) => Promise<Response>>(
+import { NextRequest } from "next/server";
+
+export const catchAsync = <
+  T extends (...args: NextRequest[]) => Promise<Response>
+>(
   handler: T
 ) => {
   return (async (...args: Parameters<T>): Promise<Response> => {
