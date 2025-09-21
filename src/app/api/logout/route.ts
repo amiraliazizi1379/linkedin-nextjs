@@ -1,3 +1,4 @@
+import { verifyRefreshToken } from "@/libs/verifyRtoken";
 import { databaseOperation } from "@/models/dataBase";
 import { catchAsync } from "@/utils/catchAsync";
 import { clearCookie } from "@/utils/handlecookie";
@@ -9,14 +10,14 @@ export const POST = catchAsync(
       { message: "No content to send" },
       { status: 400 }
     );
-    response = clearCookie(response);
 
     const refreshToken = request.cookies.get("refreshToken")?.value;
     if (!refreshToken) return response;
 
-    const userId = request.cookies.get("userId")?.value;
-    if (!userId) return response;
-
+    const result = verifyRefreshToken(refreshToken);
+    if (!result)
+      return NextResponse.redirect(new URL("/login", request.nextUrl));
+    const userId = result;
     await databaseOperation.deleteToken(userId);
 
     let newresponse = NextResponse.json(
