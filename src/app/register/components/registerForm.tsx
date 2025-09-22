@@ -23,11 +23,11 @@ export default function RegisterForm(): ReactElement {
     mode: "all",
   });
 
-  const {showPassword} = useUserContext();
+  const { showPassword } = useUserContext();
 
   const router = useRouter();
   const OnSubmit = async (data: loginType): Promise<void> => {
-  const result = await RegisterOnSubmit(data, setError);
+    const result = await RegisterOnSubmit(data, setError);
 
     if (result) {
       const route = String(result.insertId);
