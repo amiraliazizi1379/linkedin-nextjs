@@ -1,56 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { GetUserData } from "./action";
+import { GetNewAccessToken } from "../../../utils/getNewAccessToken";
+import ProfileNavBar from "../features/navbar";
+import CreatePost from "../features/createPost/components/createPost";
+import PopOp from "../features/pop-up-user-nav";
+import CreatePostComponent from "../features/createPost/components/createPostComponent";
+import RenderPosts from "../features/renderposts/components/renderPosts";
+import { useEffect } from "react";
 import { useUserContext } from "@/context/useContext";
-import { useRouter } from "next/navigation";
-import { use } from "react";
 
-export default function Profile({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
-
-  const { accesstoken, setAccesstoken } = useUserContext();
-  console.log(accesstoken);
-  const [data, setData] = useState<{ id: number }>();
-  const router = useRouter();
+export default function Profile() {
+  const { popup, setPopup } = useUserContext();
 
   useEffect(() => {
-    const result = async () => {
-      const res = await GetUserData(accesstoken, id);
-      const result = await res.json();
-      if (res.ok && result.accessToken) {
-        setAccesstoken(result.accessToken);
-        const res2 = await GetUserData(accesstoken, id);
-        if (!res2.ok) router.replace("/login");
+    const res = async () => {
+      try {
+        const res = await GetNewAccessToken("http://localhost:3000/api/user", {
+          method: "GET",
+        });
+      } catch (err) {
+        console.log(err);
       }
-      else{
-        router.push('/login')
-      }
-      //setData(result);
-
-      if (!res.ok) router.replace("/login");
     };
-
-    result();
-  }, [router]);
-
-  async function handlelogout() {
-    const res = await fetch("/api/logout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    if (res.ok) router.push("/login");
-  }
+    res();
+  }, []);
 
   return (
-    <div>
-      <button onClick={handlelogout}>log out</button>
-      {data && data.id} welcome to your profile{" "}
-    </div>
+    <main
+      onClick={() => {
+        if (popup) setPopup(false);
+      }}
+      className="bg-gray-100  h-screen overflow-y-auto"
+    >
+      <ProfileNavBar />
+      {popup && <PopOp />}
+      <CreatePost />
+      <CreatePostComponent />
+      <RenderPosts />
+    </main>
   );
 }
