@@ -1,58 +1,30 @@
 import { NextResponse, NextRequest } from "next/server";
-import { jwtVerify } from "jose";
-
-import { AppError } from "./utils/AppError";
+import { clearCookie } from "./utils/handlecookie";
 
 export const middleware = async (
   request: NextRequest
 ): Promise<NextResponse> => {
   try {
     const accessToken = request.cookies.get("accessToken")?.value;
-
-    const userId = request.cookies.get("userId")?.value;
-
     const { pathname } = request.nextUrl;
 
-    if (
-      accessToken &&
-      userId &&
-      ["/", "/register", "/login"].includes(pathname)
-    )
-      return NextResponse.redirect(new URL(`/profile/${userId}`, request.url));
-
-    if (pathname.startsWith("/api/profile/")) {
+    if (pathname.startsWith("/api") || pathname.startsWith("/profile")) {
       if (!accessToken) {
-        const err = new AppError("no token", 401);
-        return NextResponse.json(
-          { message: err.message },
-          { status: err.statusCode }
-        );
-      }
-      const result = await jwtVerify(
-        accessToken,
-        new TextEncoder().encode(process.env.ACCESSTOKEN_SECRET)
-      );
-      if (!result) {
-        const err = new AppError("verify", 401);
-        return NextResponse.json(
-          { message: err.message },
-          { status: err.statusCode }
-        );
+        let res = NextResponse.redirect(new URL("/login", request.nextUrl));
+        clearCookie(res);
+        return res;
       }
     }
 
     return NextResponse.next();
-  } catch (err) {
-    return NextResponse.json(err);
+  } catch {
+    return NextResponse.json(
+      { message: "something went wron in middleware" },
+      { status: 401 }
+    );
   }
 };
 
 export const config = {
-  matcher: [
-    "/api/profile/:path*",
-    "/profile/:path*",
-    "/login",
-    "/register",
-    "/",
-  ],
+  matcher: ["/api/posts", "/profile/:path*", "/login", "/register", "/"],
 };
