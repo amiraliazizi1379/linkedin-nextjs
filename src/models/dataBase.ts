@@ -1,6 +1,5 @@
 import { pool } from "@/libs/db";
-import { QueryResult, ResultSetHeader, RowDataPacket } from "mysql2";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 export class databaseOperation {
   static findEmail = async (email: string) => {
@@ -11,35 +10,31 @@ export class databaseOperation {
 
     return findedemail[0];
   };
-  static addUser = async (
-    email: string,
-    password: string,
-    refreshtoken: string
-  ) => {
+  static addUser = async (email: string, password: string) => {
     const [result] = await pool.query<ResultSetHeader>(
-      "insert into user_table (email , password , refreshtoken) values  ( ? , ? , ?)",
-      [email, password, refreshtoken]
+      "insert into user_table (email , password ) values  ( ? , ? )",
+      [email, password]
     );
 
     return result;
   };
 
-  static findToken = async (token: string) => {
+  static findToken = async (id: number) => {
     const [user] = await pool.query<RowDataPacket[]>(
       "select * from user_table  where id = ?",
-      [token]
+      [id]
     );
     return user[0];
   };
 
-  static deleteToken = async (userId: string) => {
+  static deleteToken = async (userId: number) => {
     return await pool.query(
       "update user_table set refreshtoken = null where id = ?",
       [userId]
     );
   };
 
-  static updateToken = async (token: string, id: string) => {
+  static updateToken = async (token: string, id: number) => {
     return await pool.query(
       "update user_table set refreshtoken = ? where id = ?",
       [token, id]
@@ -53,5 +48,52 @@ export class databaseOperation {
     );
 
     return userDat[0];
+  };
+  static addPost = async (userId: number, text: string, img: string | null) => {
+    const [addPostQuery] = await pool.query<ResultSetHeader>(
+      "insert into posts (user_id , content , image_url) values (? , ? , ?)",
+      [userId, text, img]
+    );
+    return addPostQuery;
+  };
+
+  static getPostsData = async (id: number) => {
+    const [postsDat] = await pool.query(
+      "SELECT posts.id AS post_id,posts.image_url,posts.content,posts.created_at,user_table.id AS user_id,CASE WHEN EXISTS (SELECT 1 FROM likes  WHERE likes.user_id = ? AND likes.post_id = posts.id ) THEN TRUE ELSE FALSE END AS liked,CASE WHEN EXISTS (SELECT 1 FROM follows WHERE follows.follower_id = ? AND follows.followed_id = user_table.id) THEN TRUE ELSE FALSE  END AS is_following FROM posts JOIN user_table ON posts.user_id = user_table.id ORDER BY posts.created_at DESC;",
+      [id , id]
+    );
+    return postsDat;
+  };
+  static registerLike = async (userId: number, postId: number) => {
+    const [likeResult] = await pool.query(
+      "insert into likes (user_id , post_id) values (? , ?)",
+      [userId, postId]
+    );
+    console.log(likeResult);
+    return likeResult;
+  };
+  static deleteLike = async (userId: number, postId: number) => {
+    const [likeResult] = await pool.query(
+      "DELETE from likes where user_id = ?  AND  post_id = ?",
+      [userId, postId]
+    );
+    console.log(likeResult);
+    return likeResult;
+  };
+  static registerFollow = async (userId: number, postId: number) => {
+    const [likeResult] = await pool.query(
+      "insert into follows (follower_id , followed_id) values (? , ?)",
+      [userId, postId]
+    );
+    console.log(likeResult);
+    return likeResult;
+  };
+  static deleteFollow = async (userId: number, postId: number) => {
+    const [likeResult] = await pool.query(
+      "DELETE from follows where follower_id = ?  AND  followed_id = ?",
+      [userId, postId]
+    );
+    console.log(likeResult);
+    return likeResult;
   };
 }
