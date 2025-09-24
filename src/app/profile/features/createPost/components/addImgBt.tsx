@@ -6,6 +6,7 @@ type props = {
   handleImgBt: () => void;
   fileInputRef: RefObject<HTMLInputElement | null>;
   handleImgInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  classname? : string;
 };
 
 export function AddImageButton({
@@ -13,12 +14,13 @@ export function AddImageButton({
   handleImgBt,
   fileInputRef,
   handleImgInput,
+  classname
 }: props) {
   return (
-    <div>
+    <div className={classname}>
       <button
         onClick={handleImgBt}
-        className={`text-2xl cursor-pointer ml-1.5 mt-2 ${srcImg && "hidden"}`}
+        className={`text-2xl cursor-pointer  ${srcImg && "hidden"}`}
       >
         <HiOutlinePhoto />
       </button>

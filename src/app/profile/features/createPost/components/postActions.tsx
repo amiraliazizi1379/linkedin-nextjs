@@ -2,12 +2,14 @@ type props = {
   postBt: boolean;
   srcImg: string;
   handlePost: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  classname? : string;
+  name? : string;
 };
 
-export function PostAction({ handlePost, postBt, srcImg }: props) {
+export function PostAction({ handlePost, postBt, srcImg , classname , name = 'Post'}: props) {
   return (
     <div
-      className={`flex items-center gap-4 justify-end border-t-1 border-gray-300 w-full pt-4 ${
+      className={`flex items-center ${classname} gap-4 justify-end border-t-1 border-gray-300 w-full pt-4 ${
         srcImg && "mt-10"
       }`}
     >
@@ -19,7 +21,7 @@ export function PostAction({ handlePost, postBt, srcImg }: props) {
             : "bg-gray-200 text-gray-400  cursor-not-allowed"
         } rounded-full   py-1 px-4  text-sm font-semibold `}
       >
-        Post
+        {name}
       </button>
     </div>
   );

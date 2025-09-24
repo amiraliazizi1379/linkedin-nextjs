@@ -1,6 +1,7 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { useUserContext } from "@/context/useContext";
+import { number } from "joi";
 
 export function useCreatePost() {
   const { createPost, setCreatePost } = useUserContext();
@@ -8,7 +9,7 @@ export function useCreatePost() {
   const [postImg, setPostImg] = useState<File | null>(null);
   const [postText, setPostText] = useState("");
   const [srcImg, setSrcImg] = useState("");
-
+  const [heightImage , setHeightImage] = useState(number);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const handleImgBt = () => {
     fileInputRef.current?.click();
@@ -23,6 +24,7 @@ export function useCreatePost() {
       reader.onloadend = () => {
         setSrcImg(reader.result as string);
       };
+      
       reader.readAsDataURL(file);
     }
   }
@@ -53,6 +55,8 @@ export function useCreatePost() {
     setPostText,
     srcImg,
     setSrcImg,
+    heightImage,
+    setHeightImage,
     fileInputRef,
     handleImgBt,
     handleImgInput,
