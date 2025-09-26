@@ -1,14 +1,11 @@
 import { auth } from "@/libs/accessTokenVerify";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = auth(async (request: NextRequest, userId) => {
-  // const id = request.nextUrl.pathname.split("/")[3];
-  // console.log(request.nextUrl)
-  // console.log(id , userId)
-  // if (userId !== Number(id))
-  //   return NextResponse.json(
-  //     { message: "you dont have permission to access this url" },
-  //     { status: 403 }
-  //   );
-  return NextResponse.json({ userId }, { status: 200 });
+export const POST = auth(async (request: NextRequest, userId) => {
+  const pageId = await request.text();
+
+  if (userId !== Number(pageId))
+    return NextResponse.json({ id: userId }, { status: 403 });
+
+  return NextResponse.json({ status: 200 });
 });
