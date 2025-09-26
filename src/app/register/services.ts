@@ -1,4 +1,5 @@
 import { loginType } from "@/validation/loginSchema";
+
 import { UseFormSetError } from "react-hook-form";
 //import { registerType } from "@/validation/registerSchema";
 
@@ -19,11 +20,11 @@ export async function RegisterOnSubmit(
     if (!res.ok) {
       const message = result.message.replaceAll('"', "");
 
-      if (message.startsWith("email"))
+      if (message.startsWith("email")) {
         setError("email", { type: "server", message: message });
-      else if (message.startsWith("Password"))
+      } else if (message.startsWith("Password")) {
         setError("password", { type: "server", message: message });
-      else {
+      } else {
         setError("root", { type: "manual", message: message });
       }
     } else {
