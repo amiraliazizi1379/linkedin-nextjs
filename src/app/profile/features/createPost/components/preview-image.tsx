@@ -1,25 +1,19 @@
-import { Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, useCallback, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 
 type props = {
   srcImg: string;
   setSrcImg: Dispatch<SetStateAction<string>>;
-  classname: string;
-  setHeightImage : Dispatch<SetStateAction<number>>;
+  classname?: string;
 };
 
 export function PostImageUploader({
   srcImg,
   setSrcImg,
   classname = "w-full",
-  setHeightImage
 }: props) {
-  const preview = useRef<HTMLImageElement>(null);
-  if (preview.current) {
-    setHeightImage(preview.current.offsetHeight);
-  }
   return (
-    <main className={`h-[65%] ${classname}`}>
+    <main className={`h-[65%] overflow-auto ${classname}`}>
       <div className="h-full">
         {srcImg && (
           <section>
@@ -31,7 +25,7 @@ export function PostImageUploader({
             >
               <IoMdClose />
             </button>
-            <img src={srcImg} className="" ref={preview} />
+            <img src={srcImg} />
           </section>
         )}
       </div>
