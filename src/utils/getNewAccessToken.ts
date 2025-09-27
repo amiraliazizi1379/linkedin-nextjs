@@ -11,9 +11,10 @@ export async function GetNewAccessToken(
       credentials: "include",
     });
 
-    if (res.ok) return res;
+    if (res.ok || res.status === 403) return res;
     const result = await res.json();
-    console.log(result);
+   
+
     if (res.status === 401 && result.message === "Token expired") {
       const requestToken = await fetch("http://localhost:3000/api/refresh", {
         method: "POST",
@@ -30,8 +31,11 @@ export async function GetNewAccessToken(
           body: options.body,
           credentials: "include",
         });
-        if (res2.ok) return res2;
+        if (res2.ok || res2.status === 403) return res2;
       }
+    }
+    else{
+      redirect('/login')
     }
   } catch (err) {
     throw err;
