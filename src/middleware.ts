@@ -13,14 +13,16 @@ export const middleware = async (
   try {
     const refreshToken = request.cookies.get("refreshToken")?.value;
 
-    if (refreshToken) {
+    if (!request.nextUrl.pathname.startsWith("/profile") && refreshToken) {
       const secret = new TextEncoder().encode(process.env.REFRESHTOKEN_SECRET);
       const { payload } = await jwtVerify<jwtpayload>(refreshToken, secret);
-      console.log(payload);
+
       return NextResponse.redirect(
         new URL(`/profile/${payload.userInfo.userId}`, request.nextUrl)
       );
     }
+    if (request.nextUrl.pathname.startsWith("/profile") && !refreshToken)
+      return NextResponse.redirect(new URL("/login", request.nextUrl));
     return NextResponse.next();
   } catch {
     return NextResponse.json(
@@ -31,5 +33,5 @@ export const middleware = async (
 };
 
 export const config = {
-  matcher: ["/login", "/register", "/"],
+  matcher: ["/login", "/register", "/", "/profile/:path*"],
 };
