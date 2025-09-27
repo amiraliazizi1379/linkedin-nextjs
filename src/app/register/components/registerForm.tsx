@@ -7,10 +7,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 //import { RegisterSchema, registerType } from "@/validation/registerSchema";
 import { useUserContext } from "@/context/useContext";
-import { RegisterOnSubmit } from "../action";
+import { RegisterOnSubmit } from "../services";
 import { loginSchema, loginType } from "@/validation/loginSchema";
 import { useRouter } from "next/navigation";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 export default function RegisterForm(): ReactElement {
   const {
@@ -24,15 +24,18 @@ export default function RegisterForm(): ReactElement {
   });
 
   const { showPassword } = useUserContext();
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const OnSubmit = async (data: loginType): Promise<void> => {
+    setLoading(true);
     const result = await RegisterOnSubmit(data, setError);
 
     if (result) {
       const route = String(result.insertId);
       router.push(`/profile/${route}`);
     }
+    setLoading(false);
   };
 
   return (
@@ -57,7 +60,11 @@ export default function RegisterForm(): ReactElement {
         type={`${showPassword ? "text" : "password"}`}
       />
 
-      <SubmitButton name="Agree and Join" className="mt-12 py-3 " />
+      <SubmitButton
+        name="Agree and Join"
+        className="mt-12 py-3 "
+        loading={loading}
+      />
       <Divider />
       <LoginOptions className="hover:bg-[#F1F1F1] mt-4 bg-[#ffff] text-gray-500" />
     </form>
