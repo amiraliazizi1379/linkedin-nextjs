@@ -10,10 +10,11 @@ import Divider from "@/components/divider";
 import SubmitButton from "@/components/submitButton";
 import LoginOptions from "@/components/loginOptions";
 import { LoginOnSubmit } from "../action";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 export default function LoginForm(): ReactElement {
   const { showPassword } = useUserContext();
+  const [loading , setLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -26,7 +27,7 @@ export default function LoginForm(): ReactElement {
     <main>
       <form
         onSubmit={handleSubmit(LoginOnSubmit)}
-        className="h-[82vh] p-8 shadow-xl mx-auto rounded-xl text-center max-[480px]:w-[95vw] max-[550px]:w-[80vw] max-[640px]:w-[70vw] max-[780px]:w-[60vw] max-[1023px]:w-[50vw] min-[1023px]:w-[25vw]"
+        className="min-h-[82vh] p-8 shadow-xl mx-auto rounded-xl text-center max-[480px]:w-[95vw] max-[550px]:w-[80vw] max-[640px]:w-[70vw] max-[780px]:w-[60vw] max-[1023px]:w-[50vw] min-[1023px]:w-[25vw]"
       >
         <h1 className="font-bold text-3xl text-left mb-6">Sign in</h1>
         <LoginOptions apple={true} className="hover:bg-[#F1F1F1]" />
@@ -49,7 +50,7 @@ export default function LoginForm(): ReactElement {
           type={`${showPassword ? "text" : "password"}`}
         />
         <FormOptions />
-        <SubmitButton name="Sign in" className="py-4 mt-8" />
+        <SubmitButton name="Sign in" className="py-4 mt-8" loading={loading}/>
       </form>
       <h1 className=" flex justify-center items-center mt-8 gap-2 text-gray-700">
         New to LinkedIn?
