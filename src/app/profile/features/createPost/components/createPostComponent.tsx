@@ -1,15 +1,17 @@
 import { useUserContext } from "@/context/useContext";
-import UserImageComponent from "../../userImgComponent";
+import UserImageComponent from "../../components/userImgComponent";
 import { IoMdClose } from "react-icons/io";
 import { PostTextArea } from "./PostTextarea";
 import { useCreatePost } from "../hooks/useCreatePost";
 import { PostAction } from "./postActions";
-import { PostImageUploader } from "./postImageUploader";
+import { PostImageUploader } from "./preview-image";
 import { AddImageButton } from "./addImgBt";
+import { handlePost } from "../services/addPost";
 
 export default function CreatePostComponent() {
   const { createPost, setCreatePost } = useUserContext();
   const state = useCreatePost();
+  const { postText, postImg, setLoading } = state;
 
   if (createPost) {
     return (
@@ -35,7 +37,12 @@ export default function CreatePostComponent() {
             <PostImageUploader {...state} />
           </section>
           <AddImageButton {...state} />
-          <PostAction {...state} />
+          <PostAction
+            {...state}
+            onclick={(e: React.MouseEvent<HTMLButtonElement>) =>
+              handlePost(e, postText, postImg, setLoading, setCreatePost)
+            }
+          />
         </div>
       </section>
     );

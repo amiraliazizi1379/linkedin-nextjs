@@ -1,6 +1,6 @@
 import { useUserContext } from "@/context/useContext";
 import { createPostData } from "../../datas/createpostdata";
-import UserImageComponent from "../../userImgComponent";
+import UserImageComponent from "../../components/userImgComponent";
 
 export default function CreatePost() {
   const { createPost, setCreatePost } = useUserContext();
