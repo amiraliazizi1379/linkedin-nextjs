@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 import Options from "@/app/home/options";
 import Logo from "@/components/logo";
 import { IoMdSearch } from "react-icons/io";
 import UserImageComponent from "./userImgComponent";
-import { data } from "./datas/data";
+import { data } from "../datas/data";
 import { useUserContext } from "@/context/useContext";
-import PopOp from "./pop-up-user-nav";
+
 
 export default function ProfileNavBar() {
   const { popup, setPopup } = useUserContext();
