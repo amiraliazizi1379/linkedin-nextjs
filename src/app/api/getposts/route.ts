@@ -8,6 +8,8 @@ export const GET = auth(async (request: NextRequest, userId) => {
   postdata = (postdata as any[]).map((prev) => ({
     ...prev,
     liked: Boolean(prev.liked),
+    is_following: Boolean(prev.is_following),
+    comment:false
   }));
 
   if (!postdata)
