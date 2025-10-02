@@ -57,19 +57,40 @@ export class databaseOperation {
     return addPostQuery;
   };
 
+  static addComment = async (
+    userId: number,
+    postId: number,
+    text: string,
+    img: string | null
+  ) => {
+    const [addCommentQuery] = await pool.query<ResultSetHeader>(
+      "insert into comments (user_id , post_id , content , image_url) values (? , ? , ? , ?)",
+      [userId, postId, text, img]
+    );
+    return addCommentQuery;
+  };
+
   static getPostsData = async (id: number) => {
     const [postsDat] = await pool.query(
       "SELECT posts.id AS post_id,posts.image_url,posts.content,posts.created_at,user_table.id AS user_id,CASE WHEN EXISTS (SELECT 1 FROM likes  WHERE likes.user_id = ? AND likes.post_id = posts.id ) THEN TRUE ELSE FALSE END AS liked,CASE WHEN EXISTS (SELECT 1 FROM follows WHERE follows.follower_id = ? AND follows.followed_id = user_table.id) THEN TRUE ELSE FALSE  END AS is_following FROM posts JOIN user_table ON posts.user_id = user_table.id ORDER BY posts.created_at DESC;",
-      [id , id]
+      [id, id]
     );
+    console.log(postsDat)
     return postsDat;
   };
+
+  static getComments = async (id: number) => {
+    const [postsComments] = await pool.query(
+      "select * from comments where post_id = ?",[id]
+    );
+    return postsComments;
+  };
+
   static registerLike = async (userId: number, postId: number) => {
     const [likeResult] = await pool.query(
       "insert into likes (user_id , post_id) values (? , ?)",
       [userId, postId]
     );
-    console.log(likeResult);
     return likeResult;
   };
   static deleteLike = async (userId: number, postId: number) => {
@@ -77,7 +98,6 @@ export class databaseOperation {
       "DELETE from likes where user_id = ?  AND  post_id = ?",
       [userId, postId]
     );
-    console.log(likeResult);
     return likeResult;
   };
   static registerFollow = async (userId: number, postId: number) => {
@@ -85,7 +105,6 @@ export class databaseOperation {
       "insert into follows (follower_id , followed_id) values (? , ?)",
       [userId, postId]
     );
-    console.log(likeResult);
     return likeResult;
   };
   static deleteFollow = async (userId: number, postId: number) => {
@@ -93,7 +112,6 @@ export class databaseOperation {
       "DELETE from follows where follower_id = ?  AND  followed_id = ?",
       [userId, postId]
     );
-    console.log(likeResult);
     return likeResult;
   };
 }
