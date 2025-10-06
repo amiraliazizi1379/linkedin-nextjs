@@ -1,12 +1,14 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function GetNewAccessToken(
   url: string,
-  options: { method: string; body?: FormData | string }
+  options: { method: string , headers? : {} , body?: FormData | string }
 ) {
   try {
     const res = await fetch(url, {
       method: options.method,
+      headers : options.headers,
       body: options.body,
       credentials: "include",
     });
@@ -28,6 +30,7 @@ export async function GetNewAccessToken(
       if (requestToken.ok) {
         const res2 = await fetch(url, {
           method: options.method,
+          headers : options.headers,
           body: options.body,
           credentials: "include",
         });
