@@ -16,7 +16,7 @@ export async function FormDataRouteHandler(
     const buffer = Buffer.from(bytes);
     const path = `C:/Users/Amir/Desktop/linkedin-nextjs/public/${folder}/${image.name}`;
     await writeFile(path, buffer);
-    imageUrl = `/postimg/${image.name}`;
+    imageUrl = `/${folder}/${image.name}`;
   }
   return {text , imageUrl}
 }
