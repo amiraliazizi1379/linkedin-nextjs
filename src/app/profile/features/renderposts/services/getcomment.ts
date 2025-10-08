@@ -1,4 +1,4 @@
-import { contextType, postdatas } from "@/context/useContext";
+import { contextType } from "@/context/useContext";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 
 export async function GetComments(
