@@ -1,5 +1,5 @@
 import { ClipLoader } from "react-spinners";
-import { handlePost } from "../services/addPost";
+
 
 type props = {
   postBt: boolean;
