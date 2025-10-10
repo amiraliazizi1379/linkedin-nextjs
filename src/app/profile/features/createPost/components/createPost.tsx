@@ -3,12 +3,17 @@ import { createPostData } from "../../datas/createpostdata";
 import UserImageComponent from "../../components/userImgComponent";
 
 export default function CreatePost() {
-  const { createPost, setCreatePost } = useUserContext();
-
+  const { userData, setCreatePost } = useUserContext();
+  const {name , email , image} = userData;
   return (
     <section className="border-1 border-gray-300 p-2 w-[40vw] mx-auto mt-8 rounded-md bg-[#fff]">
       <article className="flex-center gap-2">
-        <UserImageComponent style="w-[45px] h-[45px] text-xl" />
+        <UserImageComponent
+          style="w-[55px] h-[55px] text-xl"
+          image={image}
+          name={name}
+          email={email}
+        />
         <button
           onClick={() => {
             setCreatePost(true);
