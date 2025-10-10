@@ -9,4 +9,7 @@ export type postdatas = {
   is_following: boolean;
   comment: boolean;
   commentData: commentDataType[];
+  image: string;
+  name: string;
+  email: string;
 };
