@@ -1,0 +1,10 @@
+import { redirect } from "next/navigation";
+
+export async function handlelogout() {
+  const res = await fetch("/api/logout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+  });
+  if (res.ok) redirect("/login");
+}
