@@ -6,11 +6,12 @@ import InputField from "@/components/inputField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 //import { RegisterSchema, registerType } from "@/validation/registerSchema";
-import { useUserContext } from "@/context/useContext";
 import { RegisterOnSubmit } from "../services";
 import { loginSchema, loginType } from "@/validation/loginSchema";
 import { useRouter } from "next/navigation";
 import { ReactElement, useState } from "react";
+import { RootState } from "@/app/redux/store";
+import { useSelector } from "react-redux";
 
 export default function RegisterForm(): ReactElement {
   const {
@@ -23,7 +24,7 @@ export default function RegisterForm(): ReactElement {
     mode: "all",
   });
 
-  const { showPassword } = useUserContext();
+  const { showPassword } = useSelector((state : RootState) => state.app)
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();

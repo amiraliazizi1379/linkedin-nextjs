@@ -1,4 +1,5 @@
-import { useUserContext } from "../context/useContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setShowPassword } from "@/app/redux/store";
 
 interface inputProps {
   label?: string;
@@ -17,7 +18,8 @@ export default function InputField({
   register,
   error,
 }: inputProps) {
-  const { showPassword, setShowPassword } = useUserContext();
+  const dispatch = useDispatch();
+  const { showPassword } = useSelector((state: RootState) => state.app);
 
   return (
     <main>
@@ -42,7 +44,7 @@ export default function InputField({
           <button
             onClick={(e) => {
               e.preventDefault();
-              setShowPassword(!showPassword);
+              dispatch(setShowPassword(!showPassword));
             }}
             id="show-bt"
             className="absolute right-2 top-10 text-[#0a66c2] cursor-pointer hover:bg-[#daedff] rounded-full px-2  h-[1.6rem] focus:border-2 focus:border-[#0a66c2]"
