@@ -1,16 +1,12 @@
-import { contextType } from "@/context/useContext";
+import { setPostData, store } from "@/app/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 
-export async function handleFollow(
-  id: number,
-  is_following: boolean,
-  setPostData: contextType["setPostData"]
-) {
-  setPostData((pre) =>
-    pre.map((post) =>
-      post.user_id === id ? { ...post, is_following: !post.is_following } : post
-    )
+export async function handleFollow(id: number, is_following: boolean) {
+  const postData = store.getState().app.postData;
+  let updatedData = postData.map((post) =>
+    post.user_id === id ? { ...post, is_following: !post.is_following } : post
   );
+  store.dispatch(setPostData(updatedData));
 
   try {
     if (!is_following) {
@@ -25,12 +21,9 @@ export async function handleFollow(
       });
     }
   } catch {
-    setPostData((pre) =>
-      pre.map((post) =>
-        post.user_id === id
-          ? { ...post, is_following: !post.is_following }
-          : post
-      )
+    updatedData = updatedData.map((post) =>
+      post.user_id === id ? { ...post, is_following: !post.is_following } : post
     );
+    store.dispatch(setPostData(updatedData));
   }
 }

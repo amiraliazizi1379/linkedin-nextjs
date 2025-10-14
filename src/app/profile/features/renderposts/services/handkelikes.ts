@@ -1,17 +1,12 @@
+import { setPostData, store } from "@/app/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
-import { contextType } from "@/context/useContext";
 
-export async function handleLikes(
-  id: number,
-  liked: boolean | undefined,
-  setPostData: contextType["setPostData"]
-) {
-  setPostData((pre) =>
-    pre.map((post) =>
-      post.post_id === id ? { ...post, liked: !post.liked } : post
-    )
+export async function handleLikes(id: number, liked: boolean | undefined) {
+  const postData = store.getState().app.postData;
+  let updatedData = postData.map((post) =>
+    post.post_id === id ? { ...post, liked: !post.liked } : post
   );
-
+  store.dispatch(setPostData(updatedData));
   try {
     if (!liked) {
       const res = await GetNewAccessToken("/api/registerlike", {
@@ -25,10 +20,9 @@ export async function handleLikes(
       });
     }
   } catch {
-    setPostData((pre) =>
-      pre.map((post) =>
-        post.post_id === id ? { ...post, liked: !post.liked } : post
-      )
+    updatedData = updatedData.map((post) =>
+      post.post_id === id ? { ...post, liked: !post.liked } : post
     );
+    store.dispatch(setPostData(updatedData));
   }
 }
