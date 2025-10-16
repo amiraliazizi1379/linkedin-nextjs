@@ -1,16 +1,18 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
+import { store } from "@/app/redux/store";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 export function handleImgInput(
   e: ChangeEvent<HTMLInputElement>,
-  setPostImg: Dispatch<SetStateAction<File | null>>,
-  setSrcImg: Dispatch<SetStateAction<string>>
+  setPostImgFile: Dispatch<SetStateAction<File | null>>,
+  setState: ActionCreatorWithPayload<string>
 ) {
   const file = e.target.files?.[0];
   if (file) {
-    setPostImg(file);
+    setPostImgFile(file);
     const reader = new FileReader();
     reader.onloadend = () => {
-      setSrcImg(reader.result as string);
+      store.dispatch(setState(reader.result as string));
     };
 
     reader.readAsDataURL(file);
