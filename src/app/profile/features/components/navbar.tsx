@@ -5,11 +5,14 @@ import Logo from "@/components/logo";
 import { IoMdSearch } from "react-icons/io";
 import UserImageComponent from "./userImgComponent";
 import { data } from "../datas/data";
-import { useUserContext } from "@/context/useContext";
-
+import { FaCaretDown } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setPopup } from "@/app/redux/store";
 
 export default function ProfileNavBar() {
-  const { popup, setPopup } = useUserContext();
+  const dispatch = useDispatch();
+  const { popup, userData } = useSelector((state: RootState) => state.app);
+  const { name, email, image } = userData;
 
   return (
     <nav className="flex items-center justify-around p-2 bg-[#fff]">
@@ -30,11 +33,21 @@ export default function ProfileNavBar() {
       <article className="flex items-center gap-8">
         <Options datas={data} items="text-2xl" />
         <button
-          onClick={() => setPopup(!popup)}
+          onClick={() => dispatch(setPopup(!popup))}
           className="cursor-pointer flex-center flex-col hover:text-[#171717] text-[12px]"
         >
-          <UserImageComponent style="w-[25px] h-[25px] text-[11px]" />
-          Me
+          <UserImageComponent
+            style="w-[25px] h-[25px] text-[11px]"
+            image={image}
+            name={name}
+            email={email}
+            dontShowLarg
+          />
+
+          <span className="flex-center gap-0.5">
+            {" "}
+            <p>Me</p> <FaCaretDown />
+          </span>
         </button>
       </article>
     </nav>
