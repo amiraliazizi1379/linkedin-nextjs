@@ -12,4 +12,6 @@ export type postdatas = {
   image: string;
   name: string;
   email: string;
+  like_count: number;
+  comment_count: number;
 };
