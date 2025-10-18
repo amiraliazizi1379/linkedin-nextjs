@@ -1,47 +1,52 @@
-import { useUserContext } from "@/context/useContext";
 import UserImageComponent from "../../components/userImgComponent";
-import { IoMdClose } from "react-icons/io";
 import { PostTextArea } from "./PostTextarea";
-import { useCreatePost } from "../hooks/useCreatePost";
-import { PostAction } from "./postActions";
+import { CustomActionBtn } from "./customActionBt";
 import { PostImageUploader } from "./preview-image";
 import { AddImageButton } from "./addImgBt";
 import { handlePost } from "../services/addPost";
+import { CloseButton } from "../../components/closeButton";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setCreatePost, setpostImgSrc } from "@/app/redux/store";
 
 export default function CreatePostComponent() {
-  const { createPost, setCreatePost } = useUserContext();
-  const state = useCreatePost();
-  const { postText, postImg, setLoading } = state;
+  const dispatch = useDispatch();
+  const { createPost, userData, postText, postImgSrc } = useSelector(
+    (state: RootState) => state.app
+  );
+
+  const { image, name, email } = userData;
 
   if (createPost) {
     return (
       <section>
         <div
           onClick={() => {
-            setCreatePost(false);
+            dispatch(setCreatePost(false));
           }}
           className="fixed inset-0 bg-black opacity-50"
         ></div>
-        <div className="fixed w-[52vw] h-[78vh] p-5 pb-0 shadow-lg bg-[#fff] rounded-md left-[22rem] top-[2rem] ">
+        <div className="fixed w-[52vw] h-[78vh] p-5 pb-0 shadow-lg bg-[#fff] z-10 rounded-md left-[22rem] top-[2rem] ">
           <div className="flex  justify-between">
-            <UserImageComponent style="w-[55px] h-[55px] text-3xl ml-4 mt-2" />
-            <button
-              onClick={() => setCreatePost(false)}
-              className="text-3xl h-[40px] cursor-pointer rounded-full hover:bg-gray-100 p-1"
-            >
-              <IoMdClose />
-            </button>
+            <div className="flex-center gap-6">
+              <UserImageComponent
+                style="w-[55px] h-[55px] text-3xl ml-4 mt-2"
+                image={image}
+                name={name}
+                email={email}
+              />
+              <h1>{name ? name : email}</h1>
+            </div>
+            <CloseButton setCustomState={setCreatePost}/>
           </div>
           <section className="overflow-y-auto h-[70%] w-full">
-            <PostTextArea {...state} />
-            <PostImageUploader {...state} />
+            <PostTextArea />
+            <PostImageUploader classname="" />
           </section>
-          <AddImageButton {...state} />
-          <PostAction
-            {...state}
-            onclick={(e: React.MouseEvent<HTMLButtonElement>) =>
-              handlePost(e, postText, postImg, setLoading, setCreatePost)
-            }
+          <AddImageButton classname="text-2xl" setState={setpostImgSrc} />
+          <CustomActionBtn
+            onclick={(e: React.MouseEvent<HTMLButtonElement>) => handlePost(e)}
+            text={postText}
+            ImgSrc={postImgSrc}
           />
         </div>
       </section>
