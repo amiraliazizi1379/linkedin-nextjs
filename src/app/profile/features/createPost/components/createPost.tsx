@@ -1,9 +1,11 @@
-import { useUserContext } from "@/context/useContext";
 import { createPostData } from "../../datas/createpostdata";
 import UserImageComponent from "../../components/userImgComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setCreatePost } from "@/app/redux/store";
 
 export default function CreatePost() {
-  const { userData, setCreatePost } = useUserContext();
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state : RootState) => state.app);
   const {name , email , image} = userData;
   return (
     <section className="border-1 border-gray-300 p-2 w-[40vw] mx-auto mt-8 rounded-md bg-[#fff]">
@@ -16,7 +18,7 @@ export default function CreatePost() {
         />
         <button
           onClick={() => {
-            setCreatePost(true);
+            dispatch(setCreatePost(true));
           }}
           className="font-semibold text-[13px] text-[#707070] mt-1 py-3 px-4 text-left w-[90%] cursor-pointer hover:bg-[#F1F1F1] rounded-full border-1 border-gray-300"
         >
