@@ -1,4 +1,4 @@
-import { setLoading, setPostData } from "@/app/redux/store";
+import {  setPostData } from "@/app/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
