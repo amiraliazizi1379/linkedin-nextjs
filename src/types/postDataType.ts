@@ -14,4 +14,5 @@ export type postdatas = {
   email: string;
   like_count: number;
   comment_count: number;
+  bio: string;
 };
