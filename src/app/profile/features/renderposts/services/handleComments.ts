@@ -1,6 +1,6 @@
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { GetComments } from "./getcomment";
-import { setCommentText, setLoading, store } from "@/app/redux/store";
+import { setBtnLoading, setCommentText, store } from "@/app/redux/store";
 
 export async function handleComment(
   e: React.MouseEvent<HTMLButtonElement>,
@@ -9,7 +9,7 @@ export async function handleComment(
 ) {
   const { commentText } = store.getState().app;
   if (commentText || postImg) {
-    store.dispatch(setLoading(true));
+    store.dispatch(setBtnLoading(true));
     e.preventDefault();
     const formData = new FormData();
     if (postImg) formData.append("img", postImg);
@@ -22,7 +22,7 @@ export async function handleComment(
         body: formData,
       });
       GetComments(postId);
-      store.dispatch(setLoading(false));
+      store.dispatch(setBtnLoading(false));
       store.dispatch(setCommentText(""));
     } catch (err) {
       console.log(err);
