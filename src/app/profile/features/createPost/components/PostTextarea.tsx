@@ -1,12 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { RootState, setPostBt, setPostText } from "@/app/redux/store";
+import {  useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-type props = {
-  setPostText: Dispatch<SetStateAction<string>>;
-  setPostBt: Dispatch<SetStateAction<boolean>>;
-  postText: string;
-};
-
-export function PostTextArea({ setPostText, setPostBt, postText }: props) {
+export function PostTextArea() {
+  const dispatch = useDispatch();
+  const { postText} = useSelector((state: RootState) => state.app);
   const textRef = useRef<HTMLTextAreaElement | null>(null);
   useEffect(() => {
     if (textRef.current) {
@@ -22,11 +20,11 @@ export function PostTextArea({ setPostText, setPostBt, postText }: props) {
       ref={textRef}
       value={postText}
       onChange={(e) => {
-        setPostText(e.target.value);
+        dispatch(setPostText(e.target.value));
         if (e.target.value === "") {
-          setPostBt(false);
+          dispatch(setPostBt(false));
         } else {
-          setPostBt(true);
+          dispatch(setPostBt(true));
         }
       }}
     ></textarea>
