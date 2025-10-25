@@ -7,6 +7,9 @@ export async function FormDataRouteHandler(
 ) {
   const formData = await request.formData();
   const text = formData.get("text") as string;
+  const bio = formData.get("bio") as string;
+  const email = formData.get("email") as string;
+  const name = formData.get("name") as string;
   const image = formData.get("img") as File | null;
 
   let imageUrl = null;
@@ -18,5 +21,5 @@ export async function FormDataRouteHandler(
     await writeFile(path, buffer);
     imageUrl = `/${folder}/${image.name}`;
   }
-  return {text , imageUrl}
+  return { text, imageUrl, bio, email, name };
 }
