@@ -1,7 +1,6 @@
 "use client";
 
 import InputField from "../../../components/inputField";
-import { useUserContext } from "../../../context/useContext";
 import FormOptions from "./formOptions";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,10 +10,12 @@ import SubmitButton from "@/components/submitButton";
 import LoginOptions from "@/components/loginOptions";
 import { LoginOnSubmit } from "../action";
 import { ReactElement, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/redux/store";
 
 export default function LoginForm(): ReactElement {
-  const { showPassword } = useUserContext();
-  const [loading , setLoading] = useState(false)
+  const { showPassword } = useSelector((state: RootState) => state.app);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -50,7 +51,7 @@ export default function LoginForm(): ReactElement {
           type={`${showPassword ? "text" : "password"}`}
         />
         <FormOptions />
-        <SubmitButton name="Sign in" className="py-4 mt-8" loading={loading}/>
+        <SubmitButton name="Sign in" className="py-4 mt-8" loading={loading} />
       </form>
       <h1 className=" flex justify-center items-center mt-8 gap-2 text-gray-700">
         New to LinkedIn?
