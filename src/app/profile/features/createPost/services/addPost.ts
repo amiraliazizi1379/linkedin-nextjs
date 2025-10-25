@@ -1,18 +1,17 @@
+import { setBtnLoading, setCreatePost, store } from "@/app/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
-import { Dispatch, SetStateAction } from "react";
 
 export async function handlePost(
   e: React.MouseEvent<HTMLButtonElement>,
-  postText: string,
-  postImg: File | null,
-  setLoading: Dispatch<SetStateAction<boolean>>,
-  setCreatePost: Dispatch<SetStateAction<boolean>>
+  postImgFile: File | null
 ) {
-  if (postText || postImg) {
-    setLoading(true);
+  const { postText } = store.getState().app;
+
+  if (postText || postImgFile) {
+    store.dispatch(setBtnLoading(true));
     e.preventDefault();
     const formData = new FormData();
-    if (postImg) formData.append("img", postImg);
+    if (postImgFile) formData.append("img", postImgFile);
     formData.append("text", postText);
 
     try {
@@ -21,8 +20,8 @@ export async function handlePost(
         body: formData,
       });
 
-      setCreatePost(false);
-      setLoading(false);
+      store.dispatch(setCreatePost(false));
+      store.dispatch(setBtnLoading(false));
     } catch (err) {
       console.log(err);
     }
