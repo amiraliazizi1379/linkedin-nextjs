@@ -6,14 +6,21 @@ import { AddImageButton } from "./addImgBt";
 import { handlePost } from "../services/addPost";
 import { CloseButton } from "../../components/closeButton";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, setCreatePost, setpostImgSrc } from "@/app/redux/store";
+import {
+  RootState,
+  setCreatePost,
+  setPostBt,
+  setpostImgSrc,
+  setPostText,
+} from "@/app/redux/store";
+import { useUserContext } from "@/context/context";
 
 export default function CreatePostComponent() {
   const dispatch = useDispatch();
   const { createPost, userData, postText, postImgSrc } = useSelector(
     (state: RootState) => state.app
   );
-
+  const { postImgFile } = useUserContext();
   const { image, name, email } = userData;
 
   if (createPost) {
@@ -22,6 +29,8 @@ export default function CreatePostComponent() {
         <div
           onClick={() => {
             dispatch(setCreatePost(false));
+            dispatch(setPostBt(false));
+            dispatch(setPostText(''));
           }}
           className="fixed inset-0 bg-black opacity-50"
         ></div>
@@ -36,7 +45,7 @@ export default function CreatePostComponent() {
               />
               <h1>{name ? name : email}</h1>
             </div>
-            <CloseButton setCustomState={setCreatePost}/>
+            <CloseButton setCustomState={setCreatePost} />
           </div>
           <section className="overflow-y-auto h-[70%] w-full">
             <PostTextArea />
@@ -44,7 +53,9 @@ export default function CreatePostComponent() {
           </section>
           <AddImageButton classname="text-2xl" setState={setpostImgSrc} />
           <CustomActionBtn
-            onclick={(e: React.MouseEvent<HTMLButtonElement>) => handlePost(e)}
+            onclick={(e: React.MouseEvent<HTMLButtonElement>) =>
+              handlePost(e, postImgFile)
+            }
             text={postText}
             ImgSrc={postImgSrc}
           />
