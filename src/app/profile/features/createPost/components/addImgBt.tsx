@@ -1,36 +1,40 @@
-import { ChangeEvent, Dispatch, RefObject, SetStateAction } from "react";
+import { ReactNode, SetStateAction } from "react";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import { handleImgInput } from "../services/previewImg";
+import { RootState } from "@/app/redux/store";
+import { useSelector } from "react-redux";
+import { useCreatePost } from "../hooks/useCreatePost";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { useUserContext } from "@/context/context";
 
 type props = {
-  setPostImg: Dispatch<SetStateAction<File | null>>;
-  setSrcImg: Dispatch<SetStateAction<string>>;
-  srcImg: string;
-  handleImgBt: () => void;
-  fileInputRef: RefObject<HTMLInputElement | null>;
   classname?: string;
+  logo?: ReactNode;
+  setState: ActionCreatorWithPayload<string>;
 };
 
-export function AddImageButton({
-  setPostImg,
-  setSrcImg,
-  srcImg,
-  handleImgBt,
-  fileInputRef,
-  classname,
-}: props) {
+export function AddImageButton({ classname, logo, setState }: props) {
+  const { commentImgSrc, postImgSrc } = useSelector(
+    (state: RootState) => state.app
+  );
+
+  const { handleImgBt, fileInputRef } = useCreatePost();
+  const { setPostImgFile } = useUserContext();
+
   return (
-    <div className={classname}>
+    <div className={`${classname} transition-all duration-200`}>
       <button
         onClick={handleImgBt}
-        className={`text-2xl cursor-pointer  ${srcImg && "hidden"}`}
+        className={` cursor-pointer ${
+          (commentImgSrc || postImgSrc) && "hidden"
+        } `}
       >
-        <HiOutlinePhoto />
+        {logo ? logo : <HiOutlinePhoto />}
       </button>
       <input
         type="file"
         ref={fileInputRef}
-        onChange={(e) => handleImgInput(e, setPostImg, setSrcImg)}
+        onChange={(e) => handleImgInput(e, setPostImgFile, setState)}
         accept="image/*"
         className="hidden"
       />
