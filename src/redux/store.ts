@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { userData } from "@/types/userDataType";
 import { postdatas } from "@/types/postDataType";
+import { usersType } from "@/app/profile/myNetwork/type/allUsersDataType";
 const appSlice = createSlice({
   name: "app",
   initialState: {
@@ -18,7 +19,17 @@ const appSlice = createSlice({
     postText: "",
     commentText: "",
     postBt: false,
+    saveBt: false,
     loading: false,
+    editedUserName: "",
+    editedEmail: "",
+    editedBio: "",
+    activeEditingUserInfo: false,
+    btnLoading: false,
+    allUsers: [] as usersType[],
+    search: [],
+    notFoundSearch: false,
+    editEmailStatus: false,
   },
 
   reducers: {
@@ -61,11 +72,41 @@ const appSlice = createSlice({
     setPostBt: (state, action) => {
       state.postBt = action.payload;
     },
+    setSaveBt: (state, action) => {
+      state.saveBt = action.payload;
+    },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
     setFullScreenSrc: (state, action) => {
       state.fullScreenImgSrc = action.payload;
+    },
+    setEditedUserName: (state, action) => {
+      state.editedUserName = action.payload;
+    },
+    setEditedEmail: (state, action) => {
+      state.editedEmail = action.payload;
+    },
+    setEditedBio: (state, action) => {
+      state.editedBio = action.payload;
+    },
+    setActiveEditingUserInfo: (state, action) => {
+      state.activeEditingUserInfo = action.payload;
+    },
+    setBtnLoading: (state, action) => {
+      state.btnLoading = action.payload;
+    },
+    setAllUsers: (state, action) => {
+      state.allUsers = action.payload;
+    },
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
+    setNotFoundSearch: (state, action) => {
+      state.notFoundSearch = action.payload;
+    },
+    setEditEmailStatus: (state, action) => {
+      state.editEmailStatus = action.payload;
     },
   },
 });
@@ -84,8 +125,18 @@ export const {
   setCommentText,
   setPostText,
   setPostBt,
+  setSaveBt,
   setLoading,
   setFullScreenSrc,
+  setEditedBio,
+  setEditedEmail,
+  setEditedUserName,
+  setActiveEditingUserInfo,
+  setBtnLoading,
+  setAllUsers,
+  setSearch,
+  setNotFoundSearch,
+  setEditEmailStatus,
 } = appSlice.actions;
 
 export const store = configureStore({
