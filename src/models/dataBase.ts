@@ -70,12 +70,20 @@ export class databaseOperation {
 
   static getUserData = async (id: number) => {
     const [userDat] = await pool.query<RowDataPacket[]>(
-      "select name , email , image , bio from user_table where id = ?",
+      "select id , name , email , image , bio from user_table where id = ?",
       [id]
     );
-
     return userDat[0];
   };
+
+  static getAllUsers = async (id: number) => {
+    const [userDat] = await pool.query(
+      "select id , name , email , image , bio  , CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = ? AND follows.followed_id = user_table.id) THEN TRUE ELSE FALSE  END AS is_following from user_table where id != ?;",
+      [id, id]
+    );
+    return userDat;
+  };
+
   static addPost = async (userId: number, text: string, img: string | null) => {
     const [addPostQuery] = await pool.query<ResultSetHeader>(
       "insert into posts (user_id , content , image_url) values (? , ? , ?)",
