@@ -3,7 +3,7 @@ import {
   setCommentText,
   setPostData,
   store,
-} from "@/app/redux/store";
+} from "@/redux/store";
 
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 

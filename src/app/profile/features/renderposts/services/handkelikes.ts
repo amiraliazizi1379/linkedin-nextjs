@@ -1,4 +1,4 @@
-import { setPostData, store } from "@/app/redux/store";
+import { setPostData, store } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 
 export async function handleLikes(id: number, liked: boolean | undefined) {

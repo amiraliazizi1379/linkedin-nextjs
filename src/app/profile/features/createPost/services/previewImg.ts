@@ -1,4 +1,4 @@
-import { store } from "@/app/redux/store";
+import { store } from "@/redux/store";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 

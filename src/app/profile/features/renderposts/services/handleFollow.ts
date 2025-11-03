@@ -1,4 +1,4 @@
-import { setAllUsers, setPostData, store } from "@/app/redux/store";
+import { setAllUsers, setPostData, store } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 
 export async function handleFollow(id: number, is_following: boolean) {
