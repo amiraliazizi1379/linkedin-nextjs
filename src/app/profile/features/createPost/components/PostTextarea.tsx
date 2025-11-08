@@ -1,4 +1,4 @@
-import { RootState, setPostBt, setPostText } from "@/app/redux/store";
+import { RootState, setPostBt, setPostText } from "@/redux/store";
 import {  useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

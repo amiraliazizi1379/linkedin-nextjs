@@ -12,7 +12,7 @@ import {
   setPostBt,
   setpostImgSrc,
   setPostText,
-} from "@/app/redux/store";
+} from "@/redux/store";
 import { useUserContext } from "@/context/context";
 
 export default function CreatePostComponent() {
