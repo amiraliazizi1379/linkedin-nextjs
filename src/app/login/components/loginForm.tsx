@@ -8,14 +8,16 @@ import { loginSchema, loginType } from "@/validation/loginSchema";
 import Divider from "@/components/divider";
 import SubmitButton from "@/components/submitButton";
 import LoginOptions from "@/components/loginOptions";
-import { LoginOnSubmit } from "../action";
+import { LoginOnSubmit } from "../services/handleLogin";
 import { ReactElement, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/redux/store";
+import { RootState } from "@/redux/store";
 
 export default function LoginForm(): ReactElement {
-  const { showPassword } = useSelector((state: RootState) => state.app);
-  const [loading, setLoading] = useState(false);
+  const { showPassword, loginLoading } = useSelector(
+    (state: RootState) => state.app
+  );
+
   const {
     register,
     handleSubmit,
@@ -51,7 +53,11 @@ export default function LoginForm(): ReactElement {
           type={`${showPassword ? "text" : "password"}`}
         />
         <FormOptions />
-        <SubmitButton name="Sign in" className="py-4 mt-8" loading={loading} />
+        <SubmitButton
+          name="Sign in"
+          className="py-4 mt-8"
+          loading={loginLoading}
+        />
       </form>
       <h1 className=" flex justify-center items-center mt-8 gap-2 text-gray-700">
         New to LinkedIn?
