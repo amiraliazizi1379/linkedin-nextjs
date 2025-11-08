@@ -1,7 +1,8 @@
 import { createPostData } from "../../datas/createpostdata";
 import UserImageComponent from "../../components/userImgComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, setCreatePost } from "@/app/redux/store";
+import { RootState, setCreatePost, setPostBt } from "@/redux/store";
+import CreatePostComponent from "./createPostComponent";
 
 export default function CreatePost() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ export default function CreatePost() {
         />
         <button
           onClick={() => {
+            dispatch(setPostBt(false))
             dispatch(setCreatePost(true));
           }}
           className="font-semibold text-[13px] text-[#707070] mt-1 py-3 px-4 text-left w-[90%] cursor-pointer hover:bg-[#F1F1F1] rounded-full border-1 border-gray-300"
@@ -38,6 +40,7 @@ export default function CreatePost() {
           );
         })}
       </div>
+      <CreatePostComponent />
     </section>
   );
 }
