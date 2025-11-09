@@ -1,4 +1,4 @@
-import { setBtnLoading, setCreatePost, store } from "@/app/redux/store";
+import { setBtnLoading, setCreatePost, store } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 
 export async function handlePost(
