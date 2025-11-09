@@ -27,9 +27,11 @@ const appSlice = createSlice({
     activeEditingUserInfo: false,
     btnLoading: false,
     allUsers: [] as usersType[],
-    search: [],
+    usersSearch: [],
+    postsSearch: [],
     notFoundSearch: false,
     editEmailStatus: false,
+    loginLoading: false,
   },
 
   reducers: {
@@ -99,14 +101,20 @@ const appSlice = createSlice({
     setAllUsers: (state, action) => {
       state.allUsers = action.payload;
     },
-    setSearch: (state, action) => {
-      state.search = action.payload;
+    setusersSearch: (state, action) => {
+      state.usersSearch = action.payload;
+    },
+    setpostsSearch: (state, action) => {
+      state.postsSearch = action.payload;
     },
     setNotFoundSearch: (state, action) => {
       state.notFoundSearch = action.payload;
     },
     setEditEmailStatus: (state, action) => {
       state.editEmailStatus = action.payload;
+    },
+    setLoginLoading: (state, action) => {
+      state.loginLoading = action.payload;
     },
   },
 });
@@ -134,9 +142,11 @@ export const {
   setActiveEditingUserInfo,
   setBtnLoading,
   setAllUsers,
-  setSearch,
+  setusersSearch,
+  setpostsSearch,
   setNotFoundSearch,
   setEditEmailStatus,
+  setLoginLoading,
 } = appSlice.actions;
 
 export const store = configureStore({
