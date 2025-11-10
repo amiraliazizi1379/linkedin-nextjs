@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, setShowPassword } from "@/app/redux/store";
+import { RootState, setShowPassword } from "@/redux/store";
 
 interface inputProps {
   label?: string;

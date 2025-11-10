@@ -10,7 +10,7 @@ import { RegisterOnSubmit } from "../services";
 import { loginSchema, loginType } from "@/validation/loginSchema";
 import { useRouter } from "next/navigation";
 import { ReactElement, useState } from "react";
-import { RootState } from "@/app/redux/store";
+import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 
 export default function RegisterForm(): ReactElement {
