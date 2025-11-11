@@ -1,4 +1,4 @@
-import {  setPostData } from "@/app/redux/store";
+import { setLoading, setPostData } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ export function RenderPostsServices() {
         const result = await req.json();
         dispatch(setPostData(result.postdata));
       }
+      dispatch(setLoading(false));
     };
     res();
   }, []);
