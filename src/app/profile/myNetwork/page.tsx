@@ -6,19 +6,20 @@ import { RenderUsers } from "./component/renderUsers";
 import { GetUserData } from "../features/services/getUserData";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, setLoading, setPopup } from "@/redux/store";
+import Loading from "../[id]/loading";
 
 export default function MyNetwork() {
-  useEffect(() => {
-    GetUsers();
-  }, []);
-  const { popup, userData , allUsers } = useSelector((state: RootState) => state.app);
-  const userId = String(userData.id);
+  const { popup, loading } = useSelector((state: RootState) => state.app);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLoading(true));
-    GetUserData(userId);
+    GetUserData('myNetwork');
+    GetUsers();
     dispatch(setLoading(false));
   }, []);
+
+  if (loading) return <Loading />;
   return (
     <div
       className="bg-gray-100 h-screen overflow-auto"
@@ -26,7 +27,7 @@ export default function MyNetwork() {
         if (popup) dispatch(setPopup(false));
       }}
     >
-      <ProfileNavBar page="network"/>
+      <ProfileNavBar page="network" />
       <RenderUsers />
     </div>
   );
