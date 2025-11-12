@@ -25,9 +25,10 @@ export const POST = catchAsync(
     if (!userId) return clearCookie(response);
 
     const findUser = await databaseOperation.findToken(userId);
-    if (!findUser) return clearCookie(response);
+    if (!findUser || !findUser.refreshtoken) return clearCookie(response);
 
     const is_validToken = await is_validPassword(token, findUser.refreshtoken);
+
     if (!is_validToken) {
       await databaseOperation.deleteToken(userId);
       return clearCookie(response);
