@@ -30,7 +30,7 @@ export default function CreatePostComponent() {
           onClick={() => {
             dispatch(setCreatePost(false));
             dispatch(setPostBt(false));
-            dispatch(setPostText(''));
+            dispatch(setPostText(""));
           }}
           className="fixed inset-0 bg-black opacity-50"
         ></div>
@@ -56,7 +56,6 @@ export default function CreatePostComponent() {
             onclick={(e: React.MouseEvent<HTMLButtonElement>) =>
               handlePost(e, postImgFile)
             }
-            text={postText}
             ImgSrc={postImgSrc}
           />
         </div>
