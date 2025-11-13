@@ -1,6 +1,8 @@
 "use client";
 
-import { setLargImg, setFullScreenSrc } from "@/app/redux/store";
+import { setLargImg, setFullScreenSrc } from "@/redux/store";
+import { CreateAvatarColor } from "@/utils/createAvatarColor";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export default function UserImageComponent({
@@ -8,14 +10,15 @@ export default function UserImageComponent({
   image,
   name,
   email,
-  dontShowLarg 
+  dontShowLarg,
 }: {
   style: string;
   image: string;
   name: string;
   email: string;
-  dontShowLarg? : boolean
+  dontShowLarg?: boolean;
 }) {
+  const [bg, setBg] = useState("");
   const dispatch = useDispatch();
   let content = "";
   if (name) {
@@ -23,13 +26,18 @@ export default function UserImageComponent({
   } else if (email) {
     content = email.split("")[0].toUpperCase();
   }
+  useEffect(() => {
+    if (!image && email) {
+      const color = CreateAvatarColor(email);
+      setBg(color);
+    }
+  }, [email]);
 
   if (image) {
     return (
       <img
         onClick={() => {
-          if(!dontShowLarg)
-          dispatch(setLargImg(true));
+          if (!dontShowLarg) dispatch(setLargImg(true));
           dispatch(setFullScreenSrc(image));
         }}
         src={image}
@@ -39,7 +47,8 @@ export default function UserImageComponent({
   }
   return (
     <div
-      className={`${style}  rounded-full bg-[#c0392b] flex-center text-[#fff]`}
+      style={{ backgroundColor: bg }}
+      className={`${style}  rounded-full flex-center text-[#fff]`}
     >
       {content}
     </div>
