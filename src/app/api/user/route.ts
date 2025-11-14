@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = auth(async (request: NextRequest, userId) => {
   const pageId = await request.text();
 
-  if (userId !== Number(pageId))
+  if (userId !== Number(pageId) && pageId !== "myNetwork")
     return NextResponse.json({ id: userId }, { status: 403 });
 
   const userData = await databaseOperation.getUserData(userId);
