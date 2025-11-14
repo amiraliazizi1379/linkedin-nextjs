@@ -1,6 +1,6 @@
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { GetComments } from "./getcomment";
-import { setBtnLoading, setCommentText, store } from "@/app/redux/store";
+import { setBtnLoading, setCommentText, store } from "@/redux/store";
 
 export async function handleComment(
   e: React.MouseEvent<HTMLButtonElement>,
