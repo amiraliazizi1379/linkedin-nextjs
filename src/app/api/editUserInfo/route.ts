@@ -8,19 +8,13 @@ export const POST = auth(async (req: NextRequest, userId: number) => {
     req,
     "userphoto"
   );
-  let res = NextResponse.json({ status: 200 });
-  if (imageUrl) {
-    await databaseOperation.addProfileImage(imageUrl, userId);
-    return res;
-  }
-  if (bio) {
-    await databaseOperation.addBio(bio, userId);
-    return res;
-  }
-  if (name) {
-    await databaseOperation.editName(name, userId);
-    return res;
-  }
+
+  if (imageUrl) await databaseOperation.addProfileImage(imageUrl, userId);
+
+  if (bio) await databaseOperation.addBio(bio, userId);
+
+  if (name) await databaseOperation.editName(name, userId);
+
   if (email) {
     const findEmail = await databaseOperation.findEmail(email);
     if (findEmail)
@@ -28,8 +22,7 @@ export const POST = auth(async (req: NextRequest, userId: number) => {
         { message: "email is already token" },
         { status: 403 }
       );
-    await databaseOperation.addBio(bio, userId);
-    return res;
+    await databaseOperation.editEmail(email, userId);
   }
-  return NextResponse.json({ status: 400 });
+  return NextResponse.json({ status: 200 });
 });
