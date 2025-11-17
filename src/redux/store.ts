@@ -32,6 +32,7 @@ const appSlice = createSlice({
     notFoundSearch: false,
     editEmailStatus: false,
     loginLoading: false,
+    editMenu: false,
   },
 
   reducers: {
@@ -116,6 +117,9 @@ const appSlice = createSlice({
     setLoginLoading: (state, action) => {
       state.loginLoading = action.payload;
     },
+    setEditMenu: (state, action) => {
+      state.editMenu = action.payload;
+    },
   },
 });
 
@@ -147,6 +151,7 @@ export const {
   setNotFoundSearch,
   setEditEmailStatus,
   setLoginLoading,
+  setEditMenu,
 } = appSlice.actions;
 
 export const store = configureStore({
