@@ -9,27 +9,21 @@ import { CommentComponent } from "./comment";
 import { handleLikes } from "../services/handkelikes";
 import { GetComments } from "../services/getcomment";
 import { RenderComments } from "../../renderComments";
-import { LargPreviewImg } from "./largPreviewImg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  RootState,
-  setLargImg,
-  setFullScreenSrc,
-} from "@/app/redux/store";
+import { RootState, setLargImg, setFullScreenSrc } from "@/redux/store";
 
 export default function RenderPosts({ userId }: { userId: string }) {
-  const { postData, largImg } = useSelector(
+  const { postData, notFoundSearch, postsSearch } = useSelector(
     (state: RootState) => state.app
   );
   const dispatch = useDispatch();
+
   RenderPostsServices();
-  console.log(largImg);
-  if (largImg) {
-    return <LargPreviewImg />;
-  }
+
+  if (notFoundSearch) return <h1 className="text-center mt-8">No Content</h1>;
   return (
     <main className="">
-      {postData.map((item) => {
+      {(postsSearch.length > 0 ? postsSearch : postData).map((item) => {
         const {
           post_id,
           user_id,
@@ -42,6 +36,9 @@ export default function RenderPosts({ userId }: { userId: string }) {
           image,
           name,
           email,
+          like_count,
+          comment_count,
+          bio,
         } = item;
 
         return (
@@ -57,13 +54,14 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   email={email}
                   image={image}
                 />
-                <h1>{name ? name : email}</h1>
+                <div>
+                  <h1 className="text-gray-700">{name ? name : email}</h1>
+                  <p className="text-[14px] text-gray-400">{bio}</p>
+                </div>
               </div>
               {Number(userId) !== user_id && (
                 <button
-                  onClick={() =>
-                    handleFollow(user_id, is_following)
-                  }
+                  onClick={() => handleFollow(user_id, is_following)}
                   className={`text-[#0a66c2] w-[105px] rounded-sm ${
                     !is_following && "hover:bg-[#dfeefd]  hover:text-[#033d77]"
                   } cursor-pointer h-[30px] py-2  font-semibold flex-center gap-1 ${
@@ -89,7 +87,19 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 dispatch(setFullScreenSrc(image_url));
               }}
             />
-            <div className="w-full h-[1px] mt-4 bg-gray-300"></div>
+            <div className="flex justify-between px-4 mt-1">
+              <p>
+                {like_count > 0 &&
+                  `${like_count} ${like_count > 1 ? "likes" : "like"}`}
+              </p>
+              <p>
+                {comment_count > 0 &&
+                  `${comment_count} ${
+                    comment_count > 1 ? "comments" : "comment"
+                  }`}
+              </p>
+            </div>
+            <div className="w-full h-[1px] mt-1 bg-gray-300"></div>
             <div className="space-x-14 mt-2 ml-6 mb-2  flex items-center">
               <button
                 className={`post-bt flex-center`}
