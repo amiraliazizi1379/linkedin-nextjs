@@ -7,12 +7,14 @@ import UserImageComponent from "./userImgComponent";
 import { data } from "../datas/data";
 import { FaCaretDown } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, setPopup } from "@/app/redux/store";
+import { RootState, setPopup } from "@/redux/store";
+import PopOp from "./pop-up-user-nav";
+import { EditProfile } from "./editProfileCom/editProfile";
+import { handleSreach } from "../services/handleSearch";
 
-export default function ProfileNavBar() {
+export default function ProfileNavBar({ page }: { page: string }) {
   const dispatch = useDispatch();
   const { popup, userData } = useSelector((state: RootState) => state.app);
-  const { name, email, image } = userData;
 
   return (
     <nav className="flex items-center justify-around pt-1 bg-[#fff]">
@@ -25,6 +27,7 @@ export default function ProfileNavBar() {
 
         <IoMdSearch className="absolute left-14 font-bold" />
         <input
+          onChange={(e) => handleSreach(e.target.value, page)}
           type="text"
           placeholder="Search"
           className=" py-1 px-10 profile-inputs"
@@ -36,13 +39,15 @@ export default function ProfileNavBar() {
           onClick={() => dispatch(setPopup(!popup))}
           className="cursor-pointer flex-center flex-col hover:text-[#171717] text-[12px] ml-2"
         >
-          <UserImageComponent
-            style="w-[25px] h-[25px] text-[11px]"
-            image={image}
-            name={name}
-            email={email}
-            dontShowLarg
-          />
+          {userData && (
+            <UserImageComponent
+              style="w-[25px] h-[25px] text-[11px]"
+              image={userData.image}
+              name={userData.name}
+              email={userData.email}
+              dontShowLarg
+            />
+          )}
 
           <span className="flex-center gap-0.5">
             {" "}
@@ -50,6 +55,8 @@ export default function ProfileNavBar() {
           </span>
         </button>
       </article>
+      {popup && <PopOp />}
+      <EditProfile />
     </nav>
   );
 }
