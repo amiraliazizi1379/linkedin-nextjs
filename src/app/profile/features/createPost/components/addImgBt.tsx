@@ -1,7 +1,7 @@
-import { ReactNode, SetStateAction } from "react";
+import { ReactNode } from "react";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import { handleImgInput } from "../services/previewImg";
-import { RootState } from "@/app/redux/store";
+import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useCreatePost } from "../hooks/useCreatePost";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
