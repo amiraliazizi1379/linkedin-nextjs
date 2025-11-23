@@ -1,21 +1,14 @@
 "use client";
 
-import { GetNewAccessToken } from "../../../utils/getNewAccessToken";
 import ProfileNavBar from "../features/components/navbar";
 import CreatePost from "../features/createPost/components/createPost";
-import CreatePostComponent from "../features/createPost/components/createPostComponent";
 import RenderPosts from "../features/renderposts/components/renderPosts";
 import React, { useEffect } from "react";
-import PopOp from "../features/components/pop-up-user-nav";
-import { EditProfile } from "../features/components/editProfileCom/editProfile";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  RootState,
-  setLoading,
-  setPopup,
-  setUserData,
-} from "../../redux/store";
+import { RootState, setPopup } from "@/redux/store";
 import Loading from "./loading";
+import { GetUserData } from "../features/services/getUserData";
+import { UserComponent } from "../features/components/userComponent";
 
 export default function Profile({
   params,
@@ -24,24 +17,12 @@ export default function Profile({
 }) {
   const { id } = React.use(params);
   const dispatch = useDispatch();
-  const { popup, loading } = useSelector((state: RootState) => state.app);
+  const { popup, loading, postData } = useSelector(
+    (state: RootState) => state.app
+  );
 
   useEffect(() => {
-    const res = async () => {
-      dispatch(setLoading(true));
-      try {
-        const res = await GetNewAccessToken("http://localhost:3000/api/user", {
-          method: "POST",
-          body: id,
-        });
-        const result = await res?.json();
-        if (res?.status === 403) window.location.href = `/profile/${result.id}`;
-        dispatch(setUserData(result.userData));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    res();
+    GetUserData(id);
   }, []);
   if (loading) {
     return <Loading />;
@@ -53,11 +34,9 @@ export default function Profile({
       }}
       className="bg-gray-100  h-screen overflow-y-auto"
     >
-      <ProfileNavBar />
-      {popup && <PopOp />}
-      <EditProfile />
+      <ProfileNavBar page="home" />
       <CreatePost />
-      <CreatePostComponent />
+      <UserComponent />
       <RenderPosts userId={id} />
     </main>
   );
