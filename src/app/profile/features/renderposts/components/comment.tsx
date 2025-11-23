@@ -9,9 +9,10 @@ import {
   setPostBt,
   setCommentText,
   setCommentImgSrc,
-} from "@/app/redux/store";
+} from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useCreatePost } from "../../createPost/hooks/useCreatePost";
+
+import { useUserContext } from "@/context/context";
 
 export function CommentComponent({ postId }: { postId: number }) {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export function CommentComponent({ postId }: { postId: number }) {
     (state: RootState) => state.app
   );
   const { name, email, image } = userData;
-  const { postImgFile } = useCreatePost();
+  const { postImgFile } = useUserContext();
   const ctextRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
@@ -67,7 +68,6 @@ export function CommentComponent({ postId }: { postId: number }) {
           onclick={(e) => handleComment(e, postId, postImgFile)}
           name="Comment"
           classname={`absolute border-none bottom-4 right-12`}
-          text={commentText}
           ImgSrc={commentImgSrc}
         />
       )}
