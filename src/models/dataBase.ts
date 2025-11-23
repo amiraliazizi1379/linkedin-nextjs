@@ -25,6 +25,12 @@ export class databaseOperation {
       id,
     ]);
   };
+  static deleteProfileImage = async (id: number) => {
+    return await pool.query(
+      "update user_table set image = null where id = ?",
+      [id]
+    );
+  };
 
   static editEmail = async (email: string | null, id: number) => {
     return await pool.query("update user_table set  email = ? where id = ?", [
