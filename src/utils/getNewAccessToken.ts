@@ -4,7 +4,8 @@ export async function GetNewAccessToken(
   url: string,
   options: {
     method: string;
-    headers?: HeadersInit | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    headers?: {};
     body?: FormData | string;
   }
 ) {
