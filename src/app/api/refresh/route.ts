@@ -13,7 +13,7 @@ interface jwts extends jwt.JwtPayload {
 
 export const POST = catchAsync(
   async (request: NextRequest): Promise<NextResponse> => {
-    let response = NextResponse.json(
+    const response = NextResponse.json(
       { message: "Unathorized" },
       { status: 401 }
     );

@@ -1,5 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
+import Image from "next/image";
 
 export const data = [
   {
@@ -8,7 +9,7 @@ export const data = [
   },
   {
     name: "Continue with Microsoft",
-    logo: <img src="microsoft.png" className="w-[1.3rem]" />,
+    logo: <Image alt="" src="microsoft.png" className="w-[1.3rem]" />,
   },
   {
     name: "Sign in with Apple",

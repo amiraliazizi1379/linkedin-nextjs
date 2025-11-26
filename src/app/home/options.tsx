@@ -22,7 +22,7 @@ export default function Options({ datas, styles, items }: MyComponentProps) {
   const pathname = usePathname();
   useEffect(() => {
     if (pathname.split("/profile/")[1] === "myNetwork") setActiveOption(1);
-  }, []);
+  }, [pathname]);
 
   return (
     <section

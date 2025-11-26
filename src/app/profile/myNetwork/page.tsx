@@ -17,7 +17,7 @@ export default function MyNetwork() {
     GetUserData('myNetwork');
     GetUsers();
     dispatch(setLoading(false));
-  }, []);
+  }, [dispatch]);
 
   if (loading) return <Loading />;
   return (

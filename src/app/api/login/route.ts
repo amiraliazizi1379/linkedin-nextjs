@@ -32,7 +32,7 @@ export const POST = catchAsync(async (req: Request) => {
   await databaseOperation.updateToken(hashToken, emailExist.id);
 
   const accessToken = AccessToken(emailExist.email, emailExist.id);
-  let res = NextResponse.json({ id: emailExist.id }, { status: 200 });
+  const res = NextResponse.json({ id: emailExist.id }, { status: 200 });
   setCookie(res, refreshToken, accessToken);
   return res;
 });

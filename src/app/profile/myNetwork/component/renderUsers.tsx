@@ -4,7 +4,7 @@ import { RootState } from "@/redux/store";
 import { FollowBtn } from "./followButton";
 
 export function RenderUsers() {
-  let { allUsers, usersSearch, notFoundSearch } = useSelector(
+  const { allUsers, usersSearch, notFoundSearch } = useSelector(
     (state: RootState) => state.app
   );
 

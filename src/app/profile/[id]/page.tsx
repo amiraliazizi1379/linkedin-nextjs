@@ -23,7 +23,7 @@ export default function Profile({
 
   useEffect(() => {
     GetUserData(id);
-  }, []);
+  }, [id]);
   if (loading) {
     return <Loading />;
   }

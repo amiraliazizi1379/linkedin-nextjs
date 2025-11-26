@@ -27,7 +27,7 @@ export function EditUserInfo() {
     dispatch(setEditedUserName(name));
     dispatch(setEditedEmail(email));
     dispatch(setEditedBio(bio));
-  }, []);
+  }, [bio , name , dispatch , email]);
   const data = makeData(
     name,
     email,

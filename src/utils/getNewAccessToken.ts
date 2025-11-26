@@ -2,7 +2,11 @@ import { redirect } from "next/navigation";
 
 export async function GetNewAccessToken(
   url: string,
-  options: { method: string; headers?: {}; body?: FormData | string }
+  options: {
+    method: string;
+    headers?: HeadersInit | undefined;
+    body?: FormData | string;
+  }
 ) {
   try {
     const res = await fetch(url, {

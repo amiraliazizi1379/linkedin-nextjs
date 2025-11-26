@@ -2,6 +2,7 @@ import { commentDataType } from "@/types/commentDataType";
 import UserImageComponent from "./components/userImgComponent";
 import { useDispatch } from "react-redux";
 import { setFullScreenSrc, setLargImg } from "@/redux/store";
+import Image from "next/image";
 
 export function RenderComments({
   commentData,
@@ -27,7 +28,7 @@ export function RenderComments({
               </article>
               <p className="text-md mt-2 ml-10"> {content}</p>
               {image_url && (
-                <img
+                <Image
                   onClick={() => {
                     dispatch(setLargImg(true));
                     dispatch(setFullScreenSrc(image_url));

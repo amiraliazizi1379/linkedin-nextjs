@@ -2,6 +2,7 @@
 
 import { setLargImg, setFullScreenSrc } from "@/redux/store";
 import { CreateAvatarColor } from "@/utils/createAvatarColor";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -31,15 +32,16 @@ export default function UserImageComponent({
       const color = CreateAvatarColor(email);
       setBg(color);
     }
-  }, [email]);
+  }, [email, image]);
 
   if (image) {
     return (
-      <img
+      <Image
         onClick={() => {
           if (!dontShowLarg) dispatch(setLargImg(true));
           dispatch(setFullScreenSrc(image));
         }}
+        alt=""
         src={image}
         className={`object-cover rounded-full cursor-pointer flex-center ${style} `}
       />

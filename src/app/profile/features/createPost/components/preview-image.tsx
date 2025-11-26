@@ -1,9 +1,10 @@
 import { RootState, setCommentImgSrc, setpostImgSrc } from "@/redux/store";
+import Image from "next/image";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 type props = {
-  classname?: string;
+  classname: string;
 };
 
 export function PostImageUploader({ classname = "w-full" }: props) {
@@ -26,7 +27,7 @@ export function PostImageUploader({ classname = "w-full" }: props) {
             >
               <IoMdClose />
             </button>
-            <img src={commentImgSrc || postImgSrc} />
+            <Image alt="" src={commentImgSrc || postImgSrc} />
           </section>
         )}
       </div>

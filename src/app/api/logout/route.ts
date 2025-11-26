@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = catchAsync(
   async (request: NextRequest): Promise<NextResponse> => {
-    let response = NextResponse.json(
+    const response = NextResponse.json(
       { message: "No content to send" },
       { status: 400 }
     );
