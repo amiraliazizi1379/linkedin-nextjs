@@ -1,4 +1,4 @@
-import { pool } from "@/libs/db";
+import { pool } from "@/app/api/dbConnection/db";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 export class databaseOperation {
