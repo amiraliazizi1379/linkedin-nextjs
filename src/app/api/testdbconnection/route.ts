@@ -4,14 +4,7 @@ import mysql from "mysql2/promise";
 
 export async function GET() {
   try {
-    const pool = mysql.createPool({
-      //   host: process.env.DB_HOST,
-      //   user: process.env.DB_USER,
-      //   password: process.env.DB_PASSWORD,
-      //   database: process.env.DB_DATABASE,
-      //   port: Number(process.env.DB_PORT),
-      uri: process.env.MYSQL_URL,
-    });
+    const pool = mysql.createPool(process.env.MYSQL_URL!);
 
     const [rows] = await pool.query("SELECT 1+1 AS result");
     return NextResponse.json({ ok: true, rows });
