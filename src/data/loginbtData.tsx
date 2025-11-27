@@ -9,7 +9,7 @@ export const data = [
   },
   {
     name: "Continue with Microsoft",
-    logo: <Image alt="" src="https://linkedin-nextjs-production.up.railway.app/public/microsoft.png" className="w-[1.3rem]" />,
+    logo: <Image alt="" src="../../public/microsoft.png" className="w-[1.3rem]" />,
   },
   {
     name: "Sign in with Apple",
