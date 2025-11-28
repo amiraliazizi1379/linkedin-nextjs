@@ -52,7 +52,7 @@ export default function LoginForm(): ReactElement {
           label="Password"
           type={`${showPassword ? "text" : "password"}`}
         />
-        <FormOptions />
+        {/* <FormOptions /> */}
         <SubmitButton
           name="Sign in"
           className="py-4 mt-8"
