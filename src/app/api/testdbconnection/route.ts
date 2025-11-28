@@ -1,15 +1,11 @@
-// app/api/testdb/route.js
-import { NextResponse } from "next/server";
-import mysql from "mysql2/promise";
+import { pool } from "../dbConnection/db";
 
-export async function GET() {
+export const GET = async () => {
   try {
-    const pool = mysql.createPool(process.env.MYSQL_URL!);
-
-    const [rows] = await pool.query("SELECT 1+1 AS result");
-    return NextResponse.json({ ok: true, rows });
-  } catch (err) {
-    console.log("DB ERROR:", err);
-    return NextResponse.json({ error: err }, { status: 500 });
+    const result = await pool.query("SELECT NOW()");
+    Response.json({ success: true, time: result.rows[0] });
+  } catch (error) {
+    console.error("DB Connection Error:", error);
+    Response.json({ success: false, error: error });
   }
-}
+};
