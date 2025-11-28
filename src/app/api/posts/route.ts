@@ -15,7 +15,7 @@ export const POST = auth(
     if (image) {
       const bytes = await image.arrayBuffer();
       const buffer = Buffer.from(bytes);
-      const path = `C:/Users/Amir/Desktop/linkedin-nextjs/public/postimg/${image.name}`;
+      const path = `https://linkedin-nextjs-3b3x.onrender.com/public/postimg/${image.name}`;
       await writeFile(path, buffer);
       imageUrl = `/postimg/${image.name}`;
     }
