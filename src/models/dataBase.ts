@@ -4,7 +4,7 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 export class databaseOperation {
   static findEmail = async (email: string) => {
     const findedemail = await pool.query(
-      "select * from user_table where email = ?",
+      "select * from users where email = ?",
       [email]
     );
 
@@ -12,7 +12,7 @@ export class databaseOperation {
   };
   static addUser = async (email: string, password: string) => {
     const result = await pool.query(
-      "insert into user_table (email , password ) values  ( ? , ? ) RETURNING id",
+      "insert into users (email , password ) values  ( ? , ? ) RETURNING id",
       [email, password]
     );
 
@@ -20,32 +20,32 @@ export class databaseOperation {
   };
 
   static addProfileImage = async (image_url: string | null, id: number) => {
-    return await pool.query("update user_table set  image = ? where id = ?", [
+    return await pool.query("update users set  image = ? where id = ?", [
       image_url,
       id,
     ]);
   };
   static deleteProfileImage = async (id: number) => {
-    return await pool.query("update user_table set image = null where id = ?", [
+    return await pool.query("update users set image = null where id = ?", [
       id,
     ]);
   };
 
   static editEmail = async (email: string | null, id: number) => {
-    return await pool.query("update user_table set  email = ? where id = ?", [
+    return await pool.query("update users set  email = ? where id = ?", [
       email,
       id,
     ]);
   };
 
   static addBio = async (bio: string | null, id: number) => {
-    return await pool.query("update user_table set  bio = ? where id = ?", [
+    return await pool.query("update users set  bio = ? where id = ?", [
       bio,
       id,
     ]);
   };
   static editName = async (name: string, id: number) => {
-    return await pool.query("update user_table set  name = ?  where id = ?", [
+    return await pool.query("update users set  name = ?  where id = ?", [
       name,
       id,
     ]);
@@ -53,7 +53,7 @@ export class databaseOperation {
 
   static findToken = async (id: number) => {
     const user = await pool.query(
-      "select * from user_table  where id = ?",
+      "select * from users  where id = ?",
       [id]
     );
     return user.rows[0];
@@ -61,21 +61,21 @@ export class databaseOperation {
 
   static deleteToken = async (userId: number) => {
     return await pool.query(
-      "update user_table set refreshtoken = null where id = ?",
+      "update users set refreshtoken = null where id = ?",
       [userId]
     );
   };
 
   static updateToken = async (token: string, id: number) => {
     return await pool.query(
-      "update user_table set refreshtoken = ? where id = ?",
+      "update users set refreshtoken = ? where id = ?",
       [token, id]
     );
   };
 
   static getUserData = async (id: number) => {
     const userDat = await pool.query<RowDataPacket[]>(
-      "select id , name , email , image , bio from user_table where id = ?",
+      "select id , name , email , image , bio from users where id = ?",
       [id]
     );
     return userDat.rows;
@@ -83,7 +83,7 @@ export class databaseOperation {
 
   static getAllUsers = async (id: number) => {
     const userDat = await pool.query(
-      "select id , name , email , image , bio  , CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = ? AND follows.followed_id = user_table.id) THEN TRUE ELSE FALSE  END AS is_following from user_table where id != ?;",
+      "select id , name , email , image , bio  , CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = ? AND follows.followed_id = users.id) THEN TRUE ELSE FALSE  END AS is_following from users where id != ?;",
       [id, id]
     );
     return userDat.rows;
@@ -112,7 +112,7 @@ export class databaseOperation {
 
   static getPostsData = async (id: number) => {
     const postsDat = await pool.query(
-      "SELECT posts.id AS post_id,posts.image_url,posts.content,posts.created_at,user_table.id AS user_id,user_table.image,user_table.name,user_table.email,user_table.bio,CASE WHEN EXISTS ( SELECT 1 FROM likes  WHERE likes.user_id = ? AND likes.post_id = posts.id) THEN TRUE ELSE FALSE END AS liked,CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = ? AND follows.followed_id = user_table.id) THEN TRUE ELSE FALSE  END AS is_following,COALESCE(like_counts.like_count, 0) AS like_count,COALESCE(comment_counts.comment_count, 0) AS comment_count FROM posts JOIN user_table ON posts.user_id = user_table.id LEFT JOIN (SELECT post_id, COUNT(*) AS like_count FROM likes GROUP BY post_id) AS like_counts ON like_counts.post_id = posts.id LEFT JOIN (SELECT post_id, COUNT(*) AS comment_count FROM comments GROUP BY post_id) AS comment_counts ON comment_counts.post_id = posts.id ORDER BY posts.created_at DESC limit 5;",
+      "SELECT posts.id AS post_id,posts.image_url,posts.content,posts.created_at,users.id AS user_id,users.image,users.name,users.email,users.bio,CASE WHEN EXISTS ( SELECT 1 FROM likes  WHERE likes.user_id = ? AND likes.post_id = posts.id) THEN TRUE ELSE FALSE END AS liked,CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = ? AND follows.followed_id = users.id) THEN TRUE ELSE FALSE  END AS is_following,COALESCE(like_counts.like_count, 0) AS like_count,COALESCE(comment_counts.comment_count, 0) AS comment_count FROM posts JOIN users ON posts.user_id = users.id LEFT JOIN (SELECT post_id, COUNT(*) AS like_count FROM likes GROUP BY post_id) AS like_counts ON like_counts.post_id = posts.id LEFT JOIN (SELECT post_id, COUNT(*) AS comment_count FROM comments GROUP BY post_id) AS comment_counts ON comment_counts.post_id = posts.id ORDER BY posts.created_at DESC limit 5;",
       [id, id]
     );
     return postsDat.rows;
@@ -120,7 +120,7 @@ export class databaseOperation {
 
   static getComments = async (id: number) => {
     const postsComments = await pool.query(
-      "select c.id AS comment_id,c.post_id,c.user_id, c.content,c.image_url,u.image, u.name,u.email from comments c join  user_table u ON u.id = c.user_id where c.post_id = ? ;",
+      "select c.id AS comment_id,c.post_id,c.user_id, c.content,c.image_url,u.image, u.name,u.email from comments c join  users u ON u.id = c.user_id where c.post_id = ? ;",
       [id]
     );
     return postsComments;
