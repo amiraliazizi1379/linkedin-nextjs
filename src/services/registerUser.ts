@@ -17,7 +17,7 @@ export async function registerUser(
 
   const hashedPassword = await hashPassword(password);
 
-  const { insertId } = await databaseOperation.addUser(email, hashedPassword);
+  const  insertId  = await databaseOperation.addUser(email, hashedPassword);
 
   const refreshToken = RefreshToken(insertId);
 
