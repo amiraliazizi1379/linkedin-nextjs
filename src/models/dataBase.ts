@@ -26,10 +26,9 @@ export class databaseOperation {
     ]);
   };
   static deleteProfileImage = async (id: number) => {
-    return await pool.query(
-      "update user_table set image = null where id = ?",
-      [id]
-    );
+    return await pool.query("update user_table set image = null where id = ?", [
+      id,
+    ]);
   };
 
   static editEmail = async (email: string | null, id: number) => {
@@ -87,7 +86,7 @@ export class databaseOperation {
       "select id , name , email , image , bio  , CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = ? AND follows.followed_id = user_table.id) THEN TRUE ELSE FALSE  END AS is_following from user_table where id != ?;",
       [id, id]
     );
-    return userDat;
+    return userDat.rows;
   };
 
   static addPost = async (userId: number, text: string, img: string | null) => {
