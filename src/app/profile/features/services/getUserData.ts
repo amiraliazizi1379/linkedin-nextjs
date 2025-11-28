@@ -4,7 +4,7 @@ import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 export async function GetUserData(id: string) {
   store.dispatch(setLoading(true));
   try {
-    const res = await GetNewAccessToken("http://localhost:3000/api/user", {
+    const res = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/user", {
       method: "POST",
       body: id,
     });

@@ -21,7 +21,7 @@ export async function GetComments(id: number) {
   store.dispatch(setCommentImgSrc(""));
   store.dispatch(setPostData(updatedData));
   try {
-    const res = await GetNewAccessToken("/api/getcomments", {
+    const res = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/getcomments", {
       method: "GET",
       headers: { postId: id },
     });

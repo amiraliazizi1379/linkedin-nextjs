@@ -9,12 +9,12 @@ export async function handleLikes(id: number, liked: boolean | undefined) {
   store.dispatch(setPostData(updatedData));
   try {
     if (!liked) {
-      const res = await GetNewAccessToken("/api/registerlike", {
+      const res = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/registerlike", {
         method: "POST",
         body: JSON.stringify(id),
       });
     } else {
-      const res2 = await GetNewAccessToken("/api/registerlike", {
+      const res2 = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/registerlike", {
         method: "DELETE",
         body: JSON.stringify(id),
       });

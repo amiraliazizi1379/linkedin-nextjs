@@ -15,7 +15,7 @@ export async function handlePost(
     formData.append("text", postText);
 
     try {
-      const res = await GetNewAccessToken("/api/posts", {
+      const res = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/posts", {
         method: "POST",
         body: formData,
       });
