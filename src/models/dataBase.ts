@@ -11,12 +11,12 @@ export class databaseOperation {
     return findedemail.rows[0];
   };
   static addUser = async (email: string, password: string) => {
-    const result = await pool.query<ResultSetHeader>(
-      "insert into user_table (email , password ) values  ( ? , ? )",
+    const result = await pool.query(
+      "insert into user_table (email , password ) values  ( ? , ? ) RETURNING id",
       [email, password]
     );
 
-    return result;
+    return result.rows[0].id;
   };
 
   static addProfileImage = async (image_url: string | null, id: number) => {
