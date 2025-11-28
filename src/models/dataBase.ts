@@ -4,7 +4,7 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 export class databaseOperation {
   static findEmail = async (email: string) => {
     const findedemail = await pool.query(
-      "select * from users where email = ?",
+      "select * from users where email = ?;",
       [email]
     );
 
@@ -12,7 +12,7 @@ export class databaseOperation {
   };
   static addUser = async (email: string, password: string) => {
     const result = await pool.query(
-      "insert into users (email , password ) values  ( ? , ? ) RETURNING id",
+      "insert into users (email , password ) values  ( ? , ? ) RETURNING id;",
       [email, password]
     );
 
@@ -20,62 +20,59 @@ export class databaseOperation {
   };
 
   static addProfileImage = async (image_url: string | null, id: number) => {
-    return await pool.query("update users set  image = ? where id = ?", [
+    return await pool.query("update users set  image = ? where id = ?;", [
       image_url,
       id,
     ]);
   };
   static deleteProfileImage = async (id: number) => {
-    return await pool.query("update users set image = null where id = ?", [
+    return await pool.query("update users set image = null where id = ?;", [
       id,
     ]);
   };
 
   static editEmail = async (email: string | null, id: number) => {
-    return await pool.query("update users set  email = ? where id = ?", [
+    return await pool.query("update users set  email = ? where id = ?;", [
       email,
       id,
     ]);
   };
 
   static addBio = async (bio: string | null, id: number) => {
-    return await pool.query("update users set  bio = ? where id = ?", [
+    return await pool.query("update users set  bio = ? where id = ?;", [
       bio,
       id,
     ]);
   };
   static editName = async (name: string, id: number) => {
-    return await pool.query("update users set  name = ?  where id = ?", [
+    return await pool.query("update users set  name = ?  where id = ?;", [
       name,
       id,
     ]);
   };
 
   static findToken = async (id: number) => {
-    const user = await pool.query(
-      "select * from users  where id = ?",
-      [id]
-    );
+    const user = await pool.query("select * from users  where id = ?;", [id]);
     return user.rows[0];
   };
 
   static deleteToken = async (userId: number) => {
     return await pool.query(
-      "update users set refreshtoken = null where id = ?",
+      "update users set refreshtoken = null where id = ?;",
       [userId]
     );
   };
 
   static updateToken = async (token: string, id: number) => {
-    return await pool.query(
-      "update users set refreshtoken = ? where id = ?",
-      [token, id]
-    );
+    return await pool.query("update users set refreshtoken = ? where id = ?;", [
+      token,
+      id,
+    ]);
   };
 
   static getUserData = async (id: number) => {
     const userDat = await pool.query<RowDataPacket[]>(
-      "select id , name , email , image , bio from users where id = ?",
+      "select id , name , email , image , bio from users where id = ?;",
       [id]
     );
     return userDat.rows;
@@ -91,7 +88,7 @@ export class databaseOperation {
 
   static addPost = async (userId: number, text: string, img: string | null) => {
     const addPostQuery = await pool.query<ResultSetHeader>(
-      "insert into posts (user_id , content , image_url) values (? , ? , ?)",
+      "insert into posts (user_id , content , image_url) values (? , ? , ?);",
       [userId, text, img]
     );
     return addPostQuery;
@@ -104,7 +101,7 @@ export class databaseOperation {
     img: string | null
   ) => {
     const addCommentQuery = await pool.query<ResultSetHeader>(
-      "insert into comments (user_id , post_id , content , image_url) values (? , ? , ? , ?)",
+      "insert into comments (user_id , post_id , content , image_url) values (? , ? , ? , ?);",
       [userId, postId, text, img]
     );
     return addCommentQuery;
@@ -128,28 +125,28 @@ export class databaseOperation {
 
   static registerLike = async (userId: number, postId: number) => {
     const likeResult = await pool.query(
-      "insert into likes (user_id , post_id) values (? , ?)",
+      "insert into likes (user_id , post_id) values (? , ?);",
       [userId, postId]
     );
     return likeResult;
   };
   static deleteLike = async (userId: number, postId: number) => {
     const likeResult = await pool.query(
-      "DELETE from likes where user_id = ?  AND  post_id = ?",
+      "DELETE from likes where user_id = ?  AND  post_id = ?;",
       [userId, postId]
     );
     return likeResult;
   };
   static registerFollow = async (userId: number, postId: number) => {
     const likeResult = await pool.query(
-      "insert into follows (follower_id , followed_id) values (? , ?)",
+      "insert into follows (follower_id , followed_id) values (? , ?);",
       [userId, postId]
     );
     return likeResult;
   };
   static deleteFollow = async (userId: number, postId: number) => {
     const likeResult = await pool.query(
-      "DELETE from follows where follower_id = ?  AND  followed_id = ?",
+      "DELETE from follows where follower_id = ?  AND  followed_id = ?;",
       [userId, postId]
     );
     return likeResult;
