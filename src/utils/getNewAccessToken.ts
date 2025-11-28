@@ -21,7 +21,7 @@ export async function GetNewAccessToken(
     const result = await res.json();
 
     if (res.status === 401 && result.message === "Token expired") {
-      const requestToken = await fetch("http://localhost:3000/api/refresh", {
+      const requestToken = await fetch("https://linkedin-nextjs-3b3x.onrender.com/api/refresh", {
         method: "POST",
         headers: {
           "Content-Type": "application/json ",
