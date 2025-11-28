@@ -4,7 +4,7 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 export class databaseOperation {
   static findEmail = async (email: string) => {
     const findedemail = await pool.query(
-      "select * from users where email = ?;",
+      "select * from users where email = $1 ;",
       [email]
     );
 
@@ -26,7 +26,7 @@ export class databaseOperation {
     ]);
   };
   static deleteProfileImage = async (id: number) => {
-    return await pool.query("update users set image = null where id = $ ;", [
+    return await pool.query("update users set image = null where id = $1 ;", [
       id,
     ]);
   };
@@ -52,13 +52,13 @@ export class databaseOperation {
   };
 
   static findToken = async (id: number) => {
-    const user = await pool.query("select * from users  where id = $ ;", [id]);
+    const user = await pool.query("select * from users  where id = $1 ;", [id]);
     return user.rows[0];
   };
 
   static deleteToken = async (userId: number) => {
     return await pool.query(
-      "update users set refreshtoken = null where id = $;",
+      "update users set refreshtoken = null where id = $1 ;",
       [userId]
     );
   };
@@ -72,7 +72,7 @@ export class databaseOperation {
 
   static getUserData = async (id: number) => {
     const userDat = await pool.query<RowDataPacket[]>(
-      "select id , name , email , image , bio from users where id = $ ;",
+      "select id , name , email , image , bio from users where id = $1 ;",
       [id]
     );
     return userDat.rows;
@@ -80,7 +80,7 @@ export class databaseOperation {
 
   static getAllUsers = async (id: number) => {
     const userDat = await pool.query(
-      "select id , name , email , image , bio  , CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = $ AND follows.followed_id = users.id) THEN TRUE ELSE FALSE  END AS is_following from users where id != $ ;",
+      "select id , name , email , image , bio  , CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = $1 AND follows.followed_id = users.id) THEN TRUE ELSE FALSE  END AS is_following from users where id != $2 ;",
       [id, id]
     );
     return userDat.rows;
@@ -109,7 +109,7 @@ export class databaseOperation {
 
   static getPostsData = async (id: number) => {
     const postsDat = await pool.query(
-      "SELECT posts.id AS post_id,posts.image_url,posts.content,posts.created_at,users.id AS user_id,users.image,users.name,users.email,users.bio,CASE WHEN EXISTS ( SELECT 1 FROM likes  WHERE likes.user_id = $ AND likes.post_id = posts.id) THEN TRUE ELSE FALSE END AS liked,CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = $ AND follows.followed_id = users.id) THEN TRUE ELSE FALSE  END AS is_following,COALESCE(like_counts.like_count, 0) AS like_count,COALESCE(comment_counts.comment_count, 0) AS comment_count FROM posts JOIN users ON posts.user_id = users.id LEFT JOIN (SELECT post_id, COUNT(*) AS like_count FROM likes GROUP BY post_id) AS like_counts ON like_counts.post_id = posts.id LEFT JOIN (SELECT post_id, COUNT(*) AS comment_count FROM comments GROUP BY post_id) AS comment_counts ON comment_counts.post_id = posts.id ORDER BY posts.created_at DESC limit 5;",
+      "SELECT posts.id AS post_id,posts.image_url,posts.content,posts.created_at,users.id AS user_id,users.image,users.name,users.email,users.bio,CASE WHEN EXISTS ( SELECT 1 FROM likes  WHERE likes.user_id = $1 AND likes.post_id = posts.id) THEN TRUE ELSE FALSE END AS liked,CASE  WHEN EXISTS ( SELECT 1  FROM follows WHERE follows.follower_id = $2 AND follows.followed_id = users.id) THEN TRUE ELSE FALSE  END AS is_following,COALESCE(like_counts.like_count, 0) AS like_count,COALESCE(comment_counts.comment_count, 0) AS comment_count FROM posts JOIN users ON posts.user_id = users.id LEFT JOIN (SELECT post_id, COUNT(*) AS like_count FROM likes GROUP BY post_id) AS like_counts ON like_counts.post_id = posts.id LEFT JOIN (SELECT post_id, COUNT(*) AS comment_count FROM comments GROUP BY post_id) AS comment_counts ON comment_counts.post_id = posts.id ORDER BY posts.created_at DESC limit 5;",
       [id, id]
     );
     return postsDat.rows;
@@ -117,7 +117,7 @@ export class databaseOperation {
 
   static getComments = async (id: number) => {
     const postsComments = await pool.query(
-      "select c.id AS comment_id,c.post_id,c.user_id, c.content,c.image_url,u.image, u.name,u.email from comments c join  users u ON u.id = c.user_id where c.post_id = $ ;",
+      "select c.id AS comment_id,c.post_id,c.user_id, c.content,c.image_url,u.image, u.name,u.email from comments c join  users u ON u.id = c.user_id where c.post_id = $1 ;",
       [id]
     );
     return postsComments;
