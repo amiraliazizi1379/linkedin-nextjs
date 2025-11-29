@@ -36,8 +36,10 @@ export default function Profile({
     >
       <ProfileNavBar page="home" />
       <CreatePost />
-      <UserComponent />
-      <RenderPosts userId={id} />
+      <section className="flex gap-6">
+        <UserComponent />
+        <RenderPosts userId={id} />
+      </section>
     </main>
   );
 }

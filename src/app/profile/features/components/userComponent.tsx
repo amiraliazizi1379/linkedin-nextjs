@@ -6,7 +6,7 @@ export function UserComponent() {
   const { userData } = useSelector((state: RootState) => state.app);
   const { id, email, name, bio, image } = userData;
   return (
-    <div className="fixed top-22 left-44 w-[250px] h-[220px] bg-[#fff] p-4  border-1 border-gray-200 rounded-md">
+    <div className="w-[250px] h-[220px] bg-[#fff] p-4  border-1 border-gray-200 rounded-md">
       <UserImageComponent
         style="w-[80px] h-[80px] mx-auto mt-2"
         email={email}
