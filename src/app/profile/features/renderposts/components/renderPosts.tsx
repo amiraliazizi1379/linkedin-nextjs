@@ -132,7 +132,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
             {comment && (
               <div>
                 <CommentComponent postId={post_id} />
-                <RenderComments commentData={commentData} />
+                <RenderComments commentData={commentData && commentData} />
               </div>
             )}
           </div>

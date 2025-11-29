@@ -21,5 +21,5 @@ export function RenderPostsServices() {
       dispatch(setLoading(false));
     };
     res();
-  }, [dispatch]);
+  }, []);
 }
