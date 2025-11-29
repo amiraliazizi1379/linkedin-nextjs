@@ -16,11 +16,14 @@ export async function handleComment(
     formData.append("text", commentText);
 
     try {
-      const res = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/addcomment", {
-        method: "POST",
-        headers: { postId: postId },
-        body: formData,
-      });
+      const res = await GetNewAccessToken(
+        `${process.env.DOMAIN}/api/addcomment`,
+        {
+          method: "POST",
+          headers: { postId: postId },
+          body: formData,
+        }
+      );
       GetComments(postId);
       store.dispatch(setBtnLoading(false));
       store.dispatch(setCommentText(""));

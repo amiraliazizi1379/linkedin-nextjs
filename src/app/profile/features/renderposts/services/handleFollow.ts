@@ -15,15 +15,21 @@ export async function handleFollow(id: number, is_following: boolean) {
 
   try {
     if (!is_following) {
-      const res = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/registerfollow", {
-        method: "POST",
-        body: JSON.stringify(id),
-      });
+      const res = await GetNewAccessToken(
+        `${process.env.DOMAIN}/api/registerfollow`,
+        {
+          method: "POST",
+          body: JSON.stringify(id),
+        }
+      );
     } else {
-      const res2 = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/registerfollow", {
-        method: "DELETE",
-        body: JSON.stringify(id),
-      });
+      const res2 = await GetNewAccessToken(
+        `${process.env.DOMAIN}/api/registerfollow`,
+        {
+          method: "DELETE",
+          body: JSON.stringify(id),
+        }
+      );
     }
   } catch {
     updatedData = updatedData.map((post) =>

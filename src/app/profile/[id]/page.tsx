@@ -36,7 +36,7 @@ export default function Profile({
     >
       <ProfileNavBar page="home" />
       <section className="flex justify-center mt-8">
-         <UserComponent />
+        <UserComponent />
         <CreatePost />
       </section>
       <RenderPosts userId={id} />

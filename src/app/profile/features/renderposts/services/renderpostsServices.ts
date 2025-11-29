@@ -9,7 +9,7 @@ export function RenderPostsServices() {
   useEffect(() => {
     const res = async () => {
       const req = await GetNewAccessToken(
-        "https://linkedin-nextjs-3b3x.onrender.com/api/getposts",
+        `${process.env.DOMAIN}/api/getposts`,
         {
           method: "GET",
         }

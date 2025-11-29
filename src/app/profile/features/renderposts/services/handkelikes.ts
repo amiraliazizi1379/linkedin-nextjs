@@ -9,15 +9,21 @@ export async function handleLikes(id: number, liked: boolean | undefined) {
   store.dispatch(setPostData(updatedData));
   try {
     if (!liked) {
-      const res = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/registerlike", {
-        method: "POST",
-        body: JSON.stringify(id),
-      });
+      const res = await GetNewAccessToken(
+        `${process.env.DOMAIN}/api/registerlike`,
+        {
+          method: "POST",
+          body: JSON.stringify(id),
+        }
+      );
     } else {
-      const res2 = await GetNewAccessToken("https://linkedin-nextjs-3b3x.onrender.com/api/registerlike", {
-        method: "DELETE",
-        body: JSON.stringify(id),
-      });
+      const res2 = await GetNewAccessToken(
+        `${process.env.DOMAIN}/api/registerlike`,
+        {
+          method: "DELETE",
+          body: JSON.stringify(id),
+        }
+      );
     }
   } catch {
     updatedData = updatedData.map((post) =>
