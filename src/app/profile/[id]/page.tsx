@@ -36,7 +36,7 @@ export default function Profile({
     >
       <ProfileNavBar page="home" />
       <CreatePost />
-      <section className="flex gap-6">
+      <section className="flex gap-6 justify-center">
         <UserComponent />
         <RenderPosts userId={id} />
       </section>
