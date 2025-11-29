@@ -120,7 +120,7 @@ export class databaseOperation {
       "select c.id AS comment_id,c.post_id,c.user_id, c.content,c.image_url,u.image, u.name,u.email from comments c join  users u ON u.id = c.user_id where c.post_id = $1 ;",
       [id]
     );
-    return postsComments;
+    return postsComments.rows;
   };
 
   static registerLike = async (userId: number, postId: number) => {
