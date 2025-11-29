@@ -41,7 +41,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           comment_count,
           bio,
         } = item;
-
+        console.log(commentData)
         return (
           <div
             key={post_id}
