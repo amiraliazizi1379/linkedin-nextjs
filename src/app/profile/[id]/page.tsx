@@ -35,11 +35,11 @@ export default function Profile({
       className="bg-gray-100  h-screen overflow-y-auto"
     >
       <ProfileNavBar page="home" />
-      <CreatePost />
       <section className="flex gap-6 justify-center">
+        <CreatePost />
         <UserComponent />
-        <RenderPosts userId={id} />
       </section>
+      <RenderPosts userId={id} />
     </main>
   );
 }
