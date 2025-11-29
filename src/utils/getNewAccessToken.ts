@@ -21,7 +21,7 @@ export async function GetNewAccessToken(
     const result = await res.json();
 
     if (res.status === 401 && result.message === "Token expired") {
-      const requestToken = await fetch(`${process.env.DOMAIN}/api/refresh`, {
+      const requestToken = await fetch(`/api/refresh`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json ",
