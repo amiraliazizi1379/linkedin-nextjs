@@ -75,7 +75,7 @@ export class databaseOperation {
       "select id , name , email , image , bio from users where id = $1 ;",
       [id]
     );
-    return userDat.rows;
+    return userDat.rows[0];
   };
 
   static getAllUsers = async (id: number) => {
