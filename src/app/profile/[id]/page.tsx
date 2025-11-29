@@ -17,13 +17,11 @@ export default function Profile({
 }) {
   const { id } = React.use(params);
   const dispatch = useDispatch();
-  const { popup, loading, postData } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { popup, loading } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
     GetUserData(id);
-  }, [id]);
+  }, []);
   if (loading) {
     return <Loading />;
   }
