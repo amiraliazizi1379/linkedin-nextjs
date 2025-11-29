@@ -35,9 +35,9 @@ export default function Profile({
       className="bg-gray-100  h-screen overflow-y-auto"
     >
       <ProfileNavBar page="home" />
-      <section className="flex gap-6 justify-center">
+      <section className="flex-center gap-6 ">
+         <UserComponent />
         <CreatePost />
-        <UserComponent />
       </section>
       <RenderPosts userId={id} />
     </main>
