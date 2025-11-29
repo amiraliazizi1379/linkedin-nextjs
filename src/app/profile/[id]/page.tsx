@@ -35,7 +35,7 @@ export default function Profile({
       className="bg-gray-100  h-screen overflow-y-auto"
     >
       <ProfileNavBar page="home" />
-      <section className="flex-center gap-6 ">
+      <section className="flex justify-center  ">
          <UserComponent />
         <CreatePost />
       </section>
