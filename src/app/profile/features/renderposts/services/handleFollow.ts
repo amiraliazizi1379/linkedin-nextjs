@@ -16,7 +16,7 @@ export async function handleFollow(id: number, is_following: boolean) {
   try {
     if (!is_following) {
       const res = await GetNewAccessToken(
-        `${process.env.DOMAIN}/api/registerfollow`,
+        `/api/registerfollow`,
         {
           method: "POST",
           body: JSON.stringify(id),
@@ -24,7 +24,7 @@ export async function handleFollow(id: number, is_following: boolean) {
       );
     } else {
       const res2 = await GetNewAccessToken(
-        `${process.env.DOMAIN}/api/registerfollow`,
+        `/api/registerfollow`,
         {
           method: "DELETE",
           body: JSON.stringify(id),

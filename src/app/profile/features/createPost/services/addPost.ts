@@ -15,7 +15,7 @@ export async function handlePost(
     formData.append("text", postText);
 
     try {
-      const res = await GetNewAccessToken(`${process.env.DOMAIN}/api/posts`, {
+      const res = await GetNewAccessToken(`/api/posts`, {
         method: "POST",
         body: formData,
       });

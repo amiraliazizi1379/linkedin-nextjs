@@ -9,7 +9,7 @@ export function RenderPostsServices() {
   useEffect(() => {
     const res = async () => {
       const req = await GetNewAccessToken(
-        `${process.env.DOMAIN}/api/getposts`,
+        `/api/getposts`,
         {
           method: "GET",
         }

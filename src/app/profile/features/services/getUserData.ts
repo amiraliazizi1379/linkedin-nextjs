@@ -4,7 +4,7 @@ import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 export async function GetUserData(id: string) {
   store.dispatch(setLoading(true));
   try {
-    const res = await GetNewAccessToken(`${process.env.DOMAIN}/api/user`, {
+    const res = await GetNewAccessToken(`/api/user`, {
       method: "POST",
       body: id,
     });

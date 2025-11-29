@@ -17,7 +17,7 @@ export async function handleComment(
 
     try {
       const res = await GetNewAccessToken(
-        `${process.env.DOMAIN}/api/addcomment`,
+        `/api/addcomment`,
         {
           method: "POST",
           headers: { postId: postId },

@@ -10,7 +10,7 @@ export async function handleLikes(id: number, liked: boolean | undefined) {
   try {
     if (!liked) {
       const res = await GetNewAccessToken(
-        `${process.env.DOMAIN}/api/registerlike`,
+        `/api/registerlike`,
         {
           method: "POST",
           body: JSON.stringify(id),
@@ -18,7 +18,7 @@ export async function handleLikes(id: number, liked: boolean | undefined) {
       );
     } else {
       const res2 = await GetNewAccessToken(
-        `${process.env.DOMAIN}/api/registerlike`,
+        `/api/registerlike`,
         {
           method: "DELETE",
           body: JSON.stringify(id),

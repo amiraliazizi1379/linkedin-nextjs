@@ -22,7 +22,7 @@ export async function GetComments(id: number) {
   store.dispatch(setPostData(updatedData));
   try {
     const res = await GetNewAccessToken(
-      `${process.env.DOMAIN}/api/getcomments`,
+      `/api/getcomments`,
       {
         method: "GET",
         headers: { postId: id },
