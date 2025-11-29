@@ -71,7 +71,7 @@ export class databaseOperation {
   };
 
   static getUserData = async (id: number) => {
-    const userDat = await pool.query<RowDataPacket[]>(
+    const userDat = await pool.query(
       "select id , name , email , image , bio from users where id = $1 ;",
       [id]
     );
