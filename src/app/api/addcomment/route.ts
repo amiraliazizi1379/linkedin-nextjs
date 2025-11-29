@@ -7,7 +7,7 @@ export const POST = auth(
   async (req: NextRequest, userId: number): Promise<NextResponse> => {
     const postId = req.headers.get("postId");
     const { text, imageUrl } = await FormDataRouteHandler(req, "commentImage");
-    if (!text || !imageUrl) return NextResponse.json({ status: 400 });
+    if (!text) return NextResponse.json({ status: 400 });
     const result = await databaseOperation.addComment(
       userId,
       Number(postId),

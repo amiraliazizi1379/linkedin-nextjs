@@ -100,7 +100,7 @@ export class databaseOperation {
     text: string,
     img: string | null
   ) => {
-    const addCommentQuery = await pool.query<ResultSetHeader>(
+    const addCommentQuery = await pool.query(
       "insert into comments (user_id , post_id , content , image_url) values ($1 , $2 , $3 , $4) ;",
       [userId, postId, text, img]
     );
