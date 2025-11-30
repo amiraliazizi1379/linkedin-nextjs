@@ -29,9 +29,9 @@ export function EditProfile() {
 
   if (editProfile) {
     return (
-      <article className="fixed">
+      <article>
         <div
-          className="fixed inset-0  bg-black opacity-50"
+          className="fixed inset-0 bg-black opacity-50"
           onClick={() => {
             dispatch(setEditProfile(false));
             dispatch(setPostBt(false));
