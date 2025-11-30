@@ -45,7 +45,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
         return (
           <div
             key={post_id}
-            className="bg-[#fff] mt-2 w-[40vw] py-2  mx-auto rounded-lg z-auto border-1 border-gray-200"
+            className="bg-[#fff] mt-2 w-[40vw] py-2  mx-auto rounded-lg z-0 border-1 border-gray-200"
           >
             <div className="flex items-center justify-between mx-4 mt-2">
               <div className="flex gap-4">
