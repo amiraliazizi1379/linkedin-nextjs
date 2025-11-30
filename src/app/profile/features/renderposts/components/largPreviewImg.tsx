@@ -10,10 +10,10 @@ export function LargPreviewImg() {
   return (
     <div className="flex-center fixed">
       <div
-        className="fixed inset-0 bg-black opacity-50"
+        className="fixed inset-0 z-50 bg-black opacity-50"
         onClick={() => dispatch(setLargImg(false))}
       ></div>
-      <section className="fixed top-[1rem] flex flex-col items-end max-w-[70vw] h-[95vh] rounded-lg p-4   bg-[#fff]">
+      <section className="fixed top-[1rem] flex flex-col items-end max-w-[70vw] h-[95vh] rounded-lg p-4 z-50 bg-[#fff]">
         <CloseButton setCustomState={setLargImg} />
         <Image src={fullScreenImgSrc} alt="" className="rounded-md h-[82vh]" />
       </section>
