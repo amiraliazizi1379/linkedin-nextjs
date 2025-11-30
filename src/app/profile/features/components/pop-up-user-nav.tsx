@@ -8,9 +8,9 @@ export default function PopOp() {
   const { userData } = useSelector((state: RootState) => state.app);
   const { name, image, email, bio } = userData;
   return (
-    <div className="fixed bg-red-500">
+    <div className="fixed z-50">
       <div
-        className="fixed inset-0 z-50 opacity-50 bg-black"
+        className="fixed inset-0 z-50 opacity-0 "
         onClick={() => dispatch(setPopup(false))}
       ></div>
       <section className="min-w-[250px] p-2 shadow-md right-[11rem] top-[4.5rem] rounded-md fixed z-50 min-h-[150px] bg-[#fff]">
