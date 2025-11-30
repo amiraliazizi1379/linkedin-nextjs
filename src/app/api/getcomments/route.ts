@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = auth(async (req: NextRequest, userId: number) => {
   const postId = req.headers.get("postId");
-  if (postId) return NextResponse.json({ status: 400 });
+  if (!postId) return NextResponse.json({ status: 400 });
 
   const commentData = await databaseOperation.getComments(Number(postId));
   if (!commentData) return NextResponse.json({ status: 500 });
-  console.log(commentData);
+
   return NextResponse.json({ commentData }, { status: 200 });
 });
