@@ -42,7 +42,7 @@ export function EditProfile() {
           onClick={() => {
             if (editMenu) dispatch(setEditMenu(false));
           }}
-          className="fixed w-[30vw] min-h-[30vh] bg-[#fff] left-[33rem] rounded-lg p-5"
+          className="fixed w-[30vw] min-h-[30vh] bg-[#fff] left-[33rem] z-30 rounded-lg p-5"
         >
           <section className="flex justify-between items-center mt-2">
             <h1 className="font-semibold text-md">My Profile</h1>
