@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = auth(
   async (req: NextRequest, userId: number): Promise<NextResponse> => {
     const postId = req.headers.get("postId");
-    const { text, imageUrl } = await FormDataRouteHandler(req, "commentImage");
+    const { text, imageUrl } = await FormDataRouteHandler(req);
     if (!text) return NextResponse.json({ status: 400 });
     const result = await databaseOperation.addComment(
       userId,
