@@ -4,10 +4,7 @@ import { databaseOperation } from "@/models/dataBase";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = auth(async (req: NextRequest, userId: number) => {
-  const { bio, email, name, imageUrl } = await FormDataRouteHandler(
-    req,
-    "userphoto"
-  );
+  const { bio, email, name, imageUrl } = await FormDataRouteHandler(req);
 
   if (imageUrl) await databaseOperation.addProfileImage(imageUrl, userId);
 
