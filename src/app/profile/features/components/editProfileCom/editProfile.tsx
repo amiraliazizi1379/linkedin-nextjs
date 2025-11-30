@@ -31,7 +31,7 @@ export function EditProfile() {
     return (
       <article>
         <div
-          className="fixed inset-0 bg-black opacity-50"
+          className="fixed inset-0 z-50 bg-black opacity-50"
           onClick={() => {
             dispatch(setEditProfile(false));
             dispatch(setPostBt(false));
@@ -42,7 +42,7 @@ export function EditProfile() {
           onClick={() => {
             if (editMenu) dispatch(setEditMenu(false));
           }}
-          className="fixed w-[30vw] min-h-[30vh] bg-[#fff] left-[33rem] z-10 rounded-lg p-5"
+          className="fixed w-[30vw] min-h-[30vh] bg-[#fff] left-[33rem] z-50 rounded-lg p-5"
         >
           <section className="flex justify-between items-center mt-2">
             <h1 className="font-semibold text-md">My Profile</h1>
