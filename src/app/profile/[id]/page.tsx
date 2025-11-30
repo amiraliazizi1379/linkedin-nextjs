@@ -33,11 +33,13 @@ export default function Profile({
       className="bg-gray-100  h-screen overflow-y-auto"
     >
       <ProfileNavBar page="home" />
-      <section className="flex ml-8 gap-4 mt-8">
+      <section className="flex ml-47 mt-8 gap-6">
         <UserComponent />
-        <CreatePost />
+        <div>
+          <CreatePost />
+          <RenderPosts userId={id} />
+        </div>
       </section>
-      <RenderPosts userId={id} />
     </main>
   );
 }
