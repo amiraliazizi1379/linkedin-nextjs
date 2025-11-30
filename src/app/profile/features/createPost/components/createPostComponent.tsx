@@ -32,9 +32,9 @@ export default function CreatePostComponent() {
             dispatch(setPostBt(false));
             dispatch(setPostText(""));
           }}
-          className="fixed inset-0 bg-black opacity-50"
+          className="fixed inset-0 z-50 bg-black opacity-50"
         ></div>
-        <div className="fixed w-[52vw] h-[78vh] p-5 pb-0 shadow-lg bg-[#fff] z-10 rounded-md left-[22rem] top-[2rem] ">
+        <div className="fixed w-[52vw] h-[78vh] p-5 pb-0 shadow-lg bg-[#fff] z-50 rounded-md left-[22rem] top-[2rem] ">
           <div className="flex  justify-between">
             <div className="flex-center gap-6">
               <UserImageComponent
