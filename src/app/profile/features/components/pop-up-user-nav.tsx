@@ -10,7 +10,7 @@ export default function PopOp() {
   return (
     <div>
       <div
-        className="fixed inset-0 z-50 bg-black opacity-0"
+        className="fixed inset-0 z-50 bg-black opacity-50"
         onClick={() => dispatch(setPopup(false))}
       ></div>
       <section className="min-w-[250px] p-2 shadow-md right-[11rem] top-[4.5rem] rounded-md fixed z-50 min-h-[150px] bg-[#fff]">
@@ -28,7 +28,10 @@ export default function PopOp() {
           </div>
         </div>
         <button
-          onClick={() => dispatch(setEditProfile(true))}
+          onClick={() => {
+            dispatch(setEditProfile(true));
+            dispatch(setPopup(false));
+          }}
           className="border-1 border-[#0a66c2] cursor-pointer hover:border-2 hover:bg-[#eaf4fd] h-[1.5rem] w-full mt-2 text-[#0a66c2] text-[13px] font-semibold rounded-full"
         >
           View Profile
