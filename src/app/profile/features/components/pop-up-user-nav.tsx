@@ -8,7 +8,7 @@ export default function PopOp() {
   const { userData } = useSelector((state: RootState) => state.app);
   const { name, image, email, bio } = userData;
   return (
-    <div>
+    <div className="fixed">
       <div
         className="fixed inset-0 z-50 bg-black opacity-50"
         onClick={() => dispatch(setPopup(false))}
