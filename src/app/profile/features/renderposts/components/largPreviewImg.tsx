@@ -8,7 +8,7 @@ export function LargPreviewImg() {
   const { fullScreenImgSrc } = useSelector((state: RootState) => state.app);
 
   return (
-    <div className="flex-center fixed">
+    <div className="flex-center">
       <div
         className="fixed inset-0 z-50 bg-black opacity-50"
         onClick={() => dispatch(setLargImg(false))}
