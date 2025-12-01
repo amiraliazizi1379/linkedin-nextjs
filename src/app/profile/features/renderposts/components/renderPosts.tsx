@@ -11,7 +11,6 @@ import { GetComments } from "../services/getcomment";
 import { RenderComments } from "../../renderComments";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, setLargImg, setFullScreenSrc } from "@/redux/store";
-import Image from "next/image";
 
 export default function RenderPosts({ userId }: { userId: string }) {
   const { postData, notFoundSearch, postsSearch } = useSelector(
@@ -41,7 +40,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           comment_count,
           bio,
         } = item;
-        console.log(commentData)
+        console.log(commentData);
         return (
           <div
             key={post_id}
@@ -79,7 +78,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
               )}
             </div>
             <p className="mt-4 ml-4">{content}</p>
-            <Image
+            <img
               className="w-full object-cover mt-4 cursor-pointer"
               src={image_url}
               alt=""
