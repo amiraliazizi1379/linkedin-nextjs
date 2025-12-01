@@ -43,8 +43,10 @@ export default function CreatePostComponent() {
                 name={name}
                 email={email}
               />
-              <h1>{name ? name : email}</h1>
-              <p className="text-[14px] text-gray-400">{bio && bio}</p>
+              <div>
+                <h1>{name ? name : email}</h1>
+                <p className="text-[14px] text-gray-400">{bio && bio}</p>
+              </div>
             </div>
             <CloseButton setCustomState={setCreatePost} />
           </div>
