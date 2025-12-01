@@ -9,8 +9,7 @@ export async function DeleteProfilePhotoHandler() {
     });
     if (res?.ok) {
       const { id } = await res.json();
-      console.log(id)
-      GetUserData(id);
+      GetUserData(String(id));
     }
   } catch (err) {
     console.log(err);
