@@ -1,4 +1,4 @@
-import { setUserData, store } from "@/redux/store";
+import { setLoading, setUserData, store } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { GetUserData } from "./getUserData";
 
@@ -9,7 +9,8 @@ export async function DeleteProfilePhotoHandler() {
     });
     if (res?.ok) {
       const { id } = await res.json();
-      GetUserData(String(id));
+      await GetUserData(String(id));
+      store.dispatch(setLoading(false));
     }
   } catch (err) {
     console.log(err);
