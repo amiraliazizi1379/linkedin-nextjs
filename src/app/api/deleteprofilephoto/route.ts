@@ -14,5 +14,5 @@ export const POST = auth(async (req: NextRequest, userId) => {
       { status: 500 }
     );
   await databaseOperation.deleteProfileImage(userId);
-  return NextResponse.json({ status: 200 });
+  return NextResponse.json({id : userId} , { status: 200 });
 });

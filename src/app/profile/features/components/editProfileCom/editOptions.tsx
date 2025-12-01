@@ -4,6 +4,9 @@ import { MdDelete } from "react-icons/md";
 import {
   RootState,
   setActiveEditingUserInfo,
+  setEditMenu,
+  setEditProfile,
+  setPostBt,
   setuserImgSrc,
 } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,7 +46,12 @@ export function EditOptions() {
       />
 
       <button
-        onClick={DeleteProfilePhotoHandler}
+        onClick={() => {
+          dispatch(setEditProfile(false));
+          dispatch(setPostBt(false));
+          dispatch(setEditMenu(false));
+          DeleteProfilePhotoHandler();
+        }}
         className=" flex gap-2 items-center mt-0.5 hover:text-red-700 cursor-pointer px-2 p-1 hover:bg-gray-100 w-full"
       >
         <MdDelete className="text-xl" />

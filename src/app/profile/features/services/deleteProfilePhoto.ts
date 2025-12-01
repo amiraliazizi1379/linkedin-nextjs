@@ -7,6 +7,10 @@ export async function DeleteProfilePhotoHandler() {
     const res = await GetNewAccessToken("/api/deleteprofilephoto", {
       method: "POST",
     });
+    if (res?.ok) {
+      const { id } = await res.json();
+      GetUserData(id);
+    }
   } catch (err) {
     console.log(err);
   }
