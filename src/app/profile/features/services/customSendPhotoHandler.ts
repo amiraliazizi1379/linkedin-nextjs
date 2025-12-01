@@ -2,6 +2,7 @@ import {
   setBtnLoading,
   setEditEmailStatus,
   setLoading,
+  setPostBt,
   store,
 } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
@@ -50,10 +51,11 @@ export async function CustomHandler(
 
       if (res?.ok) {
         const { id } = await res.json();
+        await GetUserData(String(id));
         store.dispatch(setEditEmailStatus(false));
         store.dispatch(setState(false));
         store.dispatch(setBtnLoading(false));
-        await GetUserData(String(id));
+        store.dispatch(setPostBt(false));
         setPostImgFile(null);
         store.dispatch(setLoading(false));
       }
