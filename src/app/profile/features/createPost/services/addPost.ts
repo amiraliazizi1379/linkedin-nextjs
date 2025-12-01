@@ -1,5 +1,6 @@
-import { setBtnLoading, setCreatePost, store } from "@/redux/store";
+import { setBtnLoading, setCreatePost, setLoading, store } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
+import { RenderPostsServices } from "../../renderposts/services/renderpostsServices";
 
 export async function handlePost(
   e: React.MouseEvent<HTMLButtonElement>,
@@ -19,9 +20,12 @@ export async function handlePost(
         method: "POST",
         body: formData,
       });
-
-      store.dispatch(setCreatePost(false));
-      store.dispatch(setBtnLoading(false));
+      if (res?.ok) {
+        store.dispatch(setLoading(true));
+        RenderPostsServices();
+        store.dispatch(setCreatePost(false));
+        store.dispatch(setBtnLoading(false));
+      }
     } catch (err) {
       console.log(err);
     }

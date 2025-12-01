@@ -9,6 +9,7 @@ import { RootState } from "@/redux/store";
 import Loading from "./loading";
 import { GetUserData } from "../features/services/getUserData";
 import { UserComponent } from "../features/components/userComponent";
+import { RenderPostsServices } from "../features/renderposts/services/renderpostsServices";
 
 export default function Profile({
   params,
@@ -21,6 +22,7 @@ export default function Profile({
 
   useEffect(() => {
     GetUserData(id);
+    RenderPostsServices();
   }, []);
   if (loading) {
     return <Loading />;

@@ -1,25 +1,13 @@
-import { setLoading, setPostData } from "@/redux/store";
+import { setLoading, setPostData, store } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
-export function RenderPostsServices() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const res = async () => {
-      const req = await GetNewAccessToken(
-        `/api/getposts`,
-        {
-          method: "GET",
-        }
-      );
-      if (req) {
-        const result = await req.json();
-        dispatch(setPostData(result.postdata));
-      }
-      dispatch(setLoading(false));
-    };
-    res();
-  }, []);
+export async function RenderPostsServices() {
+  const req = await GetNewAccessToken(`/api/getposts`, {
+    method: "GET",
+  });
+  if (req?.ok) {
+    const result = await req.json();
+    store.dispatch(setPostData(result.postdata));
+  }
+  store.dispatch(setLoading(false));
 }
