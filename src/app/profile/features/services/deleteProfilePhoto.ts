@@ -5,7 +5,7 @@ import { GetUserData } from "./getUserData";
 export async function DeleteProfilePhotoHandler() {
   try {
     const res = await GetNewAccessToken("/api/deleteprofilephoto", {
-      method: "UPDATE",
+      method: "POST",
     });
   } catch (err) {
     console.log(err);
