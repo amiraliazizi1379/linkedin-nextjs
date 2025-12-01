@@ -21,7 +21,7 @@ export function EditProfile() {
     (state: RootState) => state.app
   );
 
-  const { postImgFile } = useUserContext();
+  const { postImgFile, setPostImgFile } = useUserContext();
 
   if (largImg) {
     return <LargPreviewImg />;
@@ -75,7 +75,7 @@ export function EditProfile() {
             classname="border-none mt-4"
             ImgSrc={userImgSrc}
             onclick={(e) =>
-              CustomHandler(e, postImgFile, setEditProfile, "editUserInfo")
+              CustomHandler(e, postImgFile, setEditProfile, "editUserInfo" , setPostImgFile)
             }
           />
         </div>

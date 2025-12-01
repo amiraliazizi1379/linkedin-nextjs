@@ -7,12 +7,14 @@ import {
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { GetUserData } from "./getUserData";
+import { Dispatch, SetStateAction } from "react";
 
 export async function CustomHandler(
   e: React.MouseEvent<HTMLButtonElement>,
   postImageFile: File | null,
   setState: ActionCreatorWithPayload<boolean>,
-  route: string
+  route: string,
+  setPostImgFile: Dispatch<SetStateAction<File | null>>
 ) {
   const {
     userData,
@@ -52,6 +54,7 @@ export async function CustomHandler(
         store.dispatch(setState(false));
         store.dispatch(setBtnLoading(false));
         await GetUserData(String(id));
+        setPostImgFile(null);
         store.dispatch(setLoading(false));
       }
     } catch (err) {
