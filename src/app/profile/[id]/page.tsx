@@ -22,6 +22,7 @@ export default function Profile({
 
   useEffect(() => {
     GetUserData(id);
+    RenderPostsServices();
   }, []);
   if (loading) {
     return <Loading />;
