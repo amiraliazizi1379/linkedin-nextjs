@@ -8,6 +8,7 @@ import {
 } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineModeEditOutline } from "react-icons/md";
+import { DeleteProfilePhotoHandler } from "../../services/deleteProfilePhoto";
 
 export function EditOptions() {
   const { editMenu } = useSelector((state: RootState) => state.app);
@@ -41,7 +42,10 @@ export function EditOptions() {
         setState={setuserImgSrc}
       />
 
-      <button className=" flex gap-2 items-center mt-0.5 hover:text-red-700 cursor-pointer px-2 p-1 hover:bg-gray-100 w-full">
+      <button
+        onClick={DeleteProfilePhotoHandler}
+        className=" flex gap-2 items-center mt-0.5 hover:text-red-700 cursor-pointer px-2 p-1 hover:bg-gray-100 w-full"
+      >
         <MdDelete className="text-xl" />
         <p className="text-red-500">Delete photo</p>
       </button>
