@@ -2,24 +2,20 @@ import { BsChatText } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { BiSolidLike } from "react-icons/bi";
 import UserImageComponent from "../../components/userImgComponent";
-import { RenderPostsServices } from "../services/renderpostsServices";
 import { FaCheck } from "react-icons/fa6";
 import { handleFollow } from "../services/handleFollow";
 import { CommentComponent } from "./comment";
 import { handleLikes } from "../services/handkelikes";
 import { GetComments } from "../services/getcomment";
 import { RenderComments } from "../../renderComments";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, setLargImg, setFullScreenSrc } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { RootState, setLargImg, setFullScreenSrc, store } from "@/redux/store";
 import Image from "next/image";
 
 export default function RenderPosts({ userId }: { userId: string }) {
   const { postData, notFoundSearch, postsSearch } = useSelector(
     (state: RootState) => state.app
   );
-  const dispatch = useDispatch();
-
-  RenderPostsServices();
 
   if (notFoundSearch) return <h1 className="text-center mt-8">No Content</h1>;
   return (
@@ -84,8 +80,8 @@ export default function RenderPosts({ userId }: { userId: string }) {
               src={image_url}
               alt=""
               onClick={() => {
-                dispatch(setLargImg(true));
-                dispatch(setFullScreenSrc(image_url));
+                store.dispatch(setLargImg(true));
+                store.dispatch(setFullScreenSrc(image_url));
               }}
             />
             <div className="flex justify-between px-4 mt-1">
