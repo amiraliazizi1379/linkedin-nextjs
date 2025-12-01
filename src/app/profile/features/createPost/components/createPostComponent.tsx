@@ -21,7 +21,7 @@ export default function CreatePostComponent() {
     (state: RootState) => state.app
   );
   const { postImgFile } = useUserContext();
-  const { image, name, email } = userData;
+  const { image, name, email, bio } = userData;
 
   if (createPost) {
     return (
@@ -44,6 +44,7 @@ export default function CreatePostComponent() {
                 email={email}
               />
               <h1>{name ? name : email}</h1>
+              <p className="text-[14px] text-gray-400">{bio && bio}</p>
             </div>
             <CloseButton setCustomState={setCreatePost} />
           </div>
