@@ -1,6 +1,12 @@
-import { setBtnLoading, setEditEmailStatus, store } from "@/redux/store";
+import {
+  setBtnLoading,
+  setEditEmailStatus,
+  setLoading,
+  store,
+} from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { GetUserData } from "./getUserData";
 
 export async function CustomHandler(
   e: React.MouseEvent<HTMLButtonElement>,
@@ -41,9 +47,12 @@ export async function CustomHandler(
       }
 
       if (res?.ok) {
+        const { id } = await res.json();
         store.dispatch(setEditEmailStatus(false));
         store.dispatch(setState(false));
         store.dispatch(setBtnLoading(false));
+        await GetUserData(String(id));
+        store.dispatch(setLoading(false));
       }
     } catch (err) {
       console.log(err);

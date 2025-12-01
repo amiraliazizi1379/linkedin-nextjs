@@ -21,5 +21,5 @@ export const POST = auth(async (req: NextRequest, userId: number) => {
       );
     await databaseOperation.editEmail(email, userId);
   }
-  return NextResponse.json({ status: 200 });
+  return NextResponse.json({ id: userId }, { status: 200 });
 });
