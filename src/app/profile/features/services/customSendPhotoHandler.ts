@@ -3,6 +3,7 @@ import {
   setEditEmailStatus,
   setLoading,
   setPostBt,
+  setuserImgSrc,
   store,
 } from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
@@ -56,6 +57,7 @@ export async function CustomHandler(
         store.dispatch(setState(false));
         store.dispatch(setBtnLoading(false));
         store.dispatch(setPostBt(false));
+        store.dispatch(setuserImgSrc(false));
         setPostImgFile(null);
         store.dispatch(setLoading(false));
       }
