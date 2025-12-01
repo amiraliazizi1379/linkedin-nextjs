@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = auth(async (req: NextRequest, userId) => {
   const image_url = await databaseOperation.getImageUrl(userId);
+  console.log(image_url)
   const public_id = image_url.split("/upload/")[1].split(".")[0];
   const result = await cloudinary.uploader.destroy(public_id);
   if (!result)
