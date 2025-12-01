@@ -1,5 +1,5 @@
 import { pool } from "@/app/api/dbConnection/db";
-import { ResultSetHeader, RowDataPacket } from "mysql2";
+import { ResultSetHeader } from "mysql2";
 
 export class databaseOperation {
   static findEmail = async (email: string) => {
@@ -73,6 +73,13 @@ export class databaseOperation {
   static getUserData = async (id: number) => {
     const userDat = await pool.query(
       "select id , name , email , image , bio from users where id = $1 ;",
+      [id]
+    );
+    return userDat.rows[0];
+  };
+    static getImageUrl = async (id: number) => {
+    const userDat = await pool.query(
+      "select image from users where id = $1 ;",
       [id]
     );
     return userDat.rows[0];
