@@ -26,6 +26,7 @@ export default function LoginForm(): ReactElement {
     resolver: zodResolver(loginSchema),
     mode: "all",
   });
+  console.log('login form component' , errors)
   return (
     <main>
       <form
