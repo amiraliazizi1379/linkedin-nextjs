@@ -97,7 +97,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
               </p>
             </div>
             <div className="w-full h-[1px] mt-1 bg-gray-300"></div>
-            <div className="space-x-14 mt-2 ml-6 mb-2  flex items-center">
+            <div className="mt-2 mb-2 flex justify-around items-center">
               <button
                 className={`post-bt flex-center`}
                 onClick={() => {
