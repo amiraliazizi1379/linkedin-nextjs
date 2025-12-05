@@ -57,7 +57,9 @@ export function RenderComments({
                           : itm
                       );
                       const updatedPostData = postData.map((post) =>
-                        post.post_id === post_id ? updatedData : post
+                        post.post_id === post_id
+                          ? { ...post, commentData: updatedData }
+                          : post
                       );
                       dispatch(setPostData(updatedPostData));
                     }}
