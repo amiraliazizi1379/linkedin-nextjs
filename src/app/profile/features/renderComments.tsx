@@ -18,7 +18,7 @@ export function RenderComments({
             post;
           return (
             <div key={comment_id} className="ml-5.5 mt-4 pb-4">
-              <article className="flex gap-4 ">
+              <article className="flex gap-4 items-center">
                 <UserImageComponent
                   style="w-[40px] h-[40px] text-md"
                   name={name}
