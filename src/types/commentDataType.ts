@@ -11,4 +11,5 @@ export type commentDataType = {
   image: string;
   email: string;
   bio: string;
+  readMore: boolean;
 };

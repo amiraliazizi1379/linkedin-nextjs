@@ -1,7 +1,12 @@
 import { commentDataType } from "@/types/commentDataType";
 import UserImageComponent from "./components/userImgComponent";
-import { useDispatch } from "react-redux";
-import { setFullScreenSrc, setLargImg } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  RootState,
+  setFullScreenSrc,
+  setLargImg,
+  setPostData,
+} from "@/redux/store";
 import Image from "next/image";
 
 export function RenderComments({
@@ -10,12 +15,22 @@ export function RenderComments({
   commentData: commentDataType[];
 }) {
   const dispatch = useDispatch();
+  const { postData } = useSelector((state: RootState) => state.app);
   return (
     <section className="mt-8">
       {commentData &&
         commentData.map((post) => {
-          const { comment_id, content, image_url, name, image, email, bio } =
-            post;
+          const {
+            comment_id,
+            post_id,
+            content,
+            image_url,
+            name,
+            image,
+            email,
+            bio,
+            readMore,
+          } = post;
           return (
             <div key={comment_id} className="ml-5.5 mt-4 pb-4">
               <article className="flex gap-4 items-center">
@@ -30,7 +45,27 @@ export function RenderComments({
                   <p className="text-[14px] text-gray-400">{bio}</p>
                 </div>
               </article>
-              <p className="text-md mt-2 ml-10"> {content}</p>
+              <p className="p-4">
+                {readMore ? content : content.substring(0, 100)}
+                {!readMore && content.length > 50 && (
+                  <button
+                    className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
+                    onClick={() => {
+                      const updatedData = commentData.map((itm) =>
+                        itm.comment_id === comment_id
+                          ? { ...itm, readMore: true }
+                          : itm
+                      );
+                      const updatedPostData = postData.map((post) =>
+                        post.post_id === post_id ? updatedData : post
+                      );
+                      dispatch(setPostData(updatedPostData));
+                    }}
+                  >
+                    ...more
+                  </button>
+                )}
+              </p>
               {image_url && (
                 <Image
                   onClick={() => {
