@@ -8,14 +8,21 @@ import { CommentComponent } from "./comment";
 import { handleLikes } from "../services/handkelikes";
 import { GetComments } from "../services/getcomment";
 import { RenderComments } from "../../renderComments";
-import { useSelector } from "react-redux";
-import { RootState, setLargImg, setFullScreenSrc, store } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  RootState,
+  setLargImg,
+  setFullScreenSrc,
+  store,
+  setPostData,
+} from "@/redux/store";
 import Image from "next/image";
 
 export default function RenderPosts({ userId }: { userId: string }) {
   const { postData, notFoundSearch, postsSearch } = useSelector(
     (state: RootState) => state.app
   );
+  const dispatch = useDispatch();
 
   if (notFoundSearch) return <h1 className="text-center mt-8">No Content</h1>;
   return (
@@ -76,13 +83,14 @@ export default function RenderPosts({ userId }: { userId: string }) {
               )}
             </div>
             <p className="p-4">
-              {readMore ? content : content.substring(0, 13)}
+              {readMore ? content : content.substring(0, 50)}
               <button
                 className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
                 onClick={() => {
-                  postData.map((itm) =>
+                  const updatedData = postData.map((itm) =>
                     itm.post_id === post_id ? { ...itm, readMore: true } : itm
                   );
+                  dispatch(setPostData(updatedData));
                 }}
               >
                 ...more
