@@ -15,7 +15,7 @@ export async function LoginOnSubmit(
 
     const result = await res.json();
 
-    if (!res.ok) setError("root", { type: "manual", message: result.message });
+    if (!res.ok) setError("root", { type: "server", message: result.message });
 
     if (res.status === 200) window.location.href = `/profile/${result.id}`;
     store.dispatch(setLoginLoading(false));
