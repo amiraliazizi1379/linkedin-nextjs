@@ -21,16 +21,19 @@ export default function LoginForm(): ReactElement {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<loginType>({
     resolver: zodResolver(loginSchema),
     mode: "all",
   });
-  console.log('login form component' , errors)
+  const OnSubmit = async (data: loginType): Promise<void> => {
+    const result = await LoginOnSubmit(data, setError);
+  };
   return (
     <main>
       <form
-        onSubmit={handleSubmit(LoginOnSubmit)}
+        onSubmit={handleSubmit(OnSubmit)}
         className="min-h-[82vh] p-8 shadow-xl mx-auto rounded-xl text-center max-[480px]:w-[95vw] max-[550px]:w-[80vw] max-[640px]:w-[70vw] max-[780px]:w-[60vw] max-[1023px]:w-[50vw] min-[1023px]:w-[25vw]"
       >
         <h1 className="font-bold text-3xl text-left mb-6">Sign in</h1>

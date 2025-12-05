@@ -24,7 +24,7 @@ export default function RegisterForm(): ReactElement {
     mode: "all",
   });
 
-  const { showPassword } = useSelector((state : RootState) => state.app)
+  const { showPassword } = useSelector((state: RootState) => state.app);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
