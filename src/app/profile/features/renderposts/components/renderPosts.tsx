@@ -84,7 +84,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
             </div>
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
-              {!readMore && (
+              {(!readMore && content.length > 50) && (
                 <button
                   className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
                   onClick={() => {
