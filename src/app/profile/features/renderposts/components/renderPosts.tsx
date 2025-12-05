@@ -36,6 +36,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           like_count,
           comment_count,
           bio,
+          readMore,
         } = item;
         console.log(commentData);
         return (
@@ -74,7 +75,20 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               )}
             </div>
-            <p className="p-4">{content}</p>
+            <p className="p-4">
+              {readMore ? content : content.substring(0, 13)}
+              <button
+              className="text-[14px] hover:text-[#0a66c2]"
+                onClick={() => {
+                  postData.map(
+                    (itm) =>
+                      itm.post_id === post_id && { ...itm, readMore: true }
+                  );
+                }}
+              >
+                ...more
+              </button>
+            </p>
             <Image
               className="w-full object-cover mt-4 cursor-pointer"
               src={image_url}
