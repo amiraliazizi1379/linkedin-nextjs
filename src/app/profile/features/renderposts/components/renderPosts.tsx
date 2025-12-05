@@ -78,11 +78,10 @@ export default function RenderPosts({ userId }: { userId: string }) {
             <p className="p-4">
               {readMore ? content : content.substring(0, 13)}
               <button
-              className="text-[14px] hover:text-[#0a66c2]"
+                className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
                 onClick={() => {
-                  postData.map(
-                    (itm) =>
-                      itm.post_id === post_id && { ...itm, readMore: true }
+                  postData.map((itm) =>
+                    itm.post_id === post_id ? { ...itm, readMore: true } : itm
                   );
                 }}
               >
