@@ -15,5 +15,5 @@ export type postdatas = {
   like_count: number;
   comment_count: number;
   bio: string;
-  readMore: Boolean;
+  readMore: boolean;
 };
