@@ -83,18 +83,20 @@ export default function RenderPosts({ userId }: { userId: string }) {
               )}
             </div>
             <p className="p-4">
-              {readMore ? content : content.substring(0, 50)}
-              <button
-                className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
-                onClick={() => {
-                  const updatedData = postData.map((itm) =>
-                    itm.post_id === post_id ? { ...itm, readMore: true } : itm
-                  );
-                  dispatch(setPostData(updatedData));
-                }}
-              >
-                ...more
-              </button>
+              {readMore ? content : content.substring(0, 100)}
+              {!readMore && (
+                <button
+                  className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
+                  onClick={() => {
+                    const updatedData = postData.map((itm) =>
+                      itm.post_id === post_id ? { ...itm, readMore: true } : itm
+                    );
+                    dispatch(setPostData(updatedData));
+                  }}
+                >
+                  ...more
+                </button>
+              )}
             </p>
             <Image
               className="w-full object-cover mt-4 cursor-pointer"
