@@ -14,7 +14,8 @@ export function RenderComments({
     <section className="mt-8">
       {commentData &&
         commentData.map((post) => {
-          const { comment_id, content, image_url, name, image, email } = post;
+          const { comment_id, content, image_url, name, image, email, bio } =
+            post;
           return (
             <div key={comment_id} className="ml-5.5 mt-4 pb-4">
               <article className="flex gap-4 ">
@@ -24,7 +25,10 @@ export function RenderComments({
                   image={image}
                   email={email}
                 />
-                <h1 className="font-semibold">{name ? name : email}</h1>
+                <div>
+                  <h1 className="font-semibold">{name ? name : email}</h1>
+                  <p className="text-[14px] text-gray-400">{bio}</p>
+                </div>
               </article>
               <p className="text-md mt-2 ml-10"> {content}</p>
               {image_url && (

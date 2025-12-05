@@ -10,4 +10,5 @@ export type commentDataType = {
   name: string;
   image: string;
   email: string;
+  bio: string;
 };

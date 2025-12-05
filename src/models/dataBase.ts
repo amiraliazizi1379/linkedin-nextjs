@@ -77,7 +77,7 @@ export class databaseOperation {
     );
     return userDat.rows[0];
   };
-    static getImageUrl = async (id: number) => {
+  static getImageUrl = async (id: number) => {
     const userDat = await pool.query(
       "select image from users where id = $1 ;",
       [id]
@@ -124,7 +124,7 @@ export class databaseOperation {
 
   static getComments = async (id: number) => {
     const postsComments = await pool.query(
-      "select c.id AS comment_id,c.post_id,c.user_id, c.content,c.image_url,u.image, u.name,u.email from comments c join  users u ON u.id = c.user_id where c.post_id = $1 ;",
+      "select c.id AS comment_id,c.post_id,c.user_id, c.content,c.image_url,u.image, u.name,u.email , u.bio from comments c join  users u ON u.id = c.user_id where c.post_id = $1 ;",
       [id]
     );
     return postsComments.rows;
