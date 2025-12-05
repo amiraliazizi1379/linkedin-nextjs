@@ -74,7 +74,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               )}
             </div>
-            <p className="mt-4 ml-4">{content}</p>
+            <p className="p-4">{content}</p>
             <Image
               className="w-full object-cover mt-4 cursor-pointer"
               src={image_url}
