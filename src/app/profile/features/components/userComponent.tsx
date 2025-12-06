@@ -15,12 +15,12 @@ export function UserComponent() {
         <div className="w-[30%] bg-[#b2bec3]"></div>
       </div>
       <UserImageComponent
-        style="w-[80px] h-[80px] mx-auto mt-2 border-1 border-[#fff] absolute left-4 top-8"
+        style="w-[80px] h-[80px] border-2 border-[#fff] absolute left-4 top-8"
         email={email}
         image={image}
         name={name}
       />
-      <h1 className="font-semibold mt-4">{name ? name : email}</h1>
+      <h1 className="font-semibold mt-10">{name ? name : email}</h1>
       <p>{bio && bio}</p>
     </div>
   );
