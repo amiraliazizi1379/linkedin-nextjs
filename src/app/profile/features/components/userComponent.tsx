@@ -10,7 +10,7 @@ export function UserComponent() {
     <div className="w-[250px] h-[220px] bg-[#fff] border-1 border-gray-300 rounded-xl relative">
       <div className="flex h-[70px] w-full">
         <div className="w-[70%] bg-gray-200 rounded-tl-xl">
-          <div className="w-[90%] bg-[#cfd3d5] rounded-tl-xl rounded-r-4xl h-full"></div>
+          <div className="w-[90%] bg-[#bdc0c2] rounded-tl-xl rounded-r-4xl h-full"></div>
         </div>
         <div className="w-[30%] bg-[#cad7e3] rounded-tr-xl"></div>
       </div>
