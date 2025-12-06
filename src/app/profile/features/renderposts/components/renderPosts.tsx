@@ -9,6 +9,7 @@ import { handleLikes } from "../services/handkelikes";
 import { GetComments } from "../services/getcomment";
 import { RenderComments } from "../../renderComments";
 import { useDispatch, useSelector } from "react-redux";
+import { BsThreeDots } from "react-icons/bs";
 import {
   RootState,
   setLargImg,
@@ -64,7 +65,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   <p className="text-[14px] text-gray-400">{bio}</p>
                 </div>
               </div>
-              {Number(userId) !== user_id && (
+              {Number(userId) !== user_id ? (
                 <button
                   onClick={() => handleFollow(user_id, is_following)}
                   className={`text-[#0a66c2] w-[105px] rounded-sm ${
@@ -80,7 +81,12 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   </span>
                   {is_following ? "Following" : "Follow"}
                 </button>
-              )}
+              )
+              :
+              <button className="text-2xl custom-side-bt">
+              <BsThreeDots />
+              </button>
+              }
             </div>
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}

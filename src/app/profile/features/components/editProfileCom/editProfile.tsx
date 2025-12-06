@@ -75,7 +75,13 @@ export function EditProfile() {
             classname="border-none mt-4"
             ImgSrc={userImgSrc}
             onclick={(e) =>
-              CustomHandler(e, postImgFile, setEditProfile, "editUserInfo" , setPostImgFile)
+              CustomHandler(
+                e,
+                postImgFile,
+                setEditProfile,
+                "editUserInfo",
+                setPostImgFile
+              )
             }
           />
         </div>
