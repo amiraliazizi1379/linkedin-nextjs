@@ -8,11 +8,11 @@ export function UserComponent() {
   console.log(userData);
   return (
     <div className="w-[250px] h-[220px] bg-[#fff] border-1 border-gray-300 rounded-xl relative">
-      <div className="flex h-[70px] ">
+      <div className="flex h-[70px] w-full">
         <div className="w-[70%] bg-gray-200 rounded-tl-xl">
-          <div className="w-[90%] bg-[#9eb5ca] rounded-tl-xl rounded-r-4xl h-full"></div>
+          <div className="w-[90%] bg-[#dde7f1] rounded-tl-xl rounded-r-4xl h-full"></div>
         </div>
-        <div className="w-[30%] bg-[#ced3d5] rounded-tr-xl"></div>
+        <div className="w-[30%] bg-[#dfe4e6] rounded-tr-xl"></div>
       </div>
       <UserImageComponent
         style="w-[80px] h-[80px] border-3 border-[#fff] absolute left-4 top-9"
@@ -20,7 +20,9 @@ export function UserComponent() {
         image={image}
         name={name}
       />
-      <h1 className="mt-12 ml-4 text-[#171717] text-xl">{name ? name : email}</h1>
+      <h1 className="mt-12 ml-4 text-[#171717] text-xl">
+        {name ? name : email}
+      </h1>
       <p className="ml-4">{bio && bio}</p>
     </div>
   );
