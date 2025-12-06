@@ -42,6 +42,7 @@ export default function CreatePostComponent() {
                 image={image}
                 name={name}
                 email={email}
+                dontShowLarg
               />
               <div>
                 <h1>{name ? name : email}</h1>
