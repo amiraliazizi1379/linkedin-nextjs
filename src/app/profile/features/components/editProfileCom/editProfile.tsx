@@ -29,7 +29,7 @@ export function EditProfile() {
 
   if (editProfile) {
     return (
-      <article>
+      <article className="fixed">
         <div
           className="fixed inset-0 z-50 bg-black opacity-50"
           onClick={() => {

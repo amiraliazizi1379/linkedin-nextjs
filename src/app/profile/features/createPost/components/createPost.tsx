@@ -6,8 +6,8 @@ import CreatePostComponent from "./createPostComponent";
 
 export default function CreatePost() {
   const dispatch = useDispatch();
-  const { userData } = useSelector((state : RootState) => state.app);
-  const {name , email , image} = userData;
+  const { userData } = useSelector((state: RootState) => state.app);
+  const { name, email, image } = userData;
   return (
     <section className="border-1 border-gray-300 p-2 w-[40vw] rounded-md bg-[#fff]">
       <article className="flex-center gap-2">
@@ -19,7 +19,7 @@ export default function CreatePost() {
         />
         <button
           onClick={() => {
-            dispatch(setPostBt(false))
+            dispatch(setPostBt(false));
             dispatch(setCreatePost(true));
           }}
           className="font-semibold text-[13px] text-[#707070] mt-1 py-3 px-4 text-left w-[90%] cursor-pointer hover:bg-[#F1F1F1] rounded-full border-1 border-gray-300"
@@ -27,7 +27,7 @@ export default function CreatePost() {
           Start a post
         </button>
       </article>
-      <div className="flex items-center justify-around mt-2">
+      {/* <div className="flex items-center justify-around mt-2">
         {createPostData.map((item, index) => {
           return (
             <button
@@ -39,7 +39,7 @@ export default function CreatePost() {
             </button>
           );
         })}
-      </div>
+      </div> */}
       <CreatePostComponent />
     </section>
   );
