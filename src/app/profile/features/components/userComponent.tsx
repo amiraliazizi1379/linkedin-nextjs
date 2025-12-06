@@ -9,8 +9,8 @@ export function UserComponent() {
   return (
     <div className="w-[250px] h-[220px] bg-[#fff] border-1 border-gray-300 rounded-xl relative">
       <div className="flex h-[70px] ">
-        <div className="w-[70%] bg-gray-200 rounded-tl-xl">
-          <div className="w-[90%] bg-[#b2bec3] rounded-r-4xl h-full"></div>
+        <div className="w-[70%] bg-gray-100 rounded-tl-xl">
+          <div className="w-[90%] bg-[#788fa5] rounded-tl-xl rounded-r-4xl h-full"></div>
         </div>
         <div className="w-[30%] bg-[#ced3d5] rounded-tr-xl"></div>
       </div>
