@@ -21,7 +21,7 @@ export function UserComponent() {
         image={image}
         name={name}
       />
-      <h1 className="mt-14 ml-4 text-[#171717] text-xl">
+      <h1 className="mt-16 ml-4 text-[#171717] text-xl">
         {name ? name : email}
       </h1>
       <p className="ml-4">{bio && bio}</p>
