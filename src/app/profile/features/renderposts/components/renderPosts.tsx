@@ -16,13 +16,14 @@ import {
   setFullScreenSrc,
   store,
   setPostData,
+  setPostEditOptions,
 } from "@/redux/store";
 import Image from "next/image";
+import { PostEditOptions } from "./postEditOptions";
 
 export default function RenderPosts({ userId }: { userId: string }) {
-  const { postData, notFoundSearch, postsSearch } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { postData, notFoundSearch, postsSearch, postEditOptions } =
+    useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
 
   if (notFoundSearch) return <h1 className="text-center mt-8">No Content</h1>;
@@ -81,16 +82,19 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   </span>
                   {is_following ? "Following" : "Follow"}
                 </button>
-              )
-              :
-              <button className="text-2xl custom-side-bt">
-              <BsThreeDots />
-              </button>
-              }
+              ) : (
+                <button
+                  onClick={() => dispatch(setPostEditOptions(!postEditOptions))}
+                  className="text-2xl custom-side-bt"
+                >
+                  <BsThreeDots />
+                </button>
+              )}
             </div>
+            <PostEditOptions />
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
-              {(!readMore && content.length > 50) && (
+              {!readMore && content.length > 50 && (
                 <button
                   className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
                   onClick={() => {
