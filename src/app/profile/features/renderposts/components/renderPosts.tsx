@@ -19,7 +19,7 @@ import {
   setPostEditOptions,
 } from "@/redux/store";
 import Image from "next/image";
-import { PostEditOptions } from "./postEditOptions";
+import PostEditOptions from "./postEditOptions";
 
 export default function RenderPosts({ userId }: { userId: string }) {
   const { postData, notFoundSearch, postsSearch, postEditOptions } =

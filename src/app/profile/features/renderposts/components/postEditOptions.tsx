@@ -2,15 +2,15 @@ import { RootState } from "@/redux/store";
 import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { useSelector } from "react-redux";
 
-export function PostEditOptions() {
+export default function PostEditOptions() {
   const { postEditOptions } = useSelector((state: RootState) => state.app);
   return (
     <div
-      className={`fixed flex flex-col items-start right-[30rem] py-1 shadow-md opacity-0 -translate-y-2  rounded-md transition-all duration-200 w-[200px] text-[14px] 
+      className={`fixed flex flex-col items-start right-[28rem] py-1 shadow-md opacity-0 -translate-y-2  rounded-md transition-all duration-200 w-[230px] text-[14px] 
                    
                     ${
                       postEditOptions
-                        ? "translate-y-0 z-10 opacity-100"
+                        ? "translate-y-0 z-50 opacity-100"
                         : "opacity-0 -translate-y-2 pointer-events-none"
                     }`}
     >
