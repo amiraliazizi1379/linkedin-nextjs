@@ -91,7 +91,6 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               )}
             </div>
-            {postEditOptions && <PostEditOptions />}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
@@ -167,6 +166,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           </div>
         );
       })}
+      {postEditOptions && <PostEditOptions />}
     </main>
   );
 }
