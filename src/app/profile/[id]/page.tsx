@@ -10,6 +10,7 @@ import Loading from "./loading";
 import { GetUserData } from "../features/services/getUserData";
 import { UserComponent } from "../features/components/userComponent";
 import { RenderPostsServices } from "../features/renderposts/services/renderpostsServices";
+import PostEditOptions from "../features/renderposts/components/postEditOptions";
 
 export default function Profile({
   params,
@@ -35,6 +36,7 @@ export default function Profile({
         <div>
           <CreatePost />
           <RenderPosts userId={id} />
+          <PostEditOptions />
         </div>
       </section>
     </main>

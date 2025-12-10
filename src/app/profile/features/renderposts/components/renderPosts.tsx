@@ -166,7 +166,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           </div>
         );
       })}
-      <PostEditOptions />
+      {/* <PostEditOptions /> */}
     </main>
   );
 }
