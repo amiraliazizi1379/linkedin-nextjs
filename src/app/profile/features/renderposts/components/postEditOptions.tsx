@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 export default function PostEditOptions() {
   const { postEditOptions } = useSelector((state: RootState) => state.app);
-  if(postEditOptions){
+
   return (
     <div
       className={`fixed flex flex-col items-start right-[30rem] py-1 shadow-md opacity-0 -translate-y-2  rounded-md transition-all duration-200 w-[230px] text-[14px] 
@@ -30,5 +30,5 @@ export default function PostEditOptions() {
         <p>Delete photo</p>
       </button>
     </div>
-  );}
+  );
 }
