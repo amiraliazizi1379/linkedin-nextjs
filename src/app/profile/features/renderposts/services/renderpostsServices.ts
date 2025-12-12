@@ -7,11 +7,11 @@ export async function RenderPostsServices() {
     method: "GET",
   });
   if (req?.ok) {
-    let {postdata} = await req.json();
+    let { postdata } = await req.json();
     postdata = (postdata as postdatas[]).map((itm) => ({
       ...itm,
       readMore: false,
-      activePostOptions : false
+      activePostOptions: false,
     }));
     store.dispatch(setPostData(postdata));
   }
