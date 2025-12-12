@@ -48,7 +48,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           readMore,
           activePostOptions,
         } = item;
-        console.log(commentData);
+        console.log(postData);
         return (
           <div
             key={post_id}
