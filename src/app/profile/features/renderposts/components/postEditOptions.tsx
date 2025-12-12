@@ -3,7 +3,7 @@ import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
 export default function PostEditOptions({ active }: { active: boolean }) {
   return (
     <div
-      className={`absolute flex flex-col items-start  py-1 shadow-md rounded-md transition-all duration-200 w-[230px] text-[14px] 
+      className={`absolute flex flex-col items-start right-[220px]  py-1 shadow-md rounded-md transition-all duration-200 w-[230px] text-[14px] 
                    
                     ${
                       active
