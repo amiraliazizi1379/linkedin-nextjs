@@ -100,7 +100,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               )}
             </div>
-            <div className="relative">
+            <div className="relative bg-red-500">
             <PostEditOptions active={activePostOptions} />
             </div>
             <p className="p-4">
