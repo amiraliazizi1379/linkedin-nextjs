@@ -89,7 +89,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   onClick={() => {
                     const updatedPostData = postData.map((post) =>
                       post.post_id === post_id
-                        ? { ...post, activePostOptions: !activePostOptions }
+                        ? { ...post, activePostOptions: !post.activePostOptions }
                         : post
                     );
                     dispatch(setPostData(updatedPostData));
