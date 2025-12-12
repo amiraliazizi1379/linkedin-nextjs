@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { BsChatText } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { BiSolidLike } from "react-icons/bi";
@@ -100,9 +100,9 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               )}
             </div>
-            {activePostOptions && (
-              <PostEditOptions active={activePostOptions} />
-            )}
+            <PostEditOptions
+              active={activePostOptions ? activePostOptions : false}
+            />
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
