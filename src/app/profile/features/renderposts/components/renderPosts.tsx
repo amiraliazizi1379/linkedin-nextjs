@@ -100,7 +100,9 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               )}
             </div>
+            <div className="relative">
             <PostEditOptions active={activePostOptions} />
+            </div>
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
