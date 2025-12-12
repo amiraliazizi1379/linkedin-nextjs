@@ -1,3 +1,4 @@
+"use client"
 import { BsChatText } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { BiSolidLike } from "react-icons/bi";

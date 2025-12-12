@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 import { AddImageButton } from "../../createPost/components/addImgBt";
 import UserImageComponent from "../../components/userImgComponent";
