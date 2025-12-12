@@ -101,7 +101,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
               )}
             </div>
             <PostEditOptions
-              active={activePostOptions ? activePostOptions : false}
+              active={activePostOptions}
             />
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
