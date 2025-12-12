@@ -102,8 +102,9 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   >
                     <BsThreeDots />
                   </button>
-                  {activePostOptions && (
-                    <div className="relative">
+
+                  <div className="relative">
+                    {activePostOptions && (
                       <div
                         className="fixed inset-0  opacity-0 "
                         onClick={() => {
@@ -118,9 +119,9 @@ export default function RenderPosts({ userId }: { userId: string }) {
                           dispatch(setPostData(newPostData));
                         }}
                       ></div>
-                      <PostEditOptions active={activePostOptions} />
-                    </div>
-                  )}
+                    )}
+                    <PostEditOptions active={activePostOptions} />
+                  </div>
                 </div>
               )}
             </div>
