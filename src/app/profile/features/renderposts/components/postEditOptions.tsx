@@ -7,13 +7,13 @@ export default function PostEditOptions({ active }: { active: boolean }) {
                    
                     ${
                       active
-                        ? "translate-y-0 z-50 opacity-100"
+                        ? "translate-y-0 z-50"
                         : "opacity-0 -translate-y-2 pointer-events-none"
                     }`}
     >
       <button
         //onClick={() => dispatch(set(true))}
-        className=" flex gap-2 items-center mt-2 cursor-pointer z-50 p-4 hover:bg-gray-100 w-full "
+        className=" flex gap-2 items-center mt-2 cursor-pointer  p-4 hover:bg-gray-100 w-full "
       >
         <MdOutlineModeEditOutline className="text-xl" />
         <p className="">Edit info</p>

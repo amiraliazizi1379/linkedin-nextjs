@@ -102,7 +102,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   >
                     <BsThreeDots />
                   </button>
-                  <div className="relative z-50">
+                  <div className="relative">
                     <PostEditOptions active={activePostOptions} />
                   </div>
                 </div>
