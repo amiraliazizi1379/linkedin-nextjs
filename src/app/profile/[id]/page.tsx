@@ -32,7 +32,7 @@ export default function Profile({
       onClick={() => {
         const refData = postData.map((post) => ({
           ...post,
-          activePostOptions: false,
+          activePostOptions: post.activePostOptions && false,
         }));
         dispatch(setPostData(refData));
       }}
