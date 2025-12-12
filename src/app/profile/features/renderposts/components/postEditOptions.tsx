@@ -3,7 +3,7 @@ import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
 export default function PostEditOptions({ active }: { active: boolean }) {
   return (
     <div
-      className={`absolute flex flex-col items-start right-[50px]  py-1 shadow-md rounded-md transition-all duration-200 w-[230px] text-[14px] 
+      className={`absolute flex flex-col items-start right-[30px]  py-1 shadow-md rounded-md transition-all duration-200 w-[300px] text-[14px] 
                    
                     ${
                       active
@@ -13,7 +13,7 @@ export default function PostEditOptions({ active }: { active: boolean }) {
     >
       <button
         //onClick={() => dispatch(set(true))}
-        className=" flex gap-2 items-center mt-2   cursor-pointer px-2 p-1 hover:bg-gray-100 w-full "
+        className=" flex gap-2 items-center mt-2   cursor-pointer px-2 p-4 hover:bg-gray-100 w-full "
       >
         <MdOutlineModeEditOutline className="text-xl" />
         <p className="">Edit info</p>
