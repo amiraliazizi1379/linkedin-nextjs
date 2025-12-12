@@ -102,25 +102,10 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   >
                     <BsThreeDots />
                   </button>
-                  {activePostOptions && (
-                    <div className="relative">
-                      <div
-                        className="fixed inset-0 z-50 opacity-0 "
-                        onClick={() => {
-                          const newPostData = postData.map((post) =>
-                            post.post_id === post_id
-                              ? {
-                                  ...post,
-                                  activePostOptions: false,
-                                }
-                              : post
-                          );
-                          dispatch(setPostData(newPostData));
-                        }}
-                      ></div>
-                      <PostEditOptions active={activePostOptions} />
-                    </div>
-                  )}
+
+                  <div className="relative">
+                    <PostEditOptions active={activePostOptions} />
+                  </div>
                 </div>
               )}
             </div>

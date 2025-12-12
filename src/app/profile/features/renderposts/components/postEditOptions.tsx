@@ -7,7 +7,7 @@ export default function PostEditOptions({ active }: { active: boolean }) {
                    
                     ${
                       active
-                        ? "translate-y-0 z-50"
+                        ? "translate-y-0 z-50 bg-[#fff]"
                         : "opacity-0 -translate-y-2 pointer-events-none"
                     }`}
     >
