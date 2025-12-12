@@ -85,26 +85,28 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   {is_following ? "Following" : "Follow"}
                 </button>
               ) : (
-                <button
-                  onClick={() => {
-                    const updatedPostData = postData.map((post) =>
-                      post.post_id === post_id
-                        ? {
-                            ...post,
-                            activePostOptions: !post.activePostOptions,
-                          }
-                        : post
-                    );
-                    dispatch(setPostData(updatedPostData));
-                  }}
-                  className="text-2xl custom-side-bt"
-                >
-                  <BsThreeDots />
-                </button>
+                <div>
+                  <button
+                    onClick={() => {
+                      const updatedPostData = postData.map((post) =>
+                        post.post_id === post_id
+                          ? {
+                              ...post,
+                              activePostOptions: !post.activePostOptions,
+                            }
+                          : post
+                      );
+                      dispatch(setPostData(updatedPostData));
+                    }}
+                    className="text-2xl custom-side-bt"
+                  >
+                    <BsThreeDots />
+                  </button>
+                  <div className="relative">
+                    <PostEditOptions active={activePostOptions} />
+                  </div>
+                </div>
               )}
-              <div className="relative">
-                <PostEditOptions active={activePostOptions} />
-              </div>
             </div>
 
             <p className="p-4">
