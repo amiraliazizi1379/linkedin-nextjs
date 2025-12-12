@@ -16,14 +16,14 @@ import {
   setFullScreenSrc,
   store,
   setPostData,
-  setPostEditOptions,
 } from "@/redux/store";
 import Image from "next/image";
 import PostEditOptions from "./postEditOptions";
 
 export default function RenderPosts({ userId }: { userId: string }) {
-  const { postData, notFoundSearch, postsSearch, postEditOptions } =
-    useSelector((state: RootState) => state.app);
+  const { postData, notFoundSearch, postsSearch } = useSelector(
+    (state: RootState) => state.app
+  );
   const dispatch = useDispatch();
 
   if (notFoundSearch) return <h1 className="text-center mt-8">No Content</h1>;
@@ -46,6 +46,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           comment_count,
           bio,
           readMore,
+          activePostOptions,
         } = item;
         console.log(commentData);
         return (
@@ -84,13 +85,23 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               ) : (
                 <button
-                  onClick={() => dispatch(setPostEditOptions(!postEditOptions))}
+                  onClick={() => {
+                    const updatedPostData = postData.map((post) =>
+                      post.post_id === post_id
+                        ? { ...post, activeOptions: true }
+                        : post
+                    );
+                    dispatch(setPostData(updatedPostData));
+                  }}
                   className="text-2xl custom-side-bt"
                 >
                   <BsThreeDots />
                 </button>
               )}
             </div>
+            {activePostOptions && (
+              <PostEditOptions active={activePostOptions} />
+            )}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (

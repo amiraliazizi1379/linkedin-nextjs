@@ -16,4 +16,5 @@ export type postdatas = {
   comment_count: number;
   bio: string;
   readMore: boolean;
+  activePostOptions?: boolean;
 };
