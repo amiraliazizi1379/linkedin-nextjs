@@ -5,7 +5,7 @@ import CreatePost from "../features/createPost/components/createPost";
 import RenderPosts from "../features/renderposts/components/renderPosts";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, setPostData } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import Loading from "./loading";
 import { GetUserData } from "../features/services/getUserData";
 import { UserComponent } from "../features/components/userComponent";
@@ -18,8 +18,8 @@ export default function Profile({
 }) {
   const { id } = React.use(params);
 
-  const { loading, postData } = useSelector((state: RootState) => state.app);
-  const dispatch = useDispatch();
+  const { loading } = useSelector((state: RootState) => state.app);
+
   useEffect(() => {
     GetUserData(id);
     RenderPostsServices();
@@ -28,16 +28,7 @@ export default function Profile({
     return <Loading />;
   }
   return (
-    <main
-      onClick={() => {
-        const refData = postData.map((post) => ({
-          ...post,
-          activePostOptions: post.activePostOptions && false,
-        }));
-        dispatch(setPostData(refData));
-      }}
-      className="bg-gray-100  h-screen overflow-y-auto"
-    >
+    <main className="bg-gray-100  h-screen overflow-y-auto">
       <ProfileNavBar page="home" />
       <section className="flex ml-47 mt-8 gap-6">
         <UserComponent />
