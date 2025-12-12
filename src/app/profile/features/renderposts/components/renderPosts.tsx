@@ -89,7 +89,10 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   onClick={() => {
                     const updatedPostData = postData.map((post) =>
                       post.post_id === post_id
-                        ? { ...post, activePostOptions: !post.activePostOptions }
+                        ? {
+                            ...post,
+                            activePostOptions: !post.activePostOptions,
+                          }
                         : post
                     );
                     dispatch(setPostData(updatedPostData));
@@ -99,10 +102,11 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   <BsThreeDots />
                 </button>
               )}
+              <div className="relative">
+                <PostEditOptions active={activePostOptions} />
+              </div>
             </div>
-            <div className="relative bg-red-500">
-            <PostEditOptions active={activePostOptions} />
-            </div>
+
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
