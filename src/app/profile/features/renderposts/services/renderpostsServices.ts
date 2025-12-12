@@ -11,7 +11,7 @@ export async function RenderPostsServices() {
     postdata = (postdata as postdatas[]).map((itm) => ({
       ...itm,
       readMore: false,
-      activePostOptions: false,
+      activePostOptions: true,
     }));
     store.dispatch(setPostData(postdata));
   }
