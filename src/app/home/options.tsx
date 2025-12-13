@@ -13,9 +13,10 @@ type MyComponentProps = {
   datas: props[];
   styles?: string;
   items?: string;
+  noActiveOptions? : boolean
 };
 
-export default function Options({ datas, styles, items }: MyComponentProps) {
+export default function Options({ datas, styles, items , noActiveOptions }: MyComponentProps) {
   const [activeOption, setActiveOption] = useState(0);
   const router = useRouter();
   const { userData } = useSelector((state: RootState) => state.app);
@@ -38,7 +39,7 @@ export default function Options({ datas, styles, items }: MyComponentProps) {
             }}
             key={index}
             className={`${
-              activeOption === index && "text-[#171717] border-b-2"
+              (activeOption === index && !noActiveOptions) && "text-[#171717] border-b-2"
             } py-1 px-6.5 flex flex-col items-center ${items} transition-none  cursor-pointer  hover:text-[#171717] ${
               item.name === "Get the app" &&
               "border-l-1 border-r-1 border-gray-200 px-4"

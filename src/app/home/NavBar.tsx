@@ -7,7 +7,7 @@ export default function NavBar() {
     <nav className=" flex items-center mt-4 max-[1023px]:grid  max-[1023px]:grid-cols-2">
       <Logo className="text-[#0a66c2] w-[110px] ml-38 max-[640px]:ml-4 max-[1150px]:ml-12" />
 
-      <Options datas={data} styles="min-[1023px]:ml-auto" />
+      <Options datas={data} styles="min-[1023px]:ml-auto" noActiveOptions/>
       <div className="flex w-[225px] gap-2 ml-6 mr-[9.5rem] max-[1150px]:ml-0 max-[1150px]:mr-8 max-[540px]:translate-x-[-2rem] max-[410px]:translate-x-[-4rem] max-[347px]:translate-x-[-6rem] max-[957px]:translate-x-[12rem] max-[862px]:translate-x-[9rem] max-[779px]:translate-x-[6rem] max-[700px]:translate-x-[4rem] max-[640px]:translate-x-[2rem] max-[1023px]:translate-x-[15rem]">
         <a href="/register" className=" text-gray-600 nav-bt-signin  ">
           join now
