@@ -11,7 +11,7 @@ export function RenderUsers() {
   if (notFoundSearch)
     return <h1 className="text-center mt-8">User not found</h1>;
   return (
-    <section className=" mt-10 flex flex-wrap gap-2 w-[68vw] mx-auto mb-4">
+    <section className=" mt-16 flex flex-wrap gap-2 w-[68vw] mx-auto mb-4">
       {(usersSearch.length > 0 ? usersSearch : allUsers).map((user) => {
         const { id, name, bio, email, image, is_following } = user;
         return (
