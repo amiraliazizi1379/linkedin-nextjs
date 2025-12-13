@@ -8,7 +8,7 @@ export function UserComponent() {
   const { email, name, bio, image } = userData;
   console.log(userData);
   return (
-    <div className="fixed top-22 left-50 w-[250px] h-[220px] bg-[#fff] border-1 border-gray-300 rounded-xl ">
+    <div className="fixed top-18 left-40 w-[250px] h-[220px] bg-[#fff] border-1 border-gray-300 rounded-xl ">
       <div className="flex h-[60px] w-full">
         <div className="w-[70%] bg-gray-200 rounded-tl-lg">
           <div className="w-[130%] bg-[#a6bacb] rounded-tl-lg [clip-path:circle(50%_at_33%_50%)] h-full"></div>
