@@ -33,6 +33,7 @@ const appSlice = createSlice({
     editEmailStatus: false,
     loginLoading: false,
     editMenu: false,
+    deleteVerfication: false,
   },
 
   reducers: {
@@ -120,6 +121,9 @@ const appSlice = createSlice({
     setEditMenu: (state, action) => {
       state.editMenu = action.payload;
     },
+    setDeleteVerification: (state, action) => {
+      state.deleteVerfication = action.payload;
+    },
   },
 });
 
@@ -152,6 +156,7 @@ export const {
   setEditEmailStatus,
   setLoginLoading,
   setEditMenu,
+  setDeleteVerification,
 } = appSlice.actions;
 
 export const store = configureStore({

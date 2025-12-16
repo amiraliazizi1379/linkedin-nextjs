@@ -30,6 +30,9 @@ export class databaseOperation {
       id,
     ]);
   };
+  static deletePost = async (id: number) => {
+    return await pool.query("delete from posts where id = $1 ;", [id]);
+  };
 
   static editEmail = async (email: string | null, id: number) => {
     return await pool.query("update users set  email = $1 where id = $2 ;", [
@@ -77,9 +80,9 @@ export class databaseOperation {
     );
     return userDat.rows[0];
   };
-  static getImageUrl = async (id: number) => {
+  static getImageUrl = async (id: number, table: string) => {
     const userDat = await pool.query(
-      "select image from users where id = $1 ;",
+      `select image from ${table} where id = $1 ;`,
       [id]
     );
     return userDat.rows[0];

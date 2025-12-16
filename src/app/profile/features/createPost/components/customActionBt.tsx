@@ -19,7 +19,7 @@ export function CustomActionBtn({
   return (
     <div
       className={`flex items-center ${classname} gap-4 justify-end border-t-1 border-gray-300 w-full pt-4 ${
-        ImgSrc && "mt-10"
+        ImgSrc && postBt && "mt-10"
       }`}
     >
       <button

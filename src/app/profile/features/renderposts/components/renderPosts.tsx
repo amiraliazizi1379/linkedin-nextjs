@@ -20,11 +20,11 @@ import {
 } from "@/redux/store";
 import Image from "next/image";
 import PostEditOptions from "./postEditOptions";
+import { PostDeleteVerificationComponent } from "./deleteVerification";
 
 export default function RenderPosts({ userId }: { userId: string }) {
-  const { postData, notFoundSearch, postsSearch } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { postData, notFoundSearch, postsSearch, deleteVerfication } =
+    useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
 
   if (notFoundSearch) return <h1 className="text-center mt-8">No Content</h1>;
@@ -120,12 +120,17 @@ export default function RenderPosts({ userId }: { userId: string }) {
                         }}
                       ></div>
                     )}
-                    <PostEditOptions active={activePostOptions} />
+                    <PostEditOptions
+                      active={activePostOptions}
+                      postId={post_id}
+                    />
                   </div>
                 </div>
               )}
             </div>
-
+            {deleteVerfication && (
+              <PostDeleteVerificationComponent PostId={post_id} />
+            )}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
