@@ -82,7 +82,9 @@ export class databaseOperation {
   };
   static getImageUrl = async (id: number, table: string) => {
     const userDat = await pool.query(
-      `select image from ${table} where id = $1 ;`,
+      `select ${
+        table === "users" ? "image" : "image_url"
+      } from ${table} where id = $1 ;`,
       [id]
     );
     return userDat.rows[0];

@@ -10,7 +10,7 @@ export function PostDeleteVerificationComponent({
   return (
     <div className="fixed z-50">
       <div
-        className="fixed inset-0 z-50 opacity-50 bg-black "
+        className="fixed inset-0 z-50 opacity-20 bg-black "
         onClick={() => store.dispatch(setDeleteVerification(false))}
       ></div>
       <section className="w-[350px]  p-4 shadow-md text-center right-[40%] top-[3rem] rounded-md fixed z-50 min-h-[150px] bg-[#fff]">
