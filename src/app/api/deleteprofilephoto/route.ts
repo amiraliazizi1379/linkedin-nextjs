@@ -4,7 +4,7 @@ import { databaseOperation } from "@/models/dataBase";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = auth(async (req: NextRequest, userId) => {
-  const { image } = await databaseOperation.getImageUrl(userId);
+  const { image } = await databaseOperation.getImageUrl(userId, "users");
 
   const public_id = image.split("/upload/")[1].split(".")[0];
   const result = await cloudinary.uploader.destroy(public_id);
@@ -14,5 +14,5 @@ export const POST = auth(async (req: NextRequest, userId) => {
       { status: 500 }
     );
   await databaseOperation.deleteProfileImage(userId);
-  return NextResponse.json({id : userId} , { status: 200 });
+  return NextResponse.json({ id: userId }, { status: 200 });
 });
