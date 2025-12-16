@@ -15,6 +15,6 @@ export const POST = auth(async (req: NextRequest, userId) => {
         { status: 500 }
       );
   }
-  await databaseOperation.deletePost(Number(postId));
+  await databaseOperation.deletePost(postId);
   return NextResponse.json({ id: userId }, { status: 200 });
 });
