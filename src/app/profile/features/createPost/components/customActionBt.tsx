@@ -6,7 +6,7 @@ type props = {
   classname?: string;
   name?: string;
   ImgSrc: string;
-  onclick: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+  onclick: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void> | void;
 };
 
 export function CustomActionBtn({

@@ -1,4 +1,4 @@
-import { setDeleteVerification, store } from "@/redux/store";
+import { setBtnLoading, setDeleteVerification, store } from "@/redux/store";
 import { CustomActionBtn } from "../../createPost/components/customActionBt";
 import { DeletePost } from "../services/deletePost";
 
@@ -28,7 +28,10 @@ export function PostDeleteVerificationComponent({
           ImgSrc="true"
           classname="mt-2"
           name="Delete"
-          onclick={() => DeletePost(PostId)}
+          onclick={() => {
+            store.dispatch(setBtnLoading(true));
+            DeletePost(PostId);
+          }}
         />
       </section>
     </div>

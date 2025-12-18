@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = auth(async (req: NextRequest, userId) => {
   const postId = await req.json();
-  console.log(postId)
+  console.log(postId);
   const { image } = await databaseOperation.getImageUrl(postId, "posts");
   if (image) {
     const public_id = image.split("/upload/")[1].split(".")[0];
@@ -17,5 +17,5 @@ export const POST = auth(async (req: NextRequest, userId) => {
       );
   }
   await databaseOperation.deletePost(postId);
-  return NextResponse.json({ id: userId }, { status: 200 });
+  return NextResponse.json({ message: "ok" }, { status: 200 });
 });
