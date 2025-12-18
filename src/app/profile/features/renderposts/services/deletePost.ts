@@ -1,6 +1,12 @@
-import { setLoading, store } from "@/redux/store";
+import {
+  setBtnLoading,
+  setDeleteVerification,
+  setLoading,
+  setPostData,
+  store,
+} from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
-import { GetUserData } from "../../services/getUserData";
+import { RenderPostsServices } from "./renderpostsServices";
 
 export async function DeletePost(postId: number) {
   try {
@@ -9,10 +15,17 @@ export async function DeletePost(postId: number) {
       body: JSON.stringify(postId),
     });
     if (res?.ok) {
-      const { id } = await res.json();
-      await GetUserData(String(id));
+      await RenderPostsServices();
       store.dispatch(setLoading(false));
     }
+    const { postData } = store.getState().app;
+    store.dispatch(setBtnLoading(false));
+    store.dispatch(setDeleteVerification(false));
+    const newPostData = postData.map((post) => ({
+      ...post,
+      activePostOptions: false,
+    }));
+    store.dispatch(setPostData(newPostData));
   } catch (err) {
     console.log(err);
   }
