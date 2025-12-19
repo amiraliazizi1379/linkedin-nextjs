@@ -17,7 +17,7 @@ export default function ProfileNavBar({ page }: { page: string }) {
   const { popup, userData } = useSelector((state: RootState) => state.app);
 
   return (
-    <nav className="flex fixed items-center right-0 left-0 justify-around pt-1 bg-[#fff]">
+    <nav className="flex fixed items-center -z-50 right-0 left-0 justify-around pt-1 bg-[#fff]">
       <div className="flex items-center mb-1 w-[500px] space-x-2 relative">
         <Logo
           className="text-[#0a66c2]"
