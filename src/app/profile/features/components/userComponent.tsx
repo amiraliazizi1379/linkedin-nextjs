@@ -6,7 +6,7 @@ import UserImageComponent from "./userImgComponent";
 export function UserComponent() {
   const { userData } = useSelector((state: RootState) => state.app);
   const { email, name, bio, image } = userData;
-  console.log(userData);
+
   return (
     <div className="fixed top-20 left-44 w-[250px] h-[220px] bg-[#fff] border-1 border-gray-300 rounded-xl ">
       <div className="flex h-[60px] w-full">

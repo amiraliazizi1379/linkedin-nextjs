@@ -2,11 +2,7 @@ import { setBtnLoading, setDeleteVerification, store } from "@/redux/store";
 import { CustomActionBtn } from "../../createPost/components/customActionBt";
 import { DeletePost } from "../services/deletePost";
 
-export function PostDeleteVerificationComponent({
-  PostId,
-}: {
-  PostId: number;
-}) {
+export function PostDeleteVerificationComponent() {
   return (
     <div className="fixed z-50">
       <div
@@ -30,7 +26,7 @@ export function PostDeleteVerificationComponent({
           name="Delete"
           onclick={() => {
             store.dispatch(setBtnLoading(true));
-            DeletePost(PostId);
+            DeletePost();
           }}
         />
       </section>

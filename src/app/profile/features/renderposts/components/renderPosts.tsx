@@ -88,7 +88,6 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 <div>
                   <button
                     onClick={() => {
-                      console.log(post_id);
                       const updatedPostData = postData.map((post) =>
                         post.post_id === post_id
                           ? {
@@ -98,10 +97,6 @@ export default function RenderPosts({ userId }: { userId: string }) {
                           : post
                       );
                       dispatch(setPostData(updatedPostData));
-                      console.log(
-                        "log after updating the active post options",
-                        post_id
-                      );
                     }}
                     className="text-2xl custom-side-bt"
                   >
@@ -127,14 +122,14 @@ export default function RenderPosts({ userId }: { userId: string }) {
                     )}
                     <PostEditOptions
                       active={activePostOptions}
-                      postId={post_id}
+            
                     />
                   </div>
                 </div>
               )}
             </div>
             {deleteVerfication && (
-              <PostDeleteVerificationComponent PostId={post_id} />
+              <PostDeleteVerificationComponent />
             )}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}

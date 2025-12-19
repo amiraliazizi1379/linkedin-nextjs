@@ -8,11 +8,13 @@ import {
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { RenderPostsServices } from "./renderpostsServices";
 
-export async function DeletePost(postId: number) {
+export async function DeletePost() {
+  const { postData } = store.getState().app;
+  const post = postData.find((post) => post.activePostOptions);
   try {
     const res = await GetNewAccessToken("/api/deletepost", {
       method: "POST",
-      body: JSON.stringify({ postId: postId }),
+      body: JSON.stringify({ postId: post?.post_id }),
     });
     if (res?.ok) {
       await RenderPostsServices();

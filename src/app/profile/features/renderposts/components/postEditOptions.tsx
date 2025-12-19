@@ -2,13 +2,7 @@ import { setDeleteVerification } from "@/redux/store";
 import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 
-export default function PostEditOptions({
-  active,
-  postId,
-}: {
-  active: boolean;
-  postId: number;
-}) {
+export default function PostEditOptions({ active }: { active: boolean }) {
   const dispatch = useDispatch();
   return (
     <div
