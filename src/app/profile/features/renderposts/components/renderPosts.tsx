@@ -49,7 +49,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
           readMore,
           activePostOptions,
         } = item;
-        console.log(postData);
+
         return (
           <div
             key={post_id}
@@ -88,7 +88,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 <div>
                   <button
                     onClick={() => {
-                      console.log(post_id)
+                      console.log(post_id);
                       const updatedPostData = postData.map((post) =>
                         post.post_id === post_id
                           ? {
@@ -98,6 +98,10 @@ export default function RenderPosts({ userId }: { userId: string }) {
                           : post
                       );
                       dispatch(setPostData(updatedPostData));
+                      console.log(
+                        "log after updating the active post options",
+                        post_id
+                      );
                     }}
                     className="text-2xl custom-side-bt"
                   >

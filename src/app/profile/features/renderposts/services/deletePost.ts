@@ -10,7 +10,6 @@ import { RenderPostsServices } from "./renderpostsServices";
 
 export async function DeletePost(postId: number) {
   try {
-    console.log('delete post file log :  ' , postId)
     const res = await GetNewAccessToken("/api/deletepost", {
       method: "POST",
       body: JSON.stringify({ postId: postId }),
