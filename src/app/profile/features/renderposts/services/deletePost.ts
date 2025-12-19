@@ -12,7 +12,7 @@ export async function DeletePost(postId: number) {
   try {
     const res = await GetNewAccessToken("/api/deletepost", {
       method: "POST",
-      body: JSON.stringify({ postId }),
+      body: JSON.stringify({ postId: postId }),
     });
     if (res?.ok) {
       await RenderPostsServices();
