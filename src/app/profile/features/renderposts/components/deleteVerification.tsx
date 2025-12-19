@@ -28,8 +28,7 @@ export function PostDeleteVerificationComponent({
           ImgSrc="true"
           classname="mt-2"
           name="Delete"
-          onclick={(e) => {
-            e.stopPropagation();
+          onclick={() => {
             store.dispatch(setBtnLoading(true));
             DeletePost(PostId);
           }}

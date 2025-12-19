@@ -130,7 +130,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
               )}
             </div>
             {deleteVerfication && (
-              <PostDeleteVerificationComponent key={post_id} PostId={post_id} />
+              <PostDeleteVerificationComponent PostId={post_id} />
             )}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
