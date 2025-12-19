@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = auth(async (req: NextRequest, userId) => {
   const { postId } = await req.json();
-  console.log(postId);
   const { image } = await databaseOperation.getImageUrl(postId, "posts");
   if (image) {
     const public_id = image.split("/upload/")[1].split(".")[0];

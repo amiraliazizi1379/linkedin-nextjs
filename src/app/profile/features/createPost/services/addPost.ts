@@ -1,4 +1,10 @@
-import { setBtnLoading, setCreatePost, setLoading, store } from "@/redux/store";
+import {
+  setBtnLoading,
+  setCreatePost,
+  setLoading,
+  setPostText,
+  store,
+} from "@/redux/store";
 import { GetNewAccessToken } from "@/utils/getNewAccessToken";
 import { RenderPostsServices } from "../../renderposts/services/renderpostsServices";
 
@@ -23,6 +29,7 @@ export async function handlePost(
       if (res?.ok) {
         store.dispatch(setLoading(true));
         RenderPostsServices();
+        store.dispatch(setPostText(""));
         store.dispatch(setCreatePost(false));
         store.dispatch(setBtnLoading(false));
       }
