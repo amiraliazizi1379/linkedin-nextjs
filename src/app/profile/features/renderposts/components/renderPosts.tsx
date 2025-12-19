@@ -88,6 +88,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 <div>
                   <button
                     onClick={() => {
+                      console.log(post_id)
                       const updatedPostData = postData.map((post) =>
                         post.post_id === post_id
                           ? {
