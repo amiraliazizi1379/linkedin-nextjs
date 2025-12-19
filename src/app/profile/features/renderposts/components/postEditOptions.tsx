@@ -1,8 +1,9 @@
-import { setDeleteVerification } from "@/redux/store";
+import { RootState, setDeleteVerification, setPostData } from "@/redux/store";
 import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PostEditOptions({ active }: { active: boolean }) {
+  const { postData } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
   return (
     <div
@@ -24,6 +25,11 @@ export default function PostEditOptions({ active }: { active: boolean }) {
       <button
         onClick={() => {
           dispatch(setDeleteVerification(true));
+          const newPostData = postData.map((post) => ({
+            ...post,
+            activePostOptions: false,
+          }));
+          dispatch(setPostData(newPostData));
         }}
         className=" flex gap-2 items-center mt-0.5 hover:text-red-700 cursor-pointer  p-4 hover:bg-gray-100 w-full"
       >
