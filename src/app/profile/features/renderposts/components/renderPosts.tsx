@@ -120,17 +120,12 @@ export default function RenderPosts({ userId }: { userId: string }) {
                         }}
                       ></div>
                     )}
-                    <PostEditOptions
-                      active={activePostOptions}
-            
-                    />
+                    <PostEditOptions active={activePostOptions} />
                   </div>
                 </div>
               )}
             </div>
-            {deleteVerfication && (
-              <PostDeleteVerificationComponent />
-            )}
+            {deleteVerfication && <PostDeleteVerificationComponent />}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (

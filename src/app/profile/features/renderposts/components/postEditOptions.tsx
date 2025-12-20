@@ -1,4 +1,4 @@
-import { setDeleteVerification } from "@/redux/store";
+import { setCreatePost, setDeleteVerification } from "@/redux/store";
 import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 
@@ -15,7 +15,7 @@ export default function PostEditOptions({ active }: { active: boolean }) {
                     }`}
     >
       <button
-        //onClick={() => dispatch(set(true))}
+        onClick={() => dispatch(setCreatePost(true))}
         className=" flex gap-2 items-center mt-2 cursor-pointer  p-4 hover:bg-gray-100 w-full "
       >
         <MdOutlineModeEditOutline className="text-xl" />
