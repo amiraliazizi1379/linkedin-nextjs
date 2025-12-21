@@ -15,6 +15,7 @@ import {
   setPostText,
 } from "@/redux/store";
 import { useUserContext } from "@/context/context";
+import { useEffect } from "react";
 
 export default function CreatePostComponent() {
   const dispatch = useDispatch();
@@ -24,10 +25,12 @@ export default function CreatePostComponent() {
   const { postImgFile } = useUserContext();
   const { image, name, email, bio } = userData;
   const editingPost = postData.find((post) => post.editPost);
-  if (editingPost) {
-    dispatch(setPostText(editingPost.content));
-    dispatch(setpostImgSrc(editingPost.image_url));
-  }
+  useEffect(() => {
+    if (editingPost) {
+      dispatch(setPostText(editingPost.content));
+      dispatch(setpostImgSrc(editingPost.image_url));
+    }
+  }, []);
   if (createPost) {
     return (
       <section>
