@@ -22,13 +22,14 @@ export default function PostEditOptions({ active }: { active: boolean }) {
     >
       <button
         onClick={() => {
-          const updatedData = postData.map(
-            (post) =>
-              post.activePostOptions && {
-                ...post,
-                activePostOptions: false,
-                editPost: true,
-              }
+          const updatedData = postData.map((post) =>
+            post.activePostOptions
+              ? {
+                  ...post,
+                  activePostOptions: false,
+                  editPost: true,
+                }
+              : post
           );
           dispatch(setPostData(updatedData));
           dispatch(setCreatePost(true));
