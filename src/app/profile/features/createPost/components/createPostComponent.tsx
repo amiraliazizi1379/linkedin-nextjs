@@ -30,7 +30,7 @@ export default function CreatePostComponent() {
       dispatch(setPostText(editingPost.content));
       dispatch(setpostImgSrc(editingPost.image_url));
     }
-  }, []);
+  }, [editingPost]);
   if (createPost) {
     return (
       <section>
