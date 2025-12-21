@@ -71,6 +71,7 @@ export default function CreatePostComponent() {
             onclick={(e: React.MouseEvent<HTMLButtonElement>) =>
               handlePost(e, postImgFile)
             }
+            name={editingPost && "Save"}
             ImgSrc={postImgSrc}
           />
         </div>

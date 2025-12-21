@@ -22,11 +22,14 @@ export default function PostEditOptions({ active }: { active: boolean }) {
     >
       <button
         onClick={() => {
-          const updatedData = postData.map((post) => ({
-            ...post,
-            activePostOptions: false,
-            editPost: true,
-          }));
+          const updatedData = postData.map(
+            (post) =>
+              post.activePostOptions && {
+                ...post,
+                activePostOptions: false,
+                editPost: true,
+              }
+          );
           dispatch(setPostData(updatedData));
           dispatch(setCreatePost(true));
         }}
@@ -39,7 +42,7 @@ export default function PostEditOptions({ active }: { active: boolean }) {
         onClick={() => {
           dispatch(setDeleteVerification(true));
         }}
-        className=" flex gap-2 items-center mt-0.5 hover:text-red-700 cursor-pointer  p-4 hover:bg-gray-100 w-full"
+        className=" flex gap-2 items-center mt-0.5 cursor-pointer  p-4 hover:bg-gray-100 w-full"
       >
         <MdDelete className="text-xl" />
         <p>Delete photo</p>
