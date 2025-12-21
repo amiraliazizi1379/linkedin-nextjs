@@ -1,8 +1,14 @@
-import { setCreatePost, setDeleteVerification } from "@/redux/store";
+import {
+  RootState,
+  setCreatePost,
+  setDeleteVerification,
+  setPostData,
+} from "@/redux/store";
 import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PostEditOptions({ active }: { active: boolean }) {
+  const { postData } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
   return (
     <div
@@ -15,11 +21,19 @@ export default function PostEditOptions({ active }: { active: boolean }) {
                     }`}
     >
       <button
-        onClick={() => dispatch(setCreatePost(true))}
+        onClick={() => {
+          const updatedData = postData.map((post) => ({
+            ...post,
+            activePostOptions: false,
+            editPost: true,
+          }));
+          dispatch(setPostData(updatedData));
+          dispatch(setCreatePost(true));
+        }}
         className=" flex gap-2 items-center mt-2 cursor-pointer  p-4 hover:bg-gray-100 w-full "
       >
         <MdOutlineModeEditOutline className="text-xl" />
-        <p className="">Edit info</p>
+        <p className="">Edit Post</p>
       </button>
       <button
         onClick={() => {

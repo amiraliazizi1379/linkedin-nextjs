@@ -17,4 +17,5 @@ export type postdatas = {
   bio: string;
   readMore: boolean;
   activePostOptions: boolean;
+  editPost: boolean;
 };

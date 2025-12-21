@@ -10,6 +10,7 @@ import {
   RootState,
   setCreatePost,
   setPostBt,
+  setPostData,
   setpostImgSrc,
   setPostText,
 } from "@/redux/store";
@@ -17,12 +18,16 @@ import { useUserContext } from "@/context/context";
 
 export default function CreatePostComponent() {
   const dispatch = useDispatch();
-  const { createPost, userData, postText, postImgSrc } = useSelector(
+  const { createPost, userData, postImgSrc, postData } = useSelector(
     (state: RootState) => state.app
   );
   const { postImgFile } = useUserContext();
   const { image, name, email, bio } = userData;
-
+  const editingPost = postData.find((post) => post.editPost);
+  if (editingPost) {
+    dispatch(setPostText(editingPost.content));
+    dispatch(setpostImgSrc(editingPost.image_url));
+  }
   if (createPost) {
     return (
       <section>
@@ -30,6 +35,12 @@ export default function CreatePostComponent() {
           onClick={() => {
             dispatch(setCreatePost(false));
             dispatch(setPostBt(false));
+            const disableEditPost = postData.map((post) => ({
+              ...post,
+              editPost: false,
+            }));
+            dispatch(setPostData(disableEditPost));
+            dispatch(setpostImgSrc(""));
             dispatch(setPostText(""));
           }}
           className="fixed inset-0 z-50 bg-black opacity-50"
