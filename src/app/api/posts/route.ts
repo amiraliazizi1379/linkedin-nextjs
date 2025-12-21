@@ -17,3 +17,17 @@ export const POST = auth(
     );
   }
 );
+
+export const UPDATE = auth(
+  async (request: NextRequest, userId: number): Promise<NextResponse> => {
+    const { text, imageUrl } = await FormDataRouteHandler(request);
+    const postId = request.headers.get("id");
+
+    await databaseOperation.editPost(Number(postId), text, imageUrl);
+
+    return NextResponse.json(
+      { message: "post successfully edited" },
+      { status: 200 }
+    );
+  }
+);

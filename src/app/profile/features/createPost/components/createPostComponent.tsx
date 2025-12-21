@@ -72,7 +72,12 @@ export default function CreatePostComponent() {
           <AddImageButton classname="text-2xl" setState={setpostImgSrc} />
           <CustomActionBtn
             onclick={(e: React.MouseEvent<HTMLButtonElement>) =>
-              handlePost(e, postImgFile)
+              handlePost(
+                e,
+                postImgFile,
+                editingPost?.editPost,
+                editingPost?.post_id
+              )
             }
             name={editingPost && "Save"}
             ImgSrc={postImgSrc}

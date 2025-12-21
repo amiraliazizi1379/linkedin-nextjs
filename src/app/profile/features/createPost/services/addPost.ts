@@ -10,7 +10,9 @@ import { RenderPostsServices } from "../../renderposts/services/renderpostsServi
 
 export async function handlePost(
   e: React.MouseEvent<HTMLButtonElement>,
-  postImgFile: File | null
+  postImgFile: File | null,
+  edit?: boolean,
+  postId?: number
 ) {
   const { postText } = store.getState().app;
 
@@ -23,7 +25,8 @@ export async function handlePost(
 
     try {
       const res = await GetNewAccessToken(`/api/posts`, {
-        method: "POST",
+        method: edit ? "UPDATE" : "POST",
+        headers: edit && { id: postId },
         body: formData,
       });
       if (res?.ok) {

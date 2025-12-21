@@ -105,6 +105,17 @@ export class databaseOperation {
     );
     return addPostQuery;
   };
+  static editPost = async (
+    postId: number,
+    text: string,
+    img: string | null
+  ) => {
+    const editPostQuery = await pool.query<ResultSetHeader>(
+      "update posts set image_url = $3 , text = $2 where id = $1;",
+      [postId, text, img]
+    );
+    return editPostQuery;
+  };
 
   static addComment = async (
     userId: number,
