@@ -26,7 +26,7 @@ export async function handlePost(
     try {
       const res = await GetNewAccessToken(`/api/posts`, {
         method: edit ? "UPDATE" : "POST",
-        headers: { id: postId },
+        headers: { id: String(postId) },
         body: formData,
       });
       if (res?.ok) {
