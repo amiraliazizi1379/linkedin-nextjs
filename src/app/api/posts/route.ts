@@ -21,12 +21,13 @@ export const POST = auth(
 export const UPDATE = auth(
   async (request: NextRequest, userId: number): Promise<NextResponse> => {
     const { text, imageUrl } = await FormDataRouteHandler(request);
-    if (!text)
+    if (!text && !imageUrl)
       return NextResponse.json(
         { message: "cannot make a post" },
         { status: 400 }
       );
     const postId = request.headers.get("id");
+    console.log(postId , typeof(postId))
     if (!postId)
       return NextResponse.json({ message: "post not found" }, { status: 400 });
 
