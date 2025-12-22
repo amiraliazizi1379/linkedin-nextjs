@@ -24,7 +24,9 @@ export default function CreatePostComponent() {
   );
   const { postImgFile } = useUserContext();
   const { image, name, email, bio } = userData;
+
   const editingPost = postData.find((post) => post.editPost);
+  console.log(editingPost, editingPost?.editPost, editingPost?.post_id);
   useEffect(() => {
     if (editingPost) {
       dispatch(setPostText(editingPost.content));
