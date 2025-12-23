@@ -111,7 +111,7 @@ export class databaseOperation {
     img: string | null
   ) => {
     const editPostQuery = await pool.query<ResultSetHeader>(
-      "update posts set image_url = $3 , text = $2 where id = $1;",
+      "update posts set image_url = $3 , content = $2 where id = $1;",
       [postId, text, img]
     );
     return editPostQuery;
