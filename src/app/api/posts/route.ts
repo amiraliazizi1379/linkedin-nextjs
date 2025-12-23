@@ -20,7 +20,7 @@ export const POST = auth(
   }
 );
 
-export const UPDATE = auth(
+export const PATCH = auth(
   async (request: NextRequest, userId: number): Promise<NextResponse> => {
     const { text, imageUrl } = await FormDataRouteHandler(request);
     if (!text && !imageUrl)
