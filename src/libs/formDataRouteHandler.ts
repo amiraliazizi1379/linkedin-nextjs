@@ -1,4 +1,3 @@
-import { writeFile } from "fs/promises";
 import { NextRequest } from "next/server";
 import cloudinary from "./cloudinary";
 

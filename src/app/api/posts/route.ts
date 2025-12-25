@@ -1,4 +1,5 @@
 import { auth } from "@/libs/accessTokenVerify";
+import cloudinary from "@/libs/cloudinary";
 import { FormDataRouteHandler } from "@/libs/formDataRouteHandler";
 import { databaseOperation } from "@/models/dataBase";
 import { NextRequest, NextResponse } from "next/server";
@@ -29,12 +30,25 @@ export const PATCH = auth(
         { status: 400 }
       );
     const postId = request.headers.get("id");
-    console.log(postId, typeof postId);
+
     if (!postId)
       return NextResponse.json({ message: "post not found" }, { status: 400 });
 
-    await databaseOperation.editPost(Number(postId), text, imageUrl);
+    const { image } = await databaseOperation.getImageUrl(
+      Number(postId),
+      "posts"
+    );
+    if (!imageUrl && image) {
+      const public_id = image.split("/upload/")[1].split(".")[0];
+      const result = await cloudinary.uploader.destroy(public_id);
+      if (!result)
+        return NextResponse.json(
+          { message: "some thing went wrong" },
+          { status: 500 }
+        );
+    }
 
+    await databaseOperation.editPost(Number(postId), text, imageUrl);
     return NextResponse.json(
       { message: "post successfully edited" },
       { status: 200 }
