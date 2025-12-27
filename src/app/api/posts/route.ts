@@ -46,7 +46,7 @@ export const PATCH = auth(
         .split("/")
         .slice(1)
         .join("/");
-      console.log(public_id);
+
       const result = await cloudinary.uploader.destroy(public_id);
       if (!result)
         return NextResponse.json(
