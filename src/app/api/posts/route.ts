@@ -34,7 +34,7 @@ export const PATCH = auth(
     if (!postId)
       return NextResponse.json({ message: "post not found" }, { status: 400 });
 
-    const { image } = await databaseOperation.getImageUrl(
+    const  image  = await databaseOperation.getImageUrl(
       Number(postId),
       "posts"
     );
