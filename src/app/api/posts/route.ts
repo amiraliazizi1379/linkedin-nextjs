@@ -38,10 +38,15 @@ export const PATCH = auth(
       Number(postId),
       "posts"
     );
-    console.log("reqimage : ", imageUrl, "  image in database : ", image_url);
+
     if (!imageUrl && image_url) {
-      const public_id = image_url.split("/upload/")[1].split(".")[0];
-      console.log(image_url , public_id)
+      const public_id = image_url
+        .split("/upload/")[1]
+        .split(".")[0]
+        .split("/")
+        .slice(1)
+        .join("/");
+      console.log(public_id);
       const result = await cloudinary.uploader.destroy(public_id);
       if (!result)
         return NextResponse.json(
