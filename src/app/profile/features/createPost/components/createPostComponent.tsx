@@ -22,7 +22,7 @@ export default function CreatePostComponent() {
   const { createPost, userData, postImgSrc, postData } = useSelector(
     (state: RootState) => state.app
   );
-  const { postImgFile } = useUserContext();
+  const { postImgFile, setPostImgFile } = useUserContext();
   const { image, name, email, bio } = userData;
 
   const editingPost = postData.find((post) => post.editPost);
@@ -47,6 +47,7 @@ export default function CreatePostComponent() {
             dispatch(setPostData(disableEditPost));
             dispatch(setpostImgSrc(""));
             dispatch(setPostText(""));
+            setPostImgFile(null);
           }}
           className="fixed inset-0 z-50 bg-black opacity-50"
         ></div>

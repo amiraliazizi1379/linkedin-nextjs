@@ -1,3 +1,4 @@
+import { useUserContext } from "@/context/context";
 import { RootState, setCommentImgSrc, setpostImgSrc } from "@/redux/store";
 import Image from "next/image";
 import { IoMdClose } from "react-icons/io";
@@ -9,6 +10,7 @@ type props = {
 
 export function PostImageUploader({ classname = "w-full" }: props) {
   const dispatch = useDispatch();
+  const { setPostImgFile } = useUserContext();
   const { commentImgSrc, postImgSrc } = useSelector(
     (state: RootState) => state.app
   );
@@ -19,7 +21,9 @@ export function PostImageUploader({ classname = "w-full" }: props) {
           <section>
             <button
               onClick={() => {
-                dispatch(setpostImgSrc("")), dispatch(setCommentImgSrc(""));
+                dispatch(setpostImgSrc(""));
+                dispatch(setCommentImgSrc(""));
+                setPostImgFile(null);
               }}
               className={`text-2xl mb-3 h-[32px] flex justify-self-end text-[#fff] cursor-pointer bg-[#4b4b4b] rounded-full hover:bg-[#252525] p-1 ${
                 classname && "absolute top-3 right-4 opacity-80"

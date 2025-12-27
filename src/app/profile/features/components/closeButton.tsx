@@ -1,3 +1,4 @@
+import { useUserContext } from "@/context/context";
 import { RootState, setPostData, setpostImgSrc } from "@/redux/store";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { IoMdClose } from "react-icons/io";
@@ -10,6 +11,7 @@ export function CloseButton({
 }) {
   const { postData } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
+  const { setPostImgFile } = useUserContext();
   return (
     <button
       onClick={() => {
@@ -20,6 +22,7 @@ export function CloseButton({
         }));
         dispatch(setPostData(disableEditPost));
         dispatch(setpostImgSrc(""));
+        setPostImgFile(null);
       }}
       className="text-3xl h-[40px] cursor-pointer rounded-full hover:bg-gray-100 p-1"
     >
