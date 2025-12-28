@@ -39,7 +39,7 @@ export const PATCH = auth(
       "posts"
     );
 
-    if (!imageUrl && image_url) {
+    if ((!imageUrl && image_url) || imageUrl !== image_url) {
       const public_id = image_url
         .split("/upload/")[1]
         .split(".")[0]

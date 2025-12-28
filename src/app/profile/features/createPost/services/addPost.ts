@@ -2,6 +2,7 @@ import {
   setBtnLoading,
   setCreatePost,
   setLoading,
+  setpostImgSrc,
   setPostText,
   store,
 } from "@/redux/store";
@@ -34,6 +35,7 @@ export async function handlePost(
         RenderPostsServices();
         store.dispatch(setPostText(""));
         store.dispatch(setCreatePost(false));
+        store.dispatch(setpostImgSrc(""));
         store.dispatch(setBtnLoading(false));
       }
     } catch (err) {
