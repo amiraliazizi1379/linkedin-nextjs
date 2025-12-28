@@ -26,7 +26,7 @@ export default function CreatePostComponent() {
   const { image, name, email, bio } = userData;
 
   const editingPost = postData.find((post) => post.editPost);
-  console.log(editingPost, editingPost?.editPost, editingPost?.post_id);
+
   useEffect(() => {
     if (editingPost) {
       dispatch(setPostText(editingPost.content));
@@ -84,7 +84,7 @@ export default function CreatePostComponent() {
               setPostImgFile(null);
             }}
             name={editingPost && "Save"}
-            ImgSrc={postImgSrc}
+            ImgSrc={postImgSrc === editingPost?.image_url ? "" : postImgSrc}
           />
         </div>
       </section>
