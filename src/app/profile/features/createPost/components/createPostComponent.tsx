@@ -84,7 +84,11 @@ export default function CreatePostComponent() {
               setPostImgFile(null);
             }}
             name={editingPost && "Save"}
-            ImgSrc={((postImgSrc === editingPost?.image_url) && !editingPost) ? "" : "true"}
+            ImgSrc={
+              postImgSrc === editingPost?.image_url && editingPost
+                ? ""
+                : postImgSrc
+            }
           />
         </div>
       </section>
