@@ -26,7 +26,7 @@ export function AddImageButton({ classname, logo, setState }: props) {
       <button
         onClick={handleImgBt}
         className={` cursor-pointer ${
-          (commentImgSrc || postImgSrc) && "hidden"
+          (commentImgSrc || postImgSrc) && "opacity-0 pointer-events-none"
         } `}
       >
         {logo ? logo : <HiOutlinePhoto />}
