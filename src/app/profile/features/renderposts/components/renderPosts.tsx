@@ -10,7 +10,7 @@ import { handleLikes } from "../services/handkelikes";
 import { GetComments } from "../services/getcomment";
 import { RenderComments } from "../../renderComments";
 import { useDispatch, useSelector } from "react-redux";
-import { BsThreeDots } from "react-icons/bs";
+
 import {
   RootState,
   setLargImg,
@@ -19,8 +19,9 @@ import {
   setPostData,
 } from "@/redux/store";
 import Image from "next/image";
-import PostEditOptions from "./postEditOptions";
+
 import { PostDeleteVerificationComponent } from "./deleteVerification";
+import { ThreeDotsOptions } from "./3dotsOptions";
 
 export default function RenderPosts({ userId }: { userId: string }) {
   const { postData, notFoundSearch, postsSearch, deleteVerfication } =
@@ -84,48 +85,9 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   </span>
                   {is_following ? "Following" : "Follow"}
                 </button>
-              ) : (
-                <div>
-                  <button
-                    onClick={() => {
-                      const updatedPostData = postData.map((post) =>
-                        post.post_id === post_id
-                          ? {
-                              ...post,
-                              activePostOptions: !post.activePostOptions,
-                            }
-                          : post
-                      );
-                      dispatch(setPostData(updatedPostData));
-                    }}
-                    className="text-2xl custom-side-bt"
-                  >
-                    <BsThreeDots />
-                  </button>
-
-                  <div className="relative">
-                    {activePostOptions && (
-                      <div
-                        className="fixed inset-0  opacity-0 "
-                        onClick={() => {
-                          const newPostData = postData.map((post) =>
-                            post.post_id === post_id
-                              ? {
-                                  ...post,
-                                  activePostOptions: false,
-                                }
-                              : post
-                          );
-                          dispatch(setPostData(newPostData));
-                        }}
-                      ></div>
-                    )}
-                    <PostEditOptions active={activePostOptions} />
-                  </div>
-                </div>
-              )}
-            </div>
-            {deleteVerfication && <PostDeleteVerificationComponent />}
+              ) : <ThreeDotsOptions post_id={post_id} activePostOptions={activePostOptions}/>}
+               
+             {deleteVerfication && <PostDeleteVerificationComponent />}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
@@ -199,7 +161,8 @@ export default function RenderPosts({ userId }: { userId: string }) {
               </div>
             )}
           </div>
-        );
+          </div>
+        )
       })}
       {/* <PostEditOptions /> */}
     </main>
