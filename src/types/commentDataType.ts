@@ -12,4 +12,5 @@ export type commentDataType = {
   email: string;
   bio: string;
   readMore: boolean;
+  activeCommentOption: boolean;
 };

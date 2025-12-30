@@ -8,11 +8,14 @@ import {
   setPostData,
 } from "@/redux/store";
 import Image from "next/image";
+import { ThreeDotsOptions } from "./renderposts/components/3dotsOptions";
 
 export function RenderComments({
   commentData,
+  userId,
 }: {
   commentData: commentDataType[];
+  userId: string;
 }) {
   const dispatch = useDispatch();
   const { postData } = useSelector((state: RootState) => state.app);
@@ -23,6 +26,7 @@ export function RenderComments({
           const {
             comment_id,
             post_id,
+            user_id,
             content,
             image_url,
             name,
@@ -30,6 +34,7 @@ export function RenderComments({
             email,
             bio,
             readMore,
+            activeCommentOption,
           } = post;
           return (
             <div key={comment_id} className="ml-5.5 mt-4 pb-4">
@@ -44,6 +49,9 @@ export function RenderComments({
                   <h1 className="font-semibold">{name ? name : email}</h1>
                   <p className="text-[14px] text-gray-400">{bio}</p>
                 </div>
+                {Number(userId) === user_id && (
+                  <ThreeDotsOptions post_id={post_id} activePostOptions={activeCommentOption} />
+                )}
               </article>
               <p className="p-4">
                 {readMore ? content : content.substring(0, 100)}

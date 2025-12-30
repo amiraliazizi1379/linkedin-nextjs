@@ -6,8 +6,12 @@ export const GET = auth(async (req: NextRequest, userId: number) => {
   const postId = req.headers.get("postId");
   if (!postId) return NextResponse.json({ status: 400 });
 
-  const commentData = await databaseOperation.getComments(Number(postId));
+  let commentData = await databaseOperation.getComments(Number(postId));
   if (!commentData) return NextResponse.json({ status: 500 });
 
+  commentData = commentData.map((cmnt) => ({
+    ...cmnt,
+    activeCommentOption: false,
+  }));
   return NextResponse.json({ commentData }, { status: 200 });
 });
