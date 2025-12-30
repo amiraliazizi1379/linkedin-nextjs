@@ -85,9 +85,14 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   </span>
                   {is_following ? "Following" : "Follow"}
                 </button>
-              ) : <ThreeDotsOptions post_id={post_id} activePostOptions={activePostOptions}/>}
-               
-             {deleteVerfication && <PostDeleteVerificationComponent />}
+              ) : (
+                <ThreeDotsOptions
+                  post_id={post_id}
+                  activePostOptions={activePostOptions}
+                />
+              )}
+            </div>
+            {deleteVerfication && <PostDeleteVerificationComponent />}
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
@@ -161,8 +166,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
               </div>
             )}
           </div>
-          </div>
-        )
+        );
       })}
       {/* <PostEditOptions /> */}
     </main>
