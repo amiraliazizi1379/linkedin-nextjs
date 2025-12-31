@@ -25,7 +25,7 @@ export function ThreeDotsOptions({
         );
         dispatch(setPostData(updatedPostData));
       }}
-      className="text-2xl custom-side-bt "
+      className="text-2xl custom-side-bt relative"
     >
       <BsThreeDots />
 
