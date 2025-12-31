@@ -87,8 +87,8 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               ) : (
                 <ThreeDotsOptions
-                  post_id={post_id}
-                  activePostOptions={activePostOptions}
+                  item_id={post_id}
+                  activeItemOptions={activePostOptions}
                 />
               )}
             </div>
@@ -162,7 +162,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
             {comment && (
               <div>
                 <CommentComponent postId={post_id} />
-                <RenderComments commentData={commentData} userId={userId}/>
+                <RenderComments commentData={commentData} userId={userId} />
               </div>
             )}
           </div>

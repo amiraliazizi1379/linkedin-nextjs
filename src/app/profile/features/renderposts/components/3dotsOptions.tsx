@@ -4,48 +4,68 @@ import { useDispatch, useSelector } from "react-redux";
 import PostEditOptions from "./postEditOptions";
 
 export function ThreeDotsOptions({
-  post_id,
-  activePostOptions,
+  item_id,
+  activeItemOptions,
+  sectionName = "post",
 }: {
-  post_id: number;
-  activePostOptions: boolean;
+  item_id: number;
+  activeItemOptions: boolean;
+  sectionName?: string;
 }) {
   const { postData } = useSelector((state: RootState) => state.app);
+  let updatedPostData;
   const dispatch = useDispatch();
+
   return (
     <button
       onClick={() => {
-        const updatedPostData = postData.map((post) =>
-          post.post_id === post_id
-            ? {
-                ...post,
-                activePostOptions: !post.activePostOptions,
-              }
-            : post
-        );
+        sectionName === "post"
+          ? (updatedPostData = postData.map((post) =>
+              post.post_id === item_id
+                ? {
+                    ...post,
+                    activePostOptions: !post.activePostOptions,
+                  }
+                : post
+            ))
+          : (updatedPostData = postData.map((post) =>
+              post.commentData.map((cmnt) =>
+                cmnt.comment_id === item_id
+                  ? { ...cmnt, activeCommentOption: !cmnt.activeCommentOption }
+                  : cmnt
+              )
+            ));
         dispatch(setPostData(updatedPostData));
       }}
       className="text-2xl custom-side-bt relative"
     >
       <BsThreeDots />
 
-      {activePostOptions && (
+      {activeItemOptions && (
         <div
           className="fixed inset-0  opacity-0 "
           onClick={() => {
-            const newPostData = postData.map((post) =>
-              post.post_id === post_id
-                ? {
-                    ...post,
-                    activePostOptions: false,
-                  }
-                : post
-            );
-            dispatch(setPostData(newPostData));
+            sectionName === "post"
+              ? (updatedPostData = postData.map((post) =>
+                  post.post_id === item_id
+                    ? {
+                        ...post,
+                        activePostOptions: false,
+                      }
+                    : post
+                ))
+              : (updatedPostData = postData.map((post) =>
+                  post.commentData.map((cmnt) =>
+                    cmnt.comment_id === item_id
+                      ? { ...cmnt, activeCommentOption: false }
+                      : cmnt
+                  )
+                ));
+            dispatch(setPostData(updatedPostData));
           }}
         ></div>
       )}
-      <PostEditOptions active={activePostOptions} />
+      <PostEditOptions active={activeItemOptions} />
     </button>
   );
 }
