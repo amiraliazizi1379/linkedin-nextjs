@@ -38,21 +38,26 @@ export function RenderComments({
           } = post;
           return (
             <div key={comment_id} className="ml-5.5 mt-4 pb-4">
-              <article className="flex gap-4 items-center">
-                <UserImageComponent
-                  style="w-[40px] h-[40px] text-md"
-                  name={name}
-                  image={image}
-                  email={email}
-                />
-                <div>
-                  <h1 className="font-semibold">{name ? name : email}</h1>
-                  <p className="text-[14px] text-gray-400">{bio}</p>
-                </div>
+              <div className="flex justify-between">
+                <article className="flex gap-4 items-center">
+                  <UserImageComponent
+                    style="w-[40px] h-[40px] text-md"
+                    name={name}
+                    image={image}
+                    email={email}
+                  />
+                  <div>
+                    <h1 className="font-semibold">{name ? name : email}</h1>
+                    <p className="text-[14px] text-gray-400">{bio}</p>
+                  </div>
+                </article>
                 {Number(userId) === user_id && (
-                  <ThreeDotsOptions post_id={post_id} activePostOptions={activeCommentOption} />
+                  <ThreeDotsOptions
+                    post_id={post_id}
+                    activePostOptions={activeCommentOption}
+                  />
                 )}
-              </article>
+              </div>
               <p className="p-4">
                 {readMore ? content : content.substring(0, 100)}
                 {!readMore && content.length > 50 && (
