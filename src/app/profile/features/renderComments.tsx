@@ -51,12 +51,14 @@ export function RenderComments({
                     <p className="text-[14px] text-gray-400">{bio}</p>
                   </div>
                 </article>
-                {Number(userId) === user_id && (
-                  <ThreeDotsOptions
-                    post_id={post_id}
-                    activePostOptions={activeCommentOption}
-                  />
-                )}
+                <div className="mr-4">
+                  {Number(userId) === user_id && (
+                    <ThreeDotsOptions
+                      post_id={post_id}
+                      activePostOptions={activeCommentOption}
+                    />
+                  )}
+                </div>
               </div>
               <p className="p-4">
                 {readMore ? content : content.substring(0, 100)}
