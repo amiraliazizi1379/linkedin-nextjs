@@ -13,23 +13,21 @@ export function ThreeDotsOptions({
   const { postData } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
   return (
-    <div className="relative">
-      <button
-        onClick={() => {
-          const updatedPostData = postData.map((post) =>
-            post.post_id === post_id
-              ? {
-                  ...post,
-                  activePostOptions: !post.activePostOptions,
-                }
-              : post
-          );
-          dispatch(setPostData(updatedPostData));
-        }}
-        className="text-2xl custom-side-bt"
-      >
-        <BsThreeDots />
-      </button>
+    <button
+      onClick={() => {
+        const updatedPostData = postData.map((post) =>
+          post.post_id === post_id
+            ? {
+                ...post,
+                activePostOptions: !post.activePostOptions,
+              }
+            : post
+        );
+        dispatch(setPostData(updatedPostData));
+      }}
+      className="text-2xl custom-side-bt "
+    >
+      <BsThreeDots />
 
       {activePostOptions && (
         <div
@@ -48,6 +46,6 @@ export function ThreeDotsOptions({
         ></div>
       )}
       <PostEditOptions active={activePostOptions} />
-    </div>
+    </button>
   );
 }
