@@ -7,7 +7,13 @@ import {
 import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function PostEditOptions({ active }: { active: boolean }) {
+export default function PostEditOptions({
+  active,
+  section,
+}: {
+  active: boolean;
+  section: string;
+}) {
   const { postData } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
   return (
@@ -37,7 +43,7 @@ export default function PostEditOptions({ active }: { active: boolean }) {
         className=" flex gap-2 items-center mt-2 cursor-pointer  p-4 hover:bg-gray-100 w-full "
       >
         <MdOutlineModeEditOutline className="text-xl" />
-        <p className="">Edit Post</p>
+        <p className="">Edit {section}</p>
       </button>
       <button
         onClick={() => {
@@ -46,7 +52,7 @@ export default function PostEditOptions({ active }: { active: boolean }) {
         className=" flex gap-2 items-center mt-0.5 cursor-pointer  p-4 hover:bg-gray-100 w-full"
       >
         <MdDelete className="text-xl" />
-        <p>Delete photo</p>
+        <p>Delete {section}</p>
       </button>
     </div>
   );
