@@ -36,7 +36,7 @@ export function RenderComments({
             readMore,
             activeCommentOption,
           } = post;
-          console.log(activeCommentOption , comment_id , commentData)
+          console.log(activeCommentOption, comment_id, commentData);
           return (
             <div key={comment_id} className="ml-5.5 mt-4 pb-4">
               <div className="flex justify-between">
@@ -55,7 +55,8 @@ export function RenderComments({
                 <div className="mr-4">
                   {Number(userId) === user_id && (
                     <ThreeDotsOptions
-                      item_id={comment_id}
+                      postId={post_id}
+                      commentId={comment_id}
                       activeItemOptions={activeCommentOption}
                       sectionName="comment"
                     />

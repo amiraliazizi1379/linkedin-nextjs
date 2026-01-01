@@ -87,7 +87,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               ) : (
                 <ThreeDotsOptions
-                  item_id={post_id}
+                 postId={post_id}
                   activeItemOptions={activePostOptions}
                 />
               )}

@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import PostEditOptions from "./postEditOptions";
 
 export function ThreeDotsOptions({
-  item_id,
+  postId,
+  commentId,
   activeItemOptions,
   sectionName = "post",
 }: {
-  item_id: number;
+  postId: number;
+  commentId?: number;
   activeItemOptions: boolean;
   sectionName?: string;
 }) {
@@ -21,19 +23,24 @@ export function ThreeDotsOptions({
       onClick={() => {
         sectionName === "post"
           ? (updatedPostData = postData.map((post) =>
-              post.post_id === item_id
+              post.post_id === postId
                 ? {
                     ...post,
                     activePostOptions: !post.activePostOptions,
                   }
                 : post
             ))
-          : (updatedPostData = postData.map((post) =>
-              post.commentData.map((cmnt) =>
-                cmnt.comment_id === item_id
-                  ? { ...cmnt, activeCommentOption: !cmnt.activeCommentOption }
-                  : cmnt
-              )
+          : (updatedPostData = postData.map(
+              (post) =>
+                post.post_id === postId &&
+                post.commentData.map((cmnt) =>
+                  cmnt.comment_id === commentId
+                    ? {
+                        ...cmnt,
+                        activeCommentOption: !cmnt.activeCommentOption,
+                      }
+                    : cmnt
+                )
             ));
         dispatch(setPostData(updatedPostData));
       }}
@@ -47,7 +54,7 @@ export function ThreeDotsOptions({
           onClick={() => {
             sectionName === "post"
               ? (updatedPostData = postData.map((post) =>
-                  post.post_id === item_id
+                  post.post_id === postId
                     ? {
                         ...post,
                         activePostOptions: false,
@@ -56,7 +63,7 @@ export function ThreeDotsOptions({
                 ))
               : (updatedPostData = postData.map((post) =>
                   post.commentData.map((cmnt) =>
-                    cmnt.comment_id === item_id
+                    cmnt.comment_id === commentId
                       ? { ...cmnt, activeCommentOption: false }
                       : cmnt
                   )
