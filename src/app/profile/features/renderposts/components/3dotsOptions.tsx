@@ -17,7 +17,7 @@ export function ThreeDotsOptions({
   const { postData } = useSelector((state: RootState) => state.app);
   let updatedPostData;
   const dispatch = useDispatch();
-
+console.log(postId , commentId , sectionName)
   return (
     <button
       onClick={() => {
