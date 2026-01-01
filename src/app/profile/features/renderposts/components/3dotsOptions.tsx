@@ -30,17 +30,17 @@ export function ThreeDotsOptions({
                   }
                 : post
             ))
-          : (updatedPostData = postData.map(
-              (post) =>
-                post.post_id === postId &&
-                post.commentData.map((cmnt) =>
-                  cmnt.comment_id === commentId
-                    ? {
-                        ...cmnt,
-                        activeCommentOption: !cmnt.activeCommentOption,
-                      }
-                    : cmnt
-                )
+          : (updatedPostData = postData.map((post) =>
+              post.post_id === postId
+                ? post.commentData.map((cmnt) =>
+                    cmnt.comment_id === commentId
+                      ? {
+                          ...cmnt,
+                          activeCommentOption: !cmnt.activeCommentOption,
+                        }
+                      : cmnt
+                  )
+                : post
             ));
         dispatch(setPostData(updatedPostData));
       }}
