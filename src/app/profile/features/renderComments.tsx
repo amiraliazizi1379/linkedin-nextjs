@@ -36,7 +36,7 @@ export function RenderComments({
             readMore,
             activeCommentOption,
           } = post;
-          console.log(activeCommentOption , comment_id)
+          console.log(activeCommentOption , comment_id , commentData)
           return (
             <div key={comment_id} className="ml-5.5 mt-4 pb-4">
               <div className="flex justify-between">
