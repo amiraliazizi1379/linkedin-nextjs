@@ -17,7 +17,7 @@ export function ThreeDotsOptions({
   const { postData } = useSelector((state: RootState) => state.app);
   let updatedPostData;
   const dispatch = useDispatch();
-console.log(postId , commentId , sectionName , postData)
+  console.log(postId, commentId, sectionName, postData);
   return (
     <button
       onClick={() => {
@@ -32,14 +32,17 @@ console.log(postId , commentId , sectionName , postData)
             ))
           : (updatedPostData = postData.map((post) =>
               post.post_id === postId
-                ? post.commentData.map((cmnt) =>
-                    cmnt.comment_id === commentId
-                      ? {
-                          ...cmnt,
-                          activeCommentOption: !cmnt.activeCommentOption,
-                        }
-                      : cmnt
-                  )
+                ? {
+                    ...post,
+                    commentData: post.commentData.map((cmnt) =>
+                      cmnt.comment_id === commentId
+                        ? {
+                            ...cmnt,
+                            activeCommentOption: !cmnt.activeCommentOption,
+                          }
+                        : cmnt
+                    ),
+                  }
                 : post
             ));
         dispatch(setPostData(updatedPostData));
