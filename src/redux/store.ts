@@ -33,7 +33,7 @@ const appSlice = createSlice({
     editEmailStatus: false,
     loginLoading: false,
     editMenu: false,
-    deleteVerfication: false,
+    deleteVerfication: "",
   },
 
   reducers: {

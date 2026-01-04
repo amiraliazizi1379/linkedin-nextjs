@@ -67,7 +67,7 @@ export function RenderComments({
                 </div>
               </div>
               {deleteVerfication && (
-                <PostDeleteVerificationComponent section="Comment" />
+                <PostDeleteVerificationComponent section={deleteVerfication} />
               )}
               <p className="p-4">
                 {readMore ? content : content.substring(0, 100)}

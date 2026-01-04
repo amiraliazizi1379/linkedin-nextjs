@@ -28,7 +28,7 @@ export async function DeleteComment() {
       }
 
       store.dispatch(setBtnLoading(false));
-      store.dispatch(setDeleteVerification(false));
+      store.dispatch(setDeleteVerification(""));
       const newPostData = postData.map((post) => ({
         ...post,
         commentData: post.commentData.map((cmnt) =>

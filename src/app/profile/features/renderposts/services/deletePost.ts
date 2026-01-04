@@ -22,7 +22,7 @@ export async function DeletePost() {
     }
     const { postData } = store.getState().app;
     store.dispatch(setBtnLoading(false));
-    store.dispatch(setDeleteVerification(false));
+    store.dispatch(setDeleteVerification(""));
     const newPostData = postData.map((post) => ({
       ...post,
       activePostOptions: false,

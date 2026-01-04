@@ -48,7 +48,7 @@ export default function PostEditOptions({
       </button>
       <button
         onClick={() => {
-          dispatch(setDeleteVerification(true));
+          dispatch(setDeleteVerification(section));
         }}
         className=" flex gap-2 items-center mt-0.5 cursor-pointer  p-4 hover:bg-gray-100 w-full"
       >
