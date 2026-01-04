@@ -9,7 +9,6 @@ import {
 } from "@/redux/store";
 import Image from "next/image";
 import { ThreeDotsOptions } from "./renderposts/components/3dotsOptions";
-import { PostDeleteVerificationComponent } from "./renderposts/components/deleteVerification";
 
 export function RenderComments({
   commentData,
@@ -19,9 +18,7 @@ export function RenderComments({
   userId: string;
 }) {
   const dispatch = useDispatch();
-  const { postData, deleteVerfication } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { postData } = useSelector((state: RootState) => state.app);
   return (
     <section className="mt-8">
       {commentData &&
@@ -66,9 +63,6 @@ export function RenderComments({
                   )}
                 </div>
               </div>
-              {deleteVerfication && (
-                <PostDeleteVerificationComponent section={deleteVerfication} />
-              )}
               <p className="p-4">
                 {readMore ? content : content.substring(0, 100)}
                 {!readMore && content.length > 50 && (
