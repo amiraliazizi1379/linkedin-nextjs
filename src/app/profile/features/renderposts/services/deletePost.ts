@@ -30,5 +30,6 @@ export async function DeletePost() {
     store.dispatch(setPostData(newPostData));
   } catch (err) {
     console.log(err);
+    console.log(post)
   }
 }
