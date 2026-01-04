@@ -31,7 +31,8 @@ export function PostDeleteVerificationComponent({
           name="Delete"
           onclick={() => {
             store.dispatch(setBtnLoading(true));
-            section === "Post" ? DeletePost() : DeleteComment();
+            if (section === "Post") DeletePost();
+            DeleteComment();
           }}
         />
       </section>
