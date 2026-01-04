@@ -32,7 +32,7 @@ export function PostDeleteVerificationComponent({
           onclick={() => {
             store.dispatch(setBtnLoading(true));
             if (section === "Post") DeletePost();
-            DeleteComment();
+            if (section === "Comment") DeleteComment();
           }}
         />
       </section>
