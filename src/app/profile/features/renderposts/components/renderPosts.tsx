@@ -20,12 +20,12 @@ import {
 } from "@/redux/store";
 import Image from "next/image";
 
-import { PostDeleteVerificationComponent } from "./deleteVerification";
 import { ThreeDotsOptions } from "./3dotsOptions";
 
 export default function RenderPosts({ userId }: { userId: string }) {
-  const { postData, notFoundSearch, postsSearch, deleteVerfication } =
-    useSelector((state: RootState) => state.app);
+  const { postData, notFoundSearch, postsSearch } = useSelector(
+    (state: RootState) => state.app
+  );
   const dispatch = useDispatch();
 
   if (notFoundSearch) return <h1 className="text-center mt-8">No Content</h1>;
@@ -87,12 +87,12 @@ export default function RenderPosts({ userId }: { userId: string }) {
                 </button>
               ) : (
                 <ThreeDotsOptions
-                 postId={post_id}
+                  postId={post_id}
                   activeItemOptions={activePostOptions}
                 />
               )}
             </div>
-            {deleteVerfication && <PostDeleteVerificationComponent />}
+
             <p className="p-4">
               {readMore ? content : content.substring(0, 100)}
               {!readMore && content.length > 50 && (
@@ -168,7 +168,6 @@ export default function RenderPosts({ userId }: { userId: string }) {
           </div>
         );
       })}
-      {/* <PostEditOptions /> */}
     </main>
   );
 }

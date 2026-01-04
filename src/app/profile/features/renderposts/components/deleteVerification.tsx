@@ -1,8 +1,13 @@
 import { setBtnLoading, setDeleteVerification, store } from "@/redux/store";
 import { CustomActionBtn } from "../../createPost/components/customActionBt";
 import { DeletePost } from "../services/deletePost";
+import { DeleteComment } from "../services/deleteComments";
 
-export function PostDeleteVerificationComponent() {
+export function PostDeleteVerificationComponent({
+  section,
+}: {
+  section: string;
+}) {
   return (
     <div className="fixed z-50">
       <div
@@ -10,9 +15,9 @@ export function PostDeleteVerificationComponent() {
         onClick={() => store.dispatch(setDeleteVerification(false))}
       ></div>
       <section className="w-[350px]  p-4 shadow-md text-center right-[40%] top-[3rem] rounded-md fixed z-50 min-h-[150px] bg-[#fff]">
-        <h1 className="text-[#171717]">Delete Post?</h1>
+        <h1 className="text-[#171717]">Delete {section}?</h1>
         <p className="text-[14px] mt-2">
-          Are you sure you want to permenantly remove this post?
+          Are you sure you want to permenantly remove this {section}?
         </p>
         <button
           onClick={() => store.dispatch(setDeleteVerification(false))}
@@ -26,7 +31,7 @@ export function PostDeleteVerificationComponent() {
           name="Delete"
           onclick={() => {
             store.dispatch(setBtnLoading(true));
-            DeletePost();
+            section === "Post" ? DeletePost() : DeleteComment();
           }}
         />
       </section>

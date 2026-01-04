@@ -58,7 +58,7 @@ export function RenderComments({
                       postId={post_id}
                       commentId={comment_id}
                       activeItemOptions={activeCommentOption}
-                      sectionName="comment"
+                      sectionName="Comment"
                     />
                   )}
                 </div>

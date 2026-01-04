@@ -34,6 +34,10 @@ export class databaseOperation {
     return await pool.query("delete from posts where id = $1 ;", [id]);
   };
 
+  static deleteComment = async (id: number) => {
+    return await pool.query("delete from comments where id = $1 ;", [id]);
+  };
+
   static editEmail = async (email: string | null, id: number) => {
     return await pool.query("update users set  email = $1 where id = $2 ;", [
       email,
