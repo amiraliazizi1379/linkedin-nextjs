@@ -19,38 +19,39 @@ export function ThreeDotsOptions({
   const dispatch = useDispatch();
 
   return (
-    <button
-      onClick={() => {
-        sectionName === "Post"
-          ? (updatedPostData = postData.map((post) =>
-              post.post_id === postId
-                ? {
-                    ...post,
-                    activePostOptions: !post.activePostOptions,
-                  }
-                : post
-            ))
-          : (updatedPostData = postData.map((post) =>
-              post.post_id === postId
-                ? {
-                    ...post,
-                    commentData: post.commentData.map((cmnt) =>
-                      cmnt.comment_id === commentId
-                        ? {
-                            ...cmnt,
-                            activeCommentOption: !cmnt.activeCommentOption,
-                          }
-                        : cmnt
-                    ),
-                  }
-                : post
-            ));
-        dispatch(setPostData(updatedPostData));
-      }}
-      className="text-2xl custom-side-bt relative"
-    >
-      <BsThreeDots />
-
+    <div className="relative">
+      <button
+        onClick={() => {
+          sectionName === "Post"
+            ? (updatedPostData = postData.map((post) =>
+                post.post_id === postId
+                  ? {
+                      ...post,
+                      activePostOptions: !post.activePostOptions,
+                    }
+                  : post
+              ))
+            : (updatedPostData = postData.map((post) =>
+                post.post_id === postId
+                  ? {
+                      ...post,
+                      commentData: post.commentData.map((cmnt) =>
+                        cmnt.comment_id === commentId
+                          ? {
+                              ...cmnt,
+                              activeCommentOption: !cmnt.activeCommentOption,
+                            }
+                          : cmnt
+                      ),
+                    }
+                  : post
+              ));
+          dispatch(setPostData(updatedPostData));
+        }}
+        className="text-2xl custom-side-bt"
+      >
+        <BsThreeDots />
+      </button>
       {activeItemOptions && (
         <div
           className="fixed inset-0  opacity-0 "
@@ -84,6 +85,6 @@ export function ThreeDotsOptions({
         ></div>
       )}
       <PostEditOptions active={activeItemOptions} section={sectionName} />
-    </button>
+    </div>
   );
 }
