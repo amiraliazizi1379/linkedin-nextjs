@@ -6,7 +6,6 @@ import {
 } from "@/redux/store";
 import { MdDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { PostDeleteVerificationComponent } from "./deleteVerification";
 
 export default function PostEditOptions({
   active,
@@ -15,13 +14,9 @@ export default function PostEditOptions({
   active: boolean;
   section: string;
 }) {
-  const { postData, deleteVerfication } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { postData } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
-  if (deleteVerfication) {
-    return <PostDeleteVerificationComponent section={section} />;
-  }
+
   return (
     <div
       className={`absolute flex flex-col items-start right-[10px]  py-1 shadow-md rounded-md transition-all duration-200 w-[330px] text-[14px] 
