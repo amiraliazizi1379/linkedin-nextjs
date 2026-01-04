@@ -20,7 +20,7 @@ export default function PostEditOptions({
   );
   const dispatch = useDispatch();
   if (deleteVerfication) {
-    <PostDeleteVerificationComponent section={section} />;
+    return <PostDeleteVerificationComponent section={section} />;
   }
   return (
     <div
