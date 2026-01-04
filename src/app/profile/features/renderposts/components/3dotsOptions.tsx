@@ -2,7 +2,6 @@ import { RootState, setPostData } from "@/redux/store";
 import { BsThreeDots } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import PostEditOptions from "./postEditOptions";
-import { PostDeleteVerificationComponent } from "./deleteVerification";
 
 export function ThreeDotsOptions({
   postId,
@@ -15,9 +14,7 @@ export function ThreeDotsOptions({
   activeItemOptions: boolean;
   sectionName?: string;
 }) {
-  const { postData, deleteVerfication } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { postData } = useSelector((state: RootState) => state.app);
   let updatedPostData;
   const dispatch = useDispatch();
 
@@ -87,9 +84,6 @@ export function ThreeDotsOptions({
         ></div>
       )}
       <PostEditOptions active={activeItemOptions} section={sectionName} />
-      {deleteVerfication && (
-        <PostDeleteVerificationComponent section={sectionName} />
-      )}
     </button>
   );
 }
