@@ -37,7 +37,7 @@ export function EditUserInfo() {
     editedBio
   );
   return (
-    <article className="ml-">
+    <article className="max-[640px]:hidden">
       {data.length > 1 &&
         data.map((item) => {
           const { id, name, content, logo, inputValue, reducer } = item;
