@@ -18,7 +18,7 @@ export function EditOptions() {
   const dispatch = useDispatch();
   return (
     <div
-      className={`fixed flex flex-col items-start right-[34.5rem] py-1 shadow-md opacity-0 -translate-y-2  rounded-md transition-all duration-200 w-[140px] text-[14px] 
+      className={`fixed flex flex-col items-start right-1/5 py-1 shadow-md bg-[#ffff]  -translate-y-2  rounded-md transition-all duration-200 w-[140px] text-[14px] 
                    
                     ${
                       editMenu

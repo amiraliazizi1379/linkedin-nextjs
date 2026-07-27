@@ -17,8 +17,8 @@ export default function ProfileNavBar({ page }: { page: string }) {
   const { popup, userData } = useSelector((state: RootState) => state.app);
 
   return (
-    <nav className="flex fixed items-center z-50 right-0 left-0 justify-around pt-1 max-[1023px]:grid  max-[1023px]:grid-cols-2 bg-[#fff]">
-      <div className="flex items-center mb-1 w-[500px] space-x-2 relative">
+    <nav className="flex fixed items-center z-50 right-0 left-0 justify-around pt-1  bg-[#fff]">
+      <div className="flex items-center mb-1 w-[500px] max-[550px]:ml-6 space-x-2 relative">
         <Logo
           className="text-[#0a66c2]"
           logoComponent="text-4xl"
@@ -30,14 +30,14 @@ export default function ProfileNavBar({ page }: { page: string }) {
           onChange={(e) => handleSreach(e.target.value, page)}
           type="text"
           placeholder="Search"
-          className=" py-1 px-10 profile-inputs"
+          className=" py-1 px-10 profile-inputs  "
         />
       </div>
       <article className="flex items-center h-[3.2rem]">
-        <Options datas={data} items="text-2xl" />
+        <Options datas={data} styles="" Bstyles="max-[950px]:hidden" items="text-2xl" />
         <button
           onClick={() => dispatch(setPopup(!popup))}
-          className="cursor-pointer flex-center flex-col hover:text-[#171717] text-[12px] ml-2"
+          className="cursor-pointer flex-center flex-col max-[550px]:mr-6 hover:text-[#171717] text-[12px] ml-2"
         >
           {userData && (
             <UserImageComponent

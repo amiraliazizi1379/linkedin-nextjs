@@ -31,7 +31,8 @@ export function PostImageUploader({ classname = "w-full" }: props) {
             >
               <IoMdClose />
             </button>
-            <Image alt="" src={commentImgSrc || postImgSrc} />
+           
+            <img  src={commentImgSrc || postImgSrc} />
           </section>
         )}
       </div>

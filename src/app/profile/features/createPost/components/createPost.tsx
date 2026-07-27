@@ -9,7 +9,7 @@ export default function CreatePost() {
   const { userData } = useSelector((state: RootState) => state.app);
   const { name, email, image } = userData;
   return (
-    <section className="border-1 mx-auto mt-20 border-gray-300 p-2 w-[40vw] rounded-md bg-[#fff]">
+    <section className="border-1 mx-auto mt-20 border-gray-300 p-2 min-[600px]:w-[70vw] min-[1025px]:w-[40vw] max-[600px]:w-[100vw] rounded-md bg-[#fff]">
       <article className="flex-center gap-2">
         <UserImageComponent
           style="w-[55px] h-[55px] text-xl"

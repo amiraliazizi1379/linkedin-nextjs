@@ -51,7 +51,7 @@ export default function CreatePostComponent() {
           }}
           className="fixed inset-0 z-50 bg-black opacity-50"
         ></div>
-        <div className="fixed w-[52vw] h-[78vh] p-5 pb-0 shadow-lg bg-[#fff] z-50 rounded-md left-[22rem] top-[2rem] ">
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[52vw] h-[78vh] max-[600px]:w-[100vw] p-5 pb-0 shadow-lg bg-[#fff] z-50 rounded-md   ">
           <div className="flex  justify-between">
             <div className="flex-center gap-6">
               <UserImageComponent

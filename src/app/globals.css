@@ -21,7 +21,7 @@
     @apply border-t w-full border-gray-300;
   }
   .profile-inputs {
-    @apply w-[18vw] border-gray-400 transition-all  duration-300 ease-in-out focus:outline-[#171717] focus:w-[25vw]  border-1 rounded-full;
+    @apply max-[950px]:w-[50vw] min-[950px]:w-[18vw] border-gray-400 transition-all  duration-300 ease-in-out focus:outline-[#171717] min-[950px]:focus:w-[25vw]  border-1 rounded-full;
   }
   .post-bt{
     @apply  rounded-md cursor-pointer gap-2 px-8 p-2 hover:bg-gray-200

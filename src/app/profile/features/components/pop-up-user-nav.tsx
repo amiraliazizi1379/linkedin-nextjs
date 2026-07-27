@@ -10,10 +10,10 @@ export default function PopOp() {
   return (
     <div className="fixed z-50">
       <div
-        className="fixed inset-0 z-50 opacity-0 "
+        className="fixed inset-0 z-50 bg-black opacity-50 "
         onClick={() => dispatch(setPopup(false))}
       ></div>
-      <section className="min-w-[250px] p-2 shadow-md right-[11rem] top-[4.5rem] rounded-md fixed z-50 min-h-[150px] bg-[#fff]">
+      <section className="min-w-[250px] p-2 shadow-md min-[1023px]:right-[11rem] top-[4.5rem] rounded-md max-[500px]:left-1/2 max-[500px]:-translate-x-1/2  fixed z-50 min-h-[150px] bg-[#fff]">
         <div className="flex gap-4">
           <UserImageComponent
             style="w-[50px] h-[50px] text-xl"
@@ -22,7 +22,7 @@ export default function PopOp() {
             email={email}
             dontShowLarg
           />
-          <div>
+          <div className="overflow-hidden">
             <h3 className="font-semibold">{name ? name : email}</h3>
             <p className="text-[12px]">{bio}</p>
           </div>

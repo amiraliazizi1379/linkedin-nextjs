@@ -54,7 +54,7 @@ export default function RenderPosts({ userId }: { userId: string }) {
         return (
           <div
             key={post_id}
-            className="bg-[#fff] mt-2 w-[420px] py-2  mx-auto rounded-lg z-0 border-1 border-gray-200"
+            className="bg-[#fff] mt-2 max-[600px]:w-[100vw] min-[600px]:w-[70vw] min-[1025px]:w-[40vw] py-2  mx-auto rounded-lg z-0 border-1 border-gray-200"
           >
             <div className="flex items-center justify-between mx-4 mt-2">
               <div className="flex gap-4">
@@ -102,7 +102,9 @@ export default function RenderPosts({ userId }: { userId: string }) {
                   className="text-[14px] hover:text-[#0a66c2] cursor-pointer"
                   onClick={() => {
                     const updatedData = postData.map((itm) =>
-                      itm.post_id === post_id ? { ...itm, readMore: true } : itm
+                      itm.post_id === post_id
+                        ? { ...itm, readMore: true }
+                        : itm,
                     );
                     dispatch(setPostData(updatedData));
                   }}

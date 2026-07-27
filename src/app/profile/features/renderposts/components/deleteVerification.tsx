@@ -14,14 +14,14 @@ export function PostDeleteVerificationComponent({
         className="fixed inset-0 z-50 opacity-20 bg-black "
         onClick={() => store.dispatch(setDeleteVerification(""))}
       ></div>
-      <section className="w-[350px]  p-4 shadow-md text-center right-[40%] top-[3rem] rounded-md fixed z-50 min-h-[150px] bg-[#fff]">
+      <section className="w-[350px]  p-4 shadow-md text-center left-1/2 -translate-x-1/2 top-[3rem] rounded-md fixed z-50 min-h-[150px] bg-[#fff]">
         <h1 className="text-[#171717]">Delete {section}?</h1>
         <p className="text-[14px] mt-2">
           Are you sure you want to permenantly remove this {section}?
         </p>
         <button
           onClick={() => store.dispatch(setDeleteVerification(""))}
-          className="cursor-pointer fixed top-[10.2rem] text-[#171717] rounded-full hover:bg-gray-100 border-2 py-0 px-2.5"
+          className="cursor-pointer fixed top-[7.2rem] z-50 text-[#171717] rounded-full hover:bg-gray-100 border-2 py-0 px-2.5"
         >
           Cancel
         </button>

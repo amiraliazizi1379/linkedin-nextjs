@@ -12,11 +12,18 @@ type props = {
 type MyComponentProps = {
   datas: props[];
   styles?: string;
+  Bstyles?: string;
   items?: string;
-  noActiveOptions? : boolean
+  noActiveOptions?: boolean;
 };
 
-export default function Options({ datas, styles, items , noActiveOptions }: MyComponentProps) {
+export default function Options({
+  datas,
+  styles,
+  Bstyles,
+  items,
+  noActiveOptions,
+}: MyComponentProps) {
   const [activeOption, setActiveOption] = useState(0);
   const router = useRouter();
   const { userData } = useSelector((state: RootState) => state.app);
@@ -26,9 +33,7 @@ export default function Options({ datas, styles, items , noActiveOptions }: MyCo
   }, [pathname]);
 
   return (
-    <section
-      className={`flex-center   text-xl ${styles}  max-[449px]:gap-6 max-[449px]:pl-[10rem] max-[1023px]:order-2   overflow-x-auto max-[1023px]:col-start-1 max-[1023px]:col-end-3 max-[1023px]:mt-12 max-[1023px]:gap-[10vw]`}
-    >
+    <section className={`flex-center   text-xl ${styles}  `}>
       {datas.map((item, index) => {
         return (
           <button
@@ -38,8 +43,10 @@ export default function Options({ datas, styles, items , noActiveOptions }: MyCo
               if (item.name === "My Network") router.push("/profile/myNetwork");
             }}
             key={index}
-            className={`${
-              (activeOption === index && !noActiveOptions) && "text-[#171717] border-b-2"
+            className={`${Bstyles} ${
+              activeOption === index &&
+              !noActiveOptions &&
+              "text-[#171717] border-b-2"
             } py-1 px-6.5 flex flex-col items-center ${items} transition-none  cursor-pointer  hover:text-[#171717] ${
               item.name === "Get the app" &&
               "border-l-1 border-r-1 border-gray-200 px-4"
